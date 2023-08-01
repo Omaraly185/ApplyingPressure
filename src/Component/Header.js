@@ -1,30 +1,30 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import './Header.css';
-import $ from 'jquery';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import "./Header.css";
+import $ from "jquery";
 
 function Header() {
   // const [isOpen, setIsOpen] = useState(true);
   // const handleClick = () => setIsOpen(!isOpen);
 
   $(document).ready(function () {
-    $('li').slideDown();
-    $('.menu')
-      .off('click')
-      .on('click', function () {
+    $("li").slideDown();
+    $(".menu")
+      .off("click")
+      .on("click", function () {
         if ($(window).width() < 750) {
-          $('li').slideToggle('50');
+          $("li").slideToggle("50");
         }
       });
   });
 
   $(window)
-    .off('resize')
-    .on('resize', function () {
+    .off("resize")
+    .on("resize", function () {
       if ($(window).width() > 750) {
         $(document).ready(function () {
-          $('li').slideDown();
+          $("li").slideDown();
         });
       }
     });
@@ -36,7 +36,7 @@ function Header() {
         </Link>
         <div
           className={
-            'active'
+            "active"
             // `${isOpen ? 'toggle':'active'}`
           }
         >
@@ -49,9 +49,6 @@ function Header() {
             </li>
             <li>
               <a href="/Monthly">Monthly</a>
-            </li>
-            <li>
-              <a href="#">About Us</a>
             </li>
             <li>
               <a href="/ContactUS">Contact Us</a>
