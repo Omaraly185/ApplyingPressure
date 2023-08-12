@@ -1,13 +1,13 @@
-import React from 'react';
-import video1 from './HomeVideo.mp4';
-import './home.css';
-import Button from '../../Component/Button';
+import React from "react";
+import video1 from "./HomeVideo.mp4";
+import "./home.css";
+import Button from "../../Component/Button";
 
 function homeForm() {
   return (
     <div>
       <section className="content">
-        <video autoPlay loop muted>
+        <video autoPlay loop muted playsInline>
           <source src={video1} type="video/mp4" />
         </video>
         <div className="parent">
