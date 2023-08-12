@@ -1,15 +1,15 @@
-import React from 'react';
-import './bookNow.css';
-import Packages from './Packages/packages';
-import MyCalendar from './Calendar/myCalendar';
-import Header from '../../Component/Header';
-import Sidepanel from './Calendar/SidePanel/sidepanel';
-import BookingForm from './BookingForm/bookingForm';
-import { useState } from 'react';
+import React from "react";
+import "./bookNow.css";
+import Packages from "./Packages/packages";
+import MyCalendar from "./Calendar/myCalendar";
+import Header from "../../Component/Header";
+import Sidepanel from "./Calendar/SidePanel/sidepanel";
+import BookingForm from "./BookingForm/bookingForm";
+import { useState } from "react";
 
 function BookNow() {
   const [isOpen, setIsOpen] = useState(false);
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
 
   const handleClose = () => {
     setIsOpen(false);
@@ -36,18 +36,10 @@ function BookNow() {
 
         <div
           className="overlay-Img"
-          style={{ position: isOpen ? 'fixed' : 'relative' }}
+          style={{ position: isOpen ? "fixed" : "relative" }}
         >
           <Header />
-          <div
-            style={{
-              position: 'relative',
-              top: 0,
-              left: 0,
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
+          <div className="BookNowContainer">
             <Packages />
             <BookingForm
               handleOpen={() => setIsOpen(true)}

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setFormData } from '../../../redux/action';
-import { Popover } from 'react-tiny-popover';
-import './bookingForm.css';
-import Info from './info.png';
-import Select from 'react-select';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setFormData } from "../../../redux/action";
+import { Popover } from "react-tiny-popover";
+import "./bookingForm.css";
+import Info from "./info.png";
+import Select from "react-select";
 
 const BookingForm = ({ handleOpen }) => {
   const dispatch = useDispatch();
@@ -102,28 +102,28 @@ const BookingForm = ({ handleOpen }) => {
   };
 
   const carOptions = [
-    { label: 'Sedan', value: 'sedan' },
-    { label: '2 Row Suv', value: 'twoRow' },
-    { label: '3 Row Suv', value: 'threeRow' },
-    { label: 'Heavy Truck', value: 'van' },
+    { label: "Sedan", value: "sedan" },
+    { label: "2 Row Suv", value: "twoRow" },
+    { label: "3 Row Suv", value: "threeRow" },
+    { label: "Heavy Truck", value: "van" },
   ];
 
   const [selectedExteriorOption, setSelectedExteriorOption] = useState({
-    label: 'N/A',
-    value: 'NA',
+    label: "N/A",
+    value: "NA",
   });
   const [selectedInteriorOption, setSelectedInteriorOption] = useState({
-    label: 'N/A',
-    value: 'NA',
+    label: "N/A",
+    value: "NA",
   });
   const stateOptions = [
-    { label: 'New York', value: 'NY' },
-    { label: 'New Jersey', value: 'NJ' },
+    { label: "New York", value: "NY" },
+    { label: "New Jersey", value: "NJ" },
   ];
 
   const [selectedCar, setSelectedCar] = useState({
-    label: 'Sedan',
-    value: 'sedan',
+    label: "Sedan",
+    value: "sedan",
   });
 
   const handleCarChange = (selectedCar) => {
@@ -189,25 +189,25 @@ const BookingForm = ({ handleOpen }) => {
   });
 
   const options = [
-    { label: 'Waxes', value: 'wax' },
-    { label: 'Water Spot Removal', value: 'waterSpot' },
-    { label: 'Engine Bay Clean', value: 'engineClean' },
-    { label: 'Headlight Clean', value: 'headlight' },
+    { label: "Waxes", value: "wax" },
+    { label: "Water Spot Removal", value: "waterSpot" },
+    { label: "Engine Bay Clean", value: "engineClean" },
+    { label: "Headlight Clean", value: "headlight" },
   ];
 
   const exteriorOptions = [
-    { label: 'N/A', value: 'NA' },
-    { label: 'Standard Exterior', value: 'standardExterior' },
-    { label: 'Standard Plus Exterior', value: 'standardPlus' },
-    { label: '1-Step Paint Correction', value: 'oneStep' },
-    { label: '2-Step Paint Correction', value: 'twoStep' },
+    { label: "N/A", value: "NA" },
+    { label: "Standard Exterior", value: "standardExterior" },
+    { label: "Standard Plus Exterior", value: "standardPlus" },
+    { label: "1-Step Paint Correction", value: "oneStep" },
+    { label: "2-Step Paint Correction", value: "twoStep" },
   ];
 
   const interiorOptions = [
-    { label: 'N/A', value: 'NA' },
-    { label: 'Silver Interior', value: 'silverInterior' },
-    { label: 'Gold Interior', value: 'goldInterior' },
-    { label: 'Pressure Special', value: 'pressureSpecial' },
+    { label: "N/A", value: "NA" },
+    { label: "Silver Interior", value: "silverInterior" },
+    { label: "Gold Interior", value: "goldInterior" },
+    { label: "Pressure Special", value: "pressureSpecial" },
   ];
 
   const handleOptionChange = (selectedOptionValues) => {
@@ -250,7 +250,7 @@ const BookingForm = ({ handleOpen }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newErrors = Object.keys(bookingForm).reduce((result, field) => {
-      if (field !== 'message') {
+      if (field !== "message") {
         result[field] = !bookingForm[field];
       }
       return result;
@@ -266,34 +266,31 @@ const BookingForm = ({ handleOpen }) => {
   const selectStyles = {
     control: (base) => ({
       ...base,
-      background: '#fff',
-      borderColor: '#9e9e9e',
-      boxShadow: 'none',
-      '&:hover': {
-        borderColor: '#9e9e9e',
+      background: "#fff",
+      borderColor: "#9e9e9e",
+      boxShadow: "none",
+      "&:hover": {
+        borderColor: "#9e9e9e",
       },
     }),
     menu: (base) => ({
       ...base,
-      color: 'black',
+      color: "black",
       borderRadius: 0,
       marginTop: 0,
-      height: '100px',
-      overflow: 'scroll',
+      height: "100px",
+      overflow: "scroll",
     }),
     menuList: (base) => ({
       ...base,
       padding: 0,
-      maxHeight: '100px',
-      overflow: 'scroll',
+      maxHeight: "100px",
+      overflow: "scroll",
     }),
   };
 
   return (
-    <div
-      className="myCustomHeight contact-form-container"
-      style={{ float: 'right', width: '42%', marginRight: '20px' }}
-    >
+    <div className="myCustomHeight contact-form-container bookformcontainer">
       <h1>Book Your Service</h1>
       <form onSubmit={handleSubmit}>
         <div className="testing1234">
@@ -303,7 +300,7 @@ const BookingForm = ({ handleOpen }) => {
             name="name"
             value={bookingForm.name}
             onChange={handleChange}
-            className={errors.name ? 'error' : 'inputForm'}
+            className={errors.name ? "error" : "inputForm"}
           />
           <label htmlFor="phoneNumber">Phone Number:</label>
           <input
@@ -311,7 +308,7 @@ const BookingForm = ({ handleOpen }) => {
             name="phoneNumber"
             value={bookingForm.phoneNumber}
             onChange={handleChange}
-            className={errors.phoneNumber ? 'error' : 'inputForm'}
+            className={errors.phoneNumber ? "error" : "inputForm"}
           />
           <label htmlFor="address">Address:</label>
           <input
@@ -319,7 +316,7 @@ const BookingForm = ({ handleOpen }) => {
             name="address"
             value={bookingForm.address}
             onChange={handleChange}
-            className={errors.address ? 'error' : 'inputForm'}
+            className={errors.address ? "error" : "inputForm"}
             required
           />
           <label htmlFor="city">City:</label>
@@ -328,7 +325,7 @@ const BookingForm = ({ handleOpen }) => {
             name="city"
             value={bookingForm.city}
             onChange={handleChange}
-            className={errors.city ? 'error' : 'inputForm'}
+            className={errors.city ? "error" : "inputForm"}
             required
           />
           <label htmlFor="state">
@@ -352,7 +349,7 @@ const BookingForm = ({ handleOpen }) => {
             onChange={(selectedOption) => {
               handleChange({
                 target: {
-                  name: 'state',
+                  name: "state",
                   value: selectedOption.value,
                 },
               });
@@ -365,14 +362,14 @@ const BookingForm = ({ handleOpen }) => {
           />
           <Popover
             isOpen={isPopoverOpen}
-            positions={['top', 'right']}
-            align={'end'}
+            positions={["top", "right"]}
+            align={"end"}
             content={
               <div
                 style={{
-                  padding: '5px',
-                  backgroundColor: 'white',
-                  borderRadius: '10px',
+                  padding: "5px",
+                  backgroundColor: "white",
+                  borderRadius: "10px",
                 }}
               >
                 We only service NY and NJ addresses
@@ -383,7 +380,7 @@ const BookingForm = ({ handleOpen }) => {
             }
             containerStyle={{
               zIndex: 100,
-              backgroundColor: 'white',
+              backgroundColor: "white",
             }}
           >
             <div
@@ -397,25 +394,25 @@ const BookingForm = ({ handleOpen }) => {
             <label for="yes_no">
               Is there any dog hair or spillage that may have caused odor
             </label>
-            <div style={{ display: 'inline-flex' }}>
-              <p style={{ padding: '0 10px' }}>
+            <div style={{ display: "inline-flex" }}>
+              <p style={{ padding: "0 10px" }}>
                 <input
                   type="radio"
                   id="yes"
                   name="yes_no"
                   value="yes"
-                  checked={bookingForm.yes_no === 'yes'}
+                  checked={bookingForm.yes_no === "yes"}
                   onChange={handleRadioChange}
                 />
                 <label for="yes">Yes</label>
               </p>
-              <p style={{ padding: '0 10px' }}>
+              <p style={{ padding: "0 10px" }}>
                 <input
                   type="radio"
                   id="no"
                   name="yes_no"
                   value="no"
-                  checked={bookingForm.yes_no === 'no'}
+                  checked={bookingForm.yes_no === "no"}
                   onChange={handleRadioChange}
                 />
                 <label for="no">No</label>
@@ -431,7 +428,7 @@ const BookingForm = ({ handleOpen }) => {
             name="zipCode"
             value={bookingForm.zipCode}
             onChange={handleChange}
-            className={errors.zipCode ? 'error' : 'inputForm'}
+            className={errors.zipCode ? "error" : "inputForm"}
           />
           <label htmlFor="email">Email:</label>
           <input
@@ -439,7 +436,7 @@ const BookingForm = ({ handleOpen }) => {
             name="email"
             value={bookingForm.email}
             onChange={handleChange}
-            className={errors.email ? 'error' : 'inputForm'}
+            className={errors.email ? "error" : "inputForm"}
           />
           <label htmlFor="car">Car:</label>
           <Select
@@ -495,7 +492,7 @@ const BookingForm = ({ handleOpen }) => {
             name="message"
             value={bookingForm.message}
             onChange={handleChange}
-            className={'inputForm'}
+            className={"inputForm"}
           />
         </div>
         <button className="minecraft" onClick={handleSubmit}>
@@ -503,10 +500,15 @@ const BookingForm = ({ handleOpen }) => {
         </button>
       </form>
       <p>
-        Based on your selected options, the estimated price range is between $
-        {priceRange.min} and ${priceRange.max}. Once your appointment has been
-        completed, we accept payments through Apple Pay, Cash App, Zelle, and
-        Venmo.
+        Based on your selected options, the estimated price range is between :
+        <span style={{ fontSize: "20px" }}>
+          ${priceRange.min} - ${priceRange.max}.
+        </span>
+        <br />
+        <br />
+        <br />
+        ***Once your appointment has been completed, we accept payments through
+        Apple Pay, Cash App, Zelle, and Venmo.***
       </p>
     </div>
   );

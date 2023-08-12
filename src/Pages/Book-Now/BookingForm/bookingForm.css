@@ -73,8 +73,20 @@ textarea {
   align-items: center;
 }
 
-.multiSelectContainer div input[type='checkbox'] {
+.multiSelectContainer div input[type="checkbox"] {
   margin-right: 10px;
+}
+.bookformcontainer {
+  justify-content: space-between;
+  margin-left: 3%;
+  width: 42%;
+  margin-right: 20px;
+}
+
+@media (max-width: 750px) {
+  .bookformcontainer {
+    width: 90vw;
+  }
 }
 
 .multiSelectContainer div label {

@@ -1,7 +1,18 @@
 .no-background {
   background: none;
 }
-
+.BookNowContainer {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 750px) {
+  .BookNowContainer {
+    display: block;
+  }
+}
 @media all and (max-width: 750px) {
   .no-background {
     background: none !important;
@@ -33,7 +44,7 @@
 }
 
 .overlay-Img {
-  background: url('grayover.png');
+  background: url("grayover.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -51,7 +62,7 @@
 }
 .modal-close-button:before,
 .modal-close-button:after {
-  content: '';
+  content: "";
   position: absolute;
   height: 2px;
   width: 50%;
@@ -75,7 +86,7 @@
 }
 .modal-close-button .modal-inner-content:before,
 .modal-close-button .modal-inner-content:after {
-  content: '';
+  content: "";
   position: absolute;
   height: 2px;
   width: 50%;

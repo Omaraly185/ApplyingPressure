@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './sidepanel.css';
-import { useSelector } from 'react-redux';
-import store from '../../../../redux/store';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./sidepanel.css";
+import { useSelector } from "react-redux";
+import store from "../../../../redux/store";
 
 function Sidepanel(props) {
   const [loading, setLoading] = useState(false);
@@ -22,37 +22,37 @@ function Sidepanel(props) {
   const email = useSelector((state) => state.bookingForm.email);
   const plusService = useSelector((state) => {
     if (state.bookingForm.plusService === undefined) {
-      return '';
+      return "";
     } else {
       return state.bookingForm.plusService;
     }
   });
   store.subscribe(() => console.log(store.getState()));
   const arrayAT = [
-    '7:00 AM',
-    '8:00 AM',
-    '9:00 AM',
-    '10:00 AM',
-    '11:00 AM',
-    '12:00 PM',
-    '1:00 PM',
-    '2:00 PM',
-    '3:00 PM',
-    '4:00 PM',
-    '5:00 PM',
-    '6:00 PM',
-    '7:00 PM',
-    '8:00 PM',
-    '9:00 PM',
-    '10:00 PM',
+    "7:00 AM",
+    "8:00 AM",
+    "9:00 AM",
+    "10:00 AM",
+    "11:00 AM",
+    "12:00 PM",
+    "1:00 PM",
+    "2:00 PM",
+    "3:00 PM",
+    "4:00 PM",
+    "5:00 PM",
+    "6:00 PM",
+    "7:00 PM",
+    "8:00 PM",
+    "9:00 PM",
+    "10:00 PM",
   ];
 
-  const [cardNumber, setCardNumber] = useState('');
-  const [cardName, setCardName] = useState('');
-  const [expiryDate, setExpiryDate] = useState('');
-  const [cvv, setCvv] = useState('');
+  const [cardNumber, setCardNumber] = useState("");
+  const [cardName, setCardName] = useState("");
+  const [expiryDate, setExpiryDate] = useState("");
+  const [cvv, setCvv] = useState("");
   const [showCreditCardForm, setShowCreditCardForm] = useState(false);
-  const [selectedTime, setSelectedTime] = useState('');
+  const [selectedTime, setSelectedTime] = useState("");
 
   const toggleCreditcard = (time) => {
     setSelectedTime(time);
@@ -61,26 +61,26 @@ function Sidepanel(props) {
 
   const handleFormSubmit = async (e) => {
     let appointmentLength = 0;
-    if (ExteriorPackage === 'standardExterior') {
+    if (ExteriorPackage === "standardExterior") {
       appointmentLength = appointmentLength + 2;
     }
-    if (ExteriorPackage === 'standardPlus') {
+    if (ExteriorPackage === "standardPlus") {
       appointmentLength = appointmentLength + 2;
     }
-    if (ExteriorPackage === 'oneStep') {
+    if (ExteriorPackage === "oneStep") {
       appointmentLength = appointmentLength + 4;
     }
-    if (ExteriorPackage === 'twoStep') {
+    if (ExteriorPackage === "twoStep") {
       appointmentLength = appointmentLength + 8;
     }
-    if (interiorPackage === 'silverInterior') {
+    if (interiorPackage === "silverInterior") {
       appointmentLength = appointmentLength + 2;
     }
 
-    if (interiorPackage === 'goldInterior') {
+    if (interiorPackage === "goldInterior") {
       appointmentLength = appointmentLength + 3;
     }
-    if (interiorPackage === 'pressureSpecial') {
+    if (interiorPackage === "pressureSpecial") {
       appointmentLength = appointmentLength + 4;
     }
     e.preventDefault();
@@ -93,11 +93,8 @@ function Sidepanel(props) {
       selectedDateTime.getHours() + appointmentLength + 1
     );
 
-    console.log(`${selectedDate} ${selectedTime}`);
-    console.log('End Date and Time: ', endDateTime);
-
     if (!selectedDate || !selectedTime) {
-      console.error('Please select a date and time for the appointment.');
+      console.error("Please select a date and time for the appointment.");
       return;
     }
 
@@ -116,21 +113,21 @@ function Sidepanel(props) {
     };
 
     try {
-      const response = await fetch('http://localhost:5000/events', {
-        method: 'POST',
+      const response = await fetch("http://localhost:5000/events", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(newEvent),
       });
 
       if (response.ok) {
-        console.log('Appointment created successfully');
+        console.log("Appointment created successfully");
       } else {
-        console.error('Failed to create appointment');
+        console.error("Failed to create appointment");
       }
     } catch (error) {
-      console.error('Error creating appointment:', error);
+      console.error("Error creating appointment:", error);
     }
     setLoading(false);
     setShowCreditCardForm(false);
@@ -143,10 +140,10 @@ function Sidepanel(props) {
   const handleClose = () => {
     setShowPanel(false);
     setShowCreditCardForm(false);
-    setCardNumber('');
-    setCardName('');
-    setExpiryDate('');
-    setCvv('');
+    setCardNumber("");
+    setCardName("");
+    setExpiryDate("");
+    setCvv("");
   };
   const isTimeAvailable = (time) => {
     const selectedTimeString = `${selectedDate} ${time}`;
@@ -155,24 +152,24 @@ function Sidepanel(props) {
     let appointmentLength = 0;
 
     if (
-      ExteriorPackage === 'standardExterior' ||
-      ExteriorPackage === 'standardPlus'
+      ExteriorPackage === "standardExterior" ||
+      ExteriorPackage === "standardPlus"
     ) {
       appointmentLength = appointmentLength + 2;
     }
-    if (ExteriorPackage === 'oneStep') {
+    if (ExteriorPackage === "oneStep") {
       appointmentLength = appointmentLength + 4;
     }
-    if (ExteriorPackage === 'twoStep') {
+    if (ExteriorPackage === "twoStep") {
       appointmentLength = appointmentLength + 8;
     }
-    if (interiorPackage === 'silverInterior') {
+    if (interiorPackage === "silverInterior") {
       appointmentLength = appointmentLength + 2;
     }
-    if (interiorPackage === 'goldInterior') {
+    if (interiorPackage === "goldInterior") {
       appointmentLength = appointmentLength + 3;
     }
-    if (interiorPackage === 'pressureSpecial') {
+    if (interiorPackage === "pressureSpecial") {
       appointmentLength = appointmentLength + 4;
     }
 
@@ -259,7 +256,7 @@ function Sidepanel(props) {
                   required
                 />
                 <button type="submit" disabled={loading}>
-                  {loading ? 'Loading...' : 'Submit'}
+                  {loading ? "Loading..." : "Submit"}
                 </button>
               </form>
             </>

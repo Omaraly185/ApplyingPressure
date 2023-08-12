@@ -45,7 +45,7 @@ const MyCalendar = (props) => {
 
   const handleSelectSlot = (slotInfo) => {
     const { start, action } = slotInfo;
-    if (action === "click" || action === "touch") {
+    if (action === "click" || action === "select") {
       if (start < new Date()) {
         toast.error("You can't select a date before today!");
         return;
@@ -82,6 +82,7 @@ const MyCalendar = (props) => {
         localizer={localizer}
         events={events}
         onSelectSlot={handleSelectSlot}
+        longPressThreshold={10}
         startAccessor="start"
         endAccessor="end"
         step={60}
