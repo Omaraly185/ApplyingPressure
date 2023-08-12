@@ -112,13 +112,16 @@ function Sidepanel(props) {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/events", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newEvent),
-      });
+      const response = await fetch(
+        "https://applyingpressure-api-production.up.railway.app/events",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newEvent),
+        }
+      );
 
       if (response.ok) {
         console.log("Appointment created successfully");

@@ -22,7 +22,9 @@ const MyCalendar = (props) => {
 
   const fetchEvents = async () => {
     try {
-      const response = await fetch("http://localhost:5000/events");
+      const response = await fetch(
+        "https://applyingpressure-api-production.up.railway.app/events"
+      );
       const events = await response.json();
       setEvents(events);
       setLoading(false); // Update loading state
