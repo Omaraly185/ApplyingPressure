@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'MyFont';
+  font-family: "MyFont";
   src: url(../../Component/Anurati-Regular.otf);
 }
 
@@ -79,5 +79,20 @@
   }
   .title h2 {
     font-size: 45pt;
+  }
+}
+
+@media all and (max-width: 450px) {
+  .title h1 {
+    font-size: 35pt;
+    margin-left: 30%;
+  }
+  .title h2 {
+    font-size: 35pt;
+    margin-left: 30%;
+  }
+
+  .title p {
+    margin-left: 30%;
   }
 }
