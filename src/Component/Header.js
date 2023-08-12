@@ -9,7 +9,7 @@ function Header() {
   // const handleClick = () => setIsOpen(!isOpen);
 
   $(document).ready(function () {
-    $("li").slideDown();
+    $("li").slideUp();
     $(".menu")
       .off("click")
       .on("click", function () {

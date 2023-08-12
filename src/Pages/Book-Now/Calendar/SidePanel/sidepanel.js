@@ -27,7 +27,6 @@ function Sidepanel(props) {
       return state.bookingForm.plusService;
     }
   });
-  store.subscribe(() => console.log(store.getState()));
   const arrayAT = [
     "7:00 AM",
     "8:00 AM",
@@ -223,40 +222,22 @@ function Sidepanel(props) {
                 Confirm Appointment for {selectedDate} at {selectedTime}
               </div>
               <form className="credit-card-form" onSubmit={handleFormSubmit}>
-                <label htmlFor="cardName">Cardholder Name:</label>
-                <input
-                  type="text"
-                  id="cardName"
-                  value={cardName}
-                  onChange={(e) => setCardName(e.target.value)}
-                  required
-                />
-                <label htmlFor="cardNumber">Card Number:</label>
-                <input
-                  type="text"
-                  id="cardNumber"
-                  value={cardNumber}
-                  onChange={(e) => setCardNumber(e.target.value)}
-                  required
-                />
-                <label htmlFor="expiryDate">Expiry Date:</label>
-                <input
-                  type="text"
-                  id="expiryDate"
-                  value={expiryDate}
-                  onChange={(e) => setExpiryDate(e.target.value)}
-                  required
-                />
-                <label htmlFor="cvv">CVV:</label>
-                <input
-                  type="text"
-                  id="cvv"
-                  value={cvv}
-                  onChange={(e) => setCvv(e.target.value)}
-                  required
-                />
+                Are you sure this is the appointment you'd like?
                 <button type="submit" disabled={loading}>
                   {loading ? "Loading..." : "Submit"}
+                </button>
+                <br />
+                <button
+                  style={{
+                    backgroundColor: "red",
+                    width: "185px",
+                    height: "30px",
+                  }}
+                  type="cancel"
+                  disabled={loading}
+                  onClick={handleClose}
+                >
+                  Cancel
                 </button>
               </form>
             </>

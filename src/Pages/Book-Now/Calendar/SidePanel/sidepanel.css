@@ -21,7 +21,7 @@
 
 .panel-close-button:before,
 .panel-close-button:after {
-  content: '';
+  content: "";
   position: absolute;
   height: 2px;
   width: 50%;
@@ -49,7 +49,7 @@
 
 .panel-close-button .inner-content:before,
 .panel-close-button .inner-content:after {
-  content: '';
+  content: "";
   position: absolute;
   height: 2px;
   width: 50%;
@@ -145,7 +145,7 @@
   font-size: 16px;
 }
 
-.credit-card-form button[type='submit'] {
+.credit-card-form button[type="submit"] {
   width: 50%;
   height: 30px;
   margin-top: 16px;
@@ -157,8 +157,19 @@
   border-radius: 4px;
   cursor: pointer;
 }
-
-.credit-card-form button[type='submit']:hover {
+.credit-card-form button[type="cancel"] {
+  width: 50%;
+  height: 30px;
+  margin-top: 16px;
+  background-color: #fa0101;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.credit-card-form button[type="submit"]:hover {
   background-color: #008ac7;
 }
 
