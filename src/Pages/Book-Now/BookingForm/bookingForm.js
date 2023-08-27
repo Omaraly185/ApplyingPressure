@@ -5,6 +5,18 @@ import { Popover } from "react-tiny-popover";
 import "./bookingForm.css";
 import Info from "./info.png";
 import Select from "react-select";
+import carPricing from "./carPricing.json";
+import { ToastContainer } from "react-toastify";
+import {
+  carOptions,
+  options,
+  exteriorOptions,
+  interiorOptions,
+  selectStyles,
+  computePriceRange,
+  stateOptions,
+  validateFields,
+} from "./bookingForm.helper";
 
 const BookingForm = ({ handleOpen }) => {
   const dispatch = useDispatch();
@@ -14,100 +26,6 @@ const BookingForm = ({ handleOpen }) => {
   const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
   const bookingForm = useSelector((state) => state.bookingForm);
 
-  const carPricing = {
-    sedan: {
-      services: {
-        wax: { minPrice: 35, maxPrice: 35 },
-        waterSpot: { minPrice: 30, maxPrice: 30 },
-        engineClean: { minPrice: 35, maxPrice: 35 },
-        headlight: { minPrice: 40, maxPrice: 40 },
-      },
-      exteriors: {
-        NA: { minPrice: 0, maxPrice: 0 },
-        standardExterior: { minPrice: 50, maxPrice: 50 },
-        standardPlus: { minPrice: 125, maxPrice: 125 },
-        oneStep: { minPrice: 400, maxPrice: 400 },
-        twoStep: { minPrice: 600, maxPrice: 600 },
-      },
-      interiors: {
-        NA: { minPrice: 0, maxPrice: 0 },
-        silverInterior: { minPrice: 55, maxPrice: 95 },
-        goldInterior: { minPrice: 100, maxPrice: 200 },
-        pressureSpecial: { minPrice: 200, maxPrice: 350 },
-      },
-    },
-    twoRow: {
-      services: {
-        wax: { minPrice: 80, maxPrice: 120 },
-        waterSpot: { minPrice: 30, maxPrice: 30 },
-        engineClean: { minPrice: 35, maxPrice: 35 },
-        headlight: { minPrice: 40, maxPrice: 40 },
-      },
-      exteriors: {
-        NA: { minPrice: 0, maxPrice: 0 },
-        standardExterior: { minPrice: 55, maxPrice: 55 },
-        standardPlus: { minPrice: 140, maxPrice: 140 },
-        oneStep: { minPrice: 450, maxPrice: 450 },
-        twoStep: { minPrice: 675, maxPrice: 675 },
-      },
-      interiors: {
-        NA: { minPrice: 0, maxPrice: 0 },
-        silverInterior: { minPrice: 60, maxPrice: 100 },
-        goldInterior: { minPrice: 120, maxPrice: 220 },
-        pressureSpecial: { minPrice: 240, maxPrice: 390 },
-      },
-    },
-    threeRow: {
-      services: {
-        wax: { minPrice: 80, maxPrice: 120 },
-        waterSpot: { minPrice: 30, maxPrice: 30 },
-        engineClean: { minPrice: 35, maxPrice: 35 },
-        headlight: { minPrice: 40, maxPrice: 40 },
-      },
-      exteriors: {
-        NA: { minPrice: 0, maxPrice: 0 },
-        standardExterior: { minPrice: 70, maxPrice: 70 },
-        standardPlus: { minPrice: 175, maxPrice: 175 },
-        oneStep: { minPrice: 550, maxPrice: 550 },
-        twoStep: { minPrice: 825, maxPrice: 825 },
-      },
-      interiors: {
-        NA: { minPrice: 0, maxPrice: 0 },
-        silverInterior: { minPrice: 70, maxPrice: 110 },
-        goldInterior: { minPrice: 140, maxPrice: 240 },
-        pressureSpecial: { minPrice: 280, maxPrice: 430 },
-      },
-    },
-    van: {
-      services: {
-        wax: { minPrice: 80, maxPrice: 120 },
-        waterSpot: { minPrice: 30, maxPrice: 30 },
-        engineClean: { minPrice: 35, maxPrice: 35 },
-        headlight: { minPrice: 40, maxPrice: 40 },
-      },
-      exteriors: {
-        NA: { minPrice: 0, maxPrice: 0 },
-        standardExterior: { minPrice: 95, maxPrice: 95 },
-        standardPlus: { minPrice: 240, maxPrice: 240 },
-        oneStep: { minPrice: 600, maxPrice: 600 },
-        twoStep: { minPrice: 900, maxPrice: 900 },
-      },
-      interiors: {
-        NA: { minPrice: 0, maxPrice: 0 },
-        silverInterior: { minPrice: 95, maxPrice: 105 },
-        goldInterior: { minPrice: 185, maxPrice: 240 },
-        pressureSpecial: { minPrice: 300, maxPrice: 430 },
-      },
-    },
-  };
-
-  const carOptions = [
-    { label: "Sedan", value: "sedan" },
-    { label: "2 Row Suv", value: "twoRow" },
-    { label: "3 Row Suv", value: "threeRow" },
-    { label: "Heavy Truck", value: "van" },
-  ];
-
   const [selectedExteriorOption, setSelectedExteriorOption] = useState({
     label: "N/A",
     value: "NA",
@@ -116,10 +34,6 @@ const BookingForm = ({ handleOpen }) => {
     label: "N/A",
     value: "NA",
   });
-  const stateOptions = [
-    { label: "New York", value: "NY" },
-    { label: "New Jersey", value: "NJ" },
-  ];
 
   const [selectedCar, setSelectedCar] = useState({
     label: "Sedan",
@@ -133,38 +47,19 @@ const BookingForm = ({ handleOpen }) => {
 
   useEffect(() => {
     if (selectedCar && selectedExteriorOption && selectedInteriorOption) {
-      let minPrice = 0;
-      let maxPrice = 0;
+      const newPriceRange = computePriceRange(
+        selectedCar,
+        selectedOptions,
+        selectedExteriorOption,
+        selectedInteriorOption,
+        carPricing
+      );
 
-      if (selectedOptions.length > 0) {
-        selectedOptions.forEach((option) => {
-          const carPackage = carPricing[selectedCar.value]?.services[option];
-          if (carPackage) {
-            minPrice += carPackage.minPrice;
-            maxPrice += carPackage.maxPrice;
-          }
-        });
-      }
-
-      const exteriorOptionPrice =
-        carPricing[selectedCar.value]?.exteriors[selectedExteriorOption.value];
-      if (exteriorOptionPrice) {
-        minPrice += exteriorOptionPrice.minPrice;
-        maxPrice += exteriorOptionPrice.maxPrice;
-      }
-
-      const interiorOptionPrice =
-        carPricing[selectedCar.value]?.interiors[selectedInteriorOption.value];
-      if (interiorOptionPrice) {
-        minPrice += interiorOptionPrice.minPrice;
-        maxPrice += interiorOptionPrice.maxPrice;
-      }
-
-      setPriceRange({ min: minPrice, max: maxPrice });
+      setPriceRange(newPriceRange);
       dispatch(
         setFormData({
           ...bookingForm,
-          priceRange: { min: minPrice, max: maxPrice },
+          priceRange: newPriceRange,
         })
       );
     }
@@ -174,41 +69,6 @@ const BookingForm = ({ handleOpen }) => {
     selectedExteriorOption,
     selectedInteriorOption,
   ]);
-
-  const [errors, setErrors] = useState({
-    name: false,
-    phoneNumber: false,
-    address: false,
-    zipCode: false,
-    city: false,
-    state: false,
-    email: false,
-    plusServices: false,
-    exteriorOption: false,
-    interiorOption: false,
-  });
-
-  const options = [
-    { label: "Waxes", value: "wax" },
-    { label: "Water Spot Removal", value: "waterSpot" },
-    { label: "Engine Bay Clean", value: "engineClean" },
-    { label: "Headlight Clean", value: "headlight" },
-  ];
-
-  const exteriorOptions = [
-    { label: "N/A", value: "NA" },
-    { label: "Standard Exterior", value: "standardExterior" },
-    { label: "Standard Plus Exterior", value: "standardPlus" },
-    { label: "1-Step Paint Correction", value: "oneStep" },
-    { label: "2-Step Paint Correction", value: "twoStep" },
-  ];
-
-  const interiorOptions = [
-    { label: "N/A", value: "NA" },
-    { label: "Silver Interior", value: "silverInterior" },
-    { label: "Gold Interior", value: "goldInterior" },
-    { label: "Pressure Special", value: "pressureSpecial" },
-  ];
 
   const handleOptionChange = (selectedOptionValues) => {
     const values = selectedOptionValues.map((option) => option.value);
@@ -232,7 +92,6 @@ const BookingForm = ({ handleOpen }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setErrors((prevErrors) => ({ ...prevErrors, [name]: false }));
     dispatch(setFormData({ ...bookingForm, [name]: value }));
   };
 
@@ -249,48 +108,19 @@ const BookingForm = ({ handleOpen }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newErrors = Object.keys(bookingForm).reduce((result, field) => {
-      if (field !== "message") {
-        result[field] = !bookingForm[field];
-      }
-      return result;
-    }, {});
-
-    if (Object.values(newErrors).includes(true)) {
-      setErrors(newErrors);
-    } else {
+    const isValid = validateFields(
+      bookingForm,
+      selectedInteriorOption,
+      selectedExteriorOption
+    );
+    if (isValid) {
       handleOpen();
     }
   };
 
-  const selectStyles = {
-    control: (base) => ({
-      ...base,
-      background: "#fff",
-      borderColor: "#9e9e9e",
-      boxShadow: "none",
-      "&:hover": {
-        borderColor: "#9e9e9e",
-      },
-    }),
-    menu: (base) => ({
-      ...base,
-      color: "black",
-      borderRadius: 0,
-      marginTop: 0,
-      height: "100px",
-      overflow: "scroll",
-    }),
-    menuList: (base) => ({
-      ...base,
-      padding: 0,
-      maxHeight: "100px",
-      overflow: "scroll",
-    }),
-  };
-
   return (
     <div className="myCustomHeight contact-form-container bookformcontainer">
+      <ToastContainer style={{ marginTop: "50px" }} />
       <h1>Book Your Service</h1>
       <form onSubmit={handleSubmit}>
         <div className="testing1234">
@@ -300,7 +130,7 @@ const BookingForm = ({ handleOpen }) => {
             name="name"
             value={bookingForm.name}
             onChange={handleChange}
-            className={errors.name ? "error" : "inputForm"}
+            className="inputForm"
           />
           <label htmlFor="phoneNumber">Phone Number:</label>
           <input
@@ -308,7 +138,7 @@ const BookingForm = ({ handleOpen }) => {
             name="phoneNumber"
             value={bookingForm.phoneNumber}
             onChange={handleChange}
-            className={errors.phoneNumber ? "error" : "inputForm"}
+            className="inputForm"
           />
           <label htmlFor="address">Address:</label>
           <input
@@ -316,7 +146,7 @@ const BookingForm = ({ handleOpen }) => {
             name="address"
             value={bookingForm.address}
             onChange={handleChange}
-            className={errors.address ? "error" : "inputForm"}
+            className="inputForm"
             required
           />
           <label htmlFor="city">City:</label>
@@ -325,7 +155,7 @@ const BookingForm = ({ handleOpen }) => {
             name="city"
             value={bookingForm.city}
             onChange={handleChange}
-            className={errors.city ? "error" : "inputForm"}
+            className="inputForm"
             required
           />
           <label htmlFor="state">
@@ -340,7 +170,6 @@ const BookingForm = ({ handleOpen }) => {
               alt="i"
             />
           </label>
-
           <Select
             name="state"
             options={stateOptions}
@@ -388,8 +217,7 @@ const BookingForm = ({ handleOpen }) => {
               onMouseLeave={() => setPopoverOpen(true)} // Here, I assume you meant to setPopoverOpen to false.
             ></div>
           </Popover>
-          <br />
-          <br />
+          <br /> <br />
           <div id="wrapper">
             <label for="yes_no">
               Is there any dog hair or spillage that may have caused odor
@@ -418,9 +246,7 @@ const BookingForm = ({ handleOpen }) => {
                 <label for="no">No</label>
               </p>
             </div>
-
-            <br />
-            <br />
+            <br /> <br />
           </div>
           <label htmlFor="zipCode">Zip Code:</label>
           <input
@@ -428,7 +254,7 @@ const BookingForm = ({ handleOpen }) => {
             name="zipCode"
             value={bookingForm.zipCode}
             onChange={handleChange}
-            className={errors.zipCode ? "error" : "inputForm"}
+            className="inputForm"
           />
           <label htmlFor="email">Email:</label>
           <input
@@ -436,7 +262,7 @@ const BookingForm = ({ handleOpen }) => {
             name="email"
             value={bookingForm.email}
             onChange={handleChange}
-            className={errors.email ? "error" : "inputForm"}
+            className="inputForm"
           />
           <label htmlFor="car">Car:</label>
           <Select
@@ -504,9 +330,7 @@ const BookingForm = ({ handleOpen }) => {
         <span style={{ fontSize: "20px" }}>
           ${priceRange.min} - ${priceRange.max}.
         </span>
-        <br />
-        <br />
-        <br />
+        <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
         ***Once your appointment has been completed, we accept payments through
         Apple Pay, Cash App, Zelle, and Venmo.***
       </p>
