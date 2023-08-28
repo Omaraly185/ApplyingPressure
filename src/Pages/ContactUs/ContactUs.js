@@ -1,15 +1,15 @@
-import React from 'react';
-import Header from '../../Component/Header';
-import './ContactUs.css';
-import { useState } from 'react';
-import AP from './AP.png';
-import ny from './ny.png';
-import Instgram from './Instagram.svg';
-import FaceBook from './Facebook.svg';
-import Tiktok from './Tiktok.svg';
-import Reddit from './Reddit.svg';
-import Twitter from './Twitter.svg';
-import { NavigationType } from 'react-router-dom';
+import React from "react";
+import Header from "../../Component/Header";
+import "./ContactUs.css";
+import { useState } from "react";
+import AP from "./AP.png";
+import ny from "./ny.png";
+import Instgram from "./Instagram.svg";
+import FaceBook from "./Facebook.svg";
+import Tiktok from "./Tiktok.svg";
+import Reddit from "./Reddit.svg";
+import Twitter from "./Twitter.svg";
+import { NavigationType } from "react-router-dom";
 
 function ContactUs() {
   const imgStyle = {
@@ -49,6 +49,7 @@ function ContactUs() {
               <div style={imgStyle}>Facebook</div>
             </a>
             <a
+              style={{ maxWidth: "292px" }}
               href="https://www.tiktok.com/@applyingpressurenyc"
               className="game-link tiktok"
             >
