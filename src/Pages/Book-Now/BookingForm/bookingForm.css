@@ -81,11 +81,13 @@ textarea {
   margin-left: 3%;
   width: 42%;
   margin-right: 20px;
+  min-height: 88.5vh;
+  max-height: 92vh;
 }
 
 @media (max-width: 750px) {
   .bookformcontainer {
-    width: 90vw;
+    width: 93vw;
   }
 }
 
@@ -115,4 +117,9 @@ textarea {
   box-sizing: border-box;
   margin-bottom: 10px;
   font-size: 14px;
+}
+@media (max-width: 550px) {
+  .bookformcontainer {
+    min-height: 109vh;
+  }
 }

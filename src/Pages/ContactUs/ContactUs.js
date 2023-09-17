@@ -29,7 +29,7 @@ function ContactUs() {
           <div className="Bro">Find Us On Social Media</div>
         </div>
         <div className="Section2">
-          <div class="games">
+          <div className="games">
             <a
               href="https://www.instagram.com/applyingpressurenyc/"
               className="game-link instagram"

@@ -1,13 +1,12 @@
-import React from 'react';
-import { useState } from 'react';
-import './package.css';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import Exterior from './ExteriorPrices.jpeg';
-import Interior from './InteriorPrices.jpeg';
-import Special from './Special.png';
+import React, { useState } from "react";
+import "./package.css";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+import Exterior from "./ExteriorPrices.jpeg";
+import Interior from "./InteriorPrices.jpeg";
+import Special from "./plusServices.png";
 
 const Packages = () => {
-  const [items, setItems] = useState([Exterior, Interior]);
+  const [items, setItems] = useState([Exterior, Interior, Special]);
   const [current, setCurrent] = useState(0);
   const [isNext, setIsNext] = useState(true);
 
@@ -29,7 +28,7 @@ const Packages = () => {
     let index = current;
     let length = items.length - 1;
 
-    if (index == length) {
+    if (index === length) {
       index = -1;
     }
 
@@ -45,9 +44,14 @@ const Packages = () => {
     setIsNext(next);
   };
 
+  const handleNavigationButtonClick = (index) => {
+    setCurrent(index);
+    setIsNext(index > current);
+  };
+
   const History = ({ current, items, changeSilde }) => {
     let modifiedItems = items.map((el, index) => {
-      let name = index == current ? 'active' : '';
+      let name = index === current ? "active" : "";
       return (
         <li key={index}>
           <button
@@ -60,25 +64,50 @@ const Packages = () => {
 
     return <ul>{modifiedItems}</ul>;
   };
+
   let index = current;
   let isnext = isNext;
   let src = items[index];
 
   return (
-    <div className=" myCustomHeight backborder-leftmm">
+    <div className="myCustomHeight backborder-leftmm">
+      <div style={{ marginLeft: 20 }}>
+        <button
+          className={`navigation-button ${current === 0 ? "active-nav" : ""}`}
+          onClick={() => handleNavigationButtonClick(0)} // Go to Exterior
+        >
+          Exterior
+        </button>
+        <button
+          className={`navigation-button ${current === 1 ? "active-nav" : ""}`}
+          onClick={() => handleNavigationButtonClick(1)} // Go to Interior
+        >
+          Interior
+        </button>
+        <button
+          className={`navigation-button ${current === 2 ? "active-nav" : ""}`}
+          onClick={() => handleNavigationButtonClick(2)} // Go to Special
+        >
+          Plus Services
+        </button>
+      </div>
       <div className="carousel">
         <ReactCSSTransitionGroup
           transitionName={{
-            enter: isnext ? 'enter-next' : 'enter-prev',
-            enterActive: 'enter-active',
-            leave: 'leave',
-            leaveActive: isnext ? 'leave-active-next' : 'leave-active-prev',
+            enter: isnext ? "enter-next" : "enter-prev",
+            enterActive: "enter-active",
+            leave: "leave",
+            leaveActive: isnext ? "leave-active-next" : "leave-active-prev",
           }}
           transitionEnterTimeout={500}
           transitionLeaveTimeout={500}
         >
           <div className="carousel_slide" key={index}>
-            <img style={{ minWidth: '100%' }} src={src} />
+            <img
+              style={{ minWidth: "100%" }}
+              src={src}
+              alt={`Slide ${index}`}
+            />
           </div>
         </ReactCSSTransitionGroup>
         <button

@@ -1,19 +1,19 @@
-import React from 'react';
-import './AboutUs.scss';
-import About5 from './AboutUsPics/About5.jpg';
-import About9 from './AboutUsPics/About9.jpg';
+import React from "react";
+import "./AboutUs.scss";
+import About5 from "./AboutUsPics/About5.jpg";
+import About9 from "./AboutUsPics/About9.jpg";
 
 function AboutUs() {
   return (
     <div className="fullAbout">
       <div className="About-Us-Name">
-        <div class="we-are-block">
+        <div className="we-are-block">
           <div id="about-us-section">
-            <div class="about-us-image">
+            <div className="about-us-image">
               <img src={About5} width="808" height="458" alt="Lobby" />
             </div>
 
-            <div class="about-us-info">
+            <div className="about-us-info">
               <h2>We are Applying Pressure</h2>
 
               <p>
@@ -37,11 +37,11 @@ function AboutUs() {
           </div>
 
           <div id="history-section">
-            <div class="history-image">
+            <div className="history-image">
               <img src={About9} width="951" height="471" alt="Building Pic" />
             </div>
 
-            <div class="history-info">
+            <div className="history-info">
               <h2>Why Choose Us</h2>
 
               <p>

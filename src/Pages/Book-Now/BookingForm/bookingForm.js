@@ -276,19 +276,6 @@ const BookingForm = ({ handleOpen }) => {
             )}
             styles={selectStyles}
           />
-          <label htmlFor="plusServices">Plus Services:</label>
-          <Select
-            isMulti
-            name="plusServices"
-            options={options}
-            className="basic-multi-select"
-            classNamePrefix="select"
-            onChange={handleOptionChange}
-            value={options.filter((option) =>
-              selectedOptions.includes(option.value)
-            )}
-            styles={selectStyles}
-          />
           <label htmlFor="exteriorOption">Exterior Option:</label>
           <Select
             name="exteriorOption"
@@ -313,6 +300,19 @@ const BookingForm = ({ handleOpen }) => {
             )}
             styles={selectStyles}
           />
+          <label htmlFor="plusServices">Plus Services:</label>
+          <Select
+            isMulti
+            name="plusServices"
+            options={options}
+            className="basic-multi-select"
+            classNamePrefix="select"
+            onChange={handleOptionChange}
+            value={options.filter((option) =>
+              selectedOptions.includes(option.value)
+            )}
+            styles={selectStyles}
+          />
           <label htmlFor="message">Message:</label>
           <textarea
             name="message"
@@ -330,9 +330,10 @@ const BookingForm = ({ handleOpen }) => {
         <span style={{ fontSize: "20px" }}>
           ${priceRange.min} - ${priceRange.max}.
         </span>
-        <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
-        ***Once your appointment has been completed, we accept payments through
-        Apple Pay, Cash App, Zelle, and Venmo.***
+        <div style={{ marginTop: "18%" }}>
+          ***After job is complete we accept Apple Pay, Cash App, Cash Zelle,
+          and Venmo.***
+        </div>
       </p>
     </div>
   );

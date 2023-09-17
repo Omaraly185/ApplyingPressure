@@ -19,3 +19,14 @@
 .pricing-section {
   margin-top: 20px;
 }
+.monthly-container {
+  width: 100vw; // occupies 100% of the viewport width
+  height: 100vh; // occupies 100% of the viewport height
+  overflow: hidden; // to prevent any overflower for absolute positioned child elements
+}
+.monthly-service-image {
+  max-width: 100%; // ensures it doesn't exceed the parent width
+  max-height: 100%; // ensures it doesn't exceed the parent height
+  display: block; // removes any default margins/padding
+  margin: 0 auto; // centers the image if it doesn't take the full width
+}
