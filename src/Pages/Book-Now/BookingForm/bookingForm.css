@@ -81,8 +81,7 @@ textarea {
   margin-left: 3%;
   width: 42%;
   margin-right: 20px;
-  min-height: 88.5vh;
-  max-height: 92vh;
+  min-height: 100vh;
 }
 
 @media (max-width: 750px) {

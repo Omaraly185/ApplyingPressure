@@ -42,16 +42,24 @@ function Header() {
         >
           <ul className="defaultFont">
             <li>
-              <Link to="/">Home</Link>
+              <Link className="header-routing" to="/">
+                Home
+              </Link>
             </li>
             <li>
-              <Link to="/Book_Now">Book</Link>
+              <Link className="header-routing" to="/Book_Now">
+                Book
+              </Link>
             </li>
             <li>
-              <a href="/Monthly">Monthly</a>
+              <a className="header-routing" href="/Monthly">
+                Monthly
+              </a>
             </li>
             <li>
-              <a href="/ContactUS">Contact Us</a>
+              <a className="header-routing" href="/ContactUS">
+                Contact Us
+              </a>
             </li>
           </ul>
         </div>
