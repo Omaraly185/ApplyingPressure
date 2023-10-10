@@ -31,10 +31,21 @@
   background-color: black;
   color: #ecd270;
 }
+/* .rbc-week-header {
+  background-color: black;
+  color: #ecd270;
+} */
 .rbc-time-view .rbc-row {
   /* background-color: rgb(104, 53, 53); */
   box-sizing: border-box;
   border: rgb(149, 93, 93);
+}
+.rbc-timeslot-group {
+  background-color: black;
+  color: wheat;
+}
+.rbc-allday-cell {
+  display: none !important;
 }
 
 .rbc-toolbar .rbc-toolbar-label {
@@ -47,6 +58,6 @@
 }
 
 .myCustomHeight {
-  margin-top: 4.2rem;
+  margin-top: 3.95rem;
   height: 100vh;
 }

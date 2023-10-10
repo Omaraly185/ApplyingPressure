@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import "./Header.css";
+import AP from "../Pages/ContactUs/AP.png";
 import $ from "jquery";
 
 function Header() {
-  // const [isOpen, setIsOpen] = useState(true);
-  // const handleClick = () => setIsOpen(!isOpen);
+  const navbarRef = useRef(null);
+  const menuButtonRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        navbarRef.current &&
+        !navbarRef.current.contains(e.target) &&
+        !menuButtonRef.current.contains(e.target) &&
+        $(window).width() < 750
+      ) {
+        $("li").slideUp(); // Collapse the header
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside); // Cleanup listener on unmount
+  }, []);
 
   $(document).ready(function () {
     $("li").slideDown();
@@ -28,18 +44,18 @@ function Header() {
         });
       }
     });
+
   return (
     <>
-      <div className="navbar">
+      <div className="navbar" ref={navbarRef}>
         <Link to="/" className="logo">
-          AP
+          <img
+            style={{ borderRadius: "100%", width: 65 }}
+            src={AP}
+            alt="Logo"
+          />
         </Link>
-        <div
-          className={
-            "active"
-            // `${isOpen ? 'toggle':'active'}`
-          }
-        >
+        <div className="active">
           <ul className="defaultFont">
             <li>
               <Link className="header-routing" to="/">
@@ -64,13 +80,7 @@ function Header() {
           </ul>
         </div>
       </div>
-      <button
-        className="menu"
-        id="toggleButton"
-        // onClick={() => {
-        //       setIsOpen(!isOpen);
-        //     }}
-      >
+      <button className="menu" id="toggleButton" ref={menuButtonRef}>
         <div className="menu-line"></div>
         <div className="menu-line"></div>
         <div className="menu-line"></div>

@@ -120,5 +120,6 @@ textarea {
 @media (max-width: 550px) {
   .bookformcontainer {
     min-height: 109vh;
+    width: 92vw;
   }
 }
