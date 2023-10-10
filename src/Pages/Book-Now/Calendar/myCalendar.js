@@ -26,13 +26,6 @@ const MyCalendar = (props) => {
         "https://applyingpressure-api-production.up.railway.app/events"
       );
       const events = await response.json();
-      // Format the events for react-big-calendar
-      events = events.map((event) => ({
-        ...event,
-        start: new Date(event.start),
-        end: new Date(event.end),
-      }));
-
       setEvents(events);
       setLoading(false); // Update loading state
     } catch (error) {
