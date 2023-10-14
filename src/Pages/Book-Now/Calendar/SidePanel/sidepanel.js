@@ -22,13 +22,7 @@ function Sidepanel(props) {
     (state) => state.bookingForm.interiorOption
   );
   const email = useSelector((state) => state.bookingForm.email);
-  const plusService = useSelector((state) => {
-    if (state.bookingForm.plusService === undefined) {
-      return "";
-    } else {
-      return state.bookingForm.plusService;
-    }
-  });
+  const plusService = useSelector((state) => state.bookingForm.plusServices);
   console.log(plusService);
   const arrayAT = [
     "7:00 AM",
