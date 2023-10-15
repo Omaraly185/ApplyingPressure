@@ -146,6 +146,10 @@ function Sidepanel(props) {
     const selectedTime = new Date(selectedTimeString);
 
     let appointmentLength = 0;
+    const dayOfWeek = selectedTime.getDay();
+    if (dayOfWeek === 1 || dayOfWeek === 2) {
+      return false;
+    }
 
     if (
       ExteriorPackage === "standardExterior" ||
@@ -200,16 +204,20 @@ function Sidepanel(props) {
                 Available times for {selectedDate}
               </div>
               <div className="available-times">
-                {arrayAT.map((time) =>
-                  isTimeAvailable(time) ? (
-                    <button
-                      className="available-time-button"
-                      onClick={() => toggleCreditcard(time)}
-                      key={time}
-                    >
-                      {time}
-                    </button>
-                  ) : null
+                {arrayAT.some((time) => isTimeAvailable(time)) ? (
+                  arrayAT.map((time) =>
+                    isTimeAvailable(time) ? (
+                      <button
+                        className="available-time-button"
+                        onClick={() => toggleCreditcard(time)}
+                        key={time}
+                      >
+                        {time}
+                      </button>
+                    ) : null
+                  )
+                ) : (
+                  <div>No available times on this day</div>
                 )}
               </div>
             </>
