@@ -14,6 +14,7 @@ function Sidepanel(props) {
   const message = useSelector((state) => state.bookingForm.message) || "";
   const price = useSelector((state) => state.bookingForm.priceRange);
   const location = useSelector((state) => state.bookingForm.address);
+  const carType = useSelector((state) => state.bookingForm.car);
   const phoneNumber = useSelector((state) => state.bookingForm.phoneNumber);
   const ExteriorPackage = useSelector(
     (state) => state.bookingForm.exteriorOption
@@ -101,7 +102,7 @@ function Sidepanel(props) {
       endTime,
       dogHair,
       message,
-      description: `APL:OTheGeneral \n\n ${name} ${phoneNumber},\n\n Sedan,\n ${ExteriorPackage} ${interiorPackage} $ ${plusService}\n\n dog Hair/Smell:${dogHair}\n\n ${price.min}-${price.max},\n\nAPD:\n\n\n\n${message}`,
+      description: `APL:OTheGeneral \n\n ${name} ${phoneNumber},\n\n ${carType},\n ${ExteriorPackage} ${interiorPackage} $ ${plusService}\n\n dog Hair/Smell:${dogHair}\n\n ${price.min}-${price.max},\n\nAPD:\n\n\n\n${message}`,
       location: `${location}`,
     };
 
