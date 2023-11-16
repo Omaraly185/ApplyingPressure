@@ -35,8 +35,6 @@ function Sidepanel(props) {
     "1:00 PM",
     "2:00 PM",
     "3:00 PM",
-    "4:00 PM",
-    "5:00 PM",
   ];
 
   const [cardNumber, setCardNumber] = useState("");
@@ -148,7 +146,7 @@ function Sidepanel(props) {
 
     let appointmentLength = 0;
     const dayOfWeek = selectedTime.getDay();
-    if (dayOfWeek === 1 || dayOfWeek === 2) {
+    if (dayOfWeek === 1 || dayOfWeek === 2 || dayOfWeek === 5) {
       return false;
     }
 
