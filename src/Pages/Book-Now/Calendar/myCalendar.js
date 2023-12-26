@@ -90,13 +90,13 @@ const MyCalendar = (props) => {
         step={60}
         timeslots={1}
         views={["month", "agenda"]}
-        min={new Date(0, 0, 0, 7, 0)} // 7 AM
-        max={new Date(0, 0, 0, 21, 0)} // 9 PM
+        min={new Date(0, 0, 0, 7, 0)}
+        max={new Date(0, 0, 0, 21, 0)}
       />
       <Sidepanel
         showPanel={showPanel}
         selectedDate={selectedDate}
-        events={events} // Pass events to Sidepanel component
+        events={events}
         setShowPanel={setShowPanel}
         handleTimeSelect={handleTimeSelect}
       />
