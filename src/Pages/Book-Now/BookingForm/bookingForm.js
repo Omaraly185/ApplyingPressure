@@ -92,6 +92,13 @@ const BookingForm = ({ handleOpen }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === "name") {
+      // eslint-disable-next-line no-undef
+      fbq("trackCustom", "NameFieldChange", {
+        fieldName: name,
+        fieldValue: value,
+      });
+    }
     dispatch(setFormData({ ...bookingForm, [name]: value }));
   };
 
@@ -114,6 +121,8 @@ const BookingForm = ({ handleOpen }) => {
       selectedExteriorOption
     );
     if (isValid) {
+      // eslint-disable-next-line no-undef
+      fbq("trackCustom", "AppointmentButtonClicked");
       handleOpen();
     }
   };
