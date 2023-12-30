@@ -6,7 +6,7 @@ const useTrackPageView = () => {
 
   useEffect(() => {
     // eslint-disable-next-line no-undef
-    fbq("track", "PageView"); // Track page view with Facebook Pixel
+    fbq("track", `PageView ${location.pathname}`); // Track page view with Facebook Pixel
   }, [location]); // Triggered on location change
 };
 
