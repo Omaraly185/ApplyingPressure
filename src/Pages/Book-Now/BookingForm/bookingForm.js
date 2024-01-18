@@ -335,15 +335,29 @@ const BookingForm = ({ handleOpen }) => {
         </button>
       </form>
       <p>
-        Based on your selected options, the estimated price range is between :
-        <span style={{ fontSize: "20px" }}>
+        Based on your selected options, the estimated price range is between:
+        <span
+          style={{
+            fontSize: "20px",
+            fontWeight: "bold",
+            display: "block",
+            marginTop: "20px",
+          }}
+        >
           ${priceRange.min} - ${priceRange.max}.
         </span>
-        <div style={{ marginTop: "18%" }}>
-          ***After job is complete we accept Apple Pay, Cash App, Cash Zelle,
-          and Venmo.***
-        </div>
       </p>
+      <div
+        style={{
+          marginTop: "20px",
+          fontSize: "14px",
+          color: "#cccccc",
+          fontStyle: "italic",
+        }}
+      >
+        ***After job is complete we accept Apple Pay, Cash App, Cash Zelle, and
+        Venmo.***
+      </div>
     </div>
   );
 };
