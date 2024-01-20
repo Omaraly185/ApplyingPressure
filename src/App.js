@@ -9,6 +9,7 @@ import useTrackPageView from "./Component/useTrackPageView";
 import ContactUs from "./Pages/ContactUs/ContactUs";
 import SuccessPage from "./Success/SuccessPage";
 import MonthlySub from "./Pages/Monthly/MonthlySub";
+import useTrackPageExit from "./Component/useTrackPageExit";
 
 function App() {
   const [sessionId, setSessionId] = useState(
@@ -24,6 +25,7 @@ function App() {
   }, [sessionId]);
 
   useTrackPageView(sessionId);
+  useTrackPageExit();
 
   return (
     <div className="App">
