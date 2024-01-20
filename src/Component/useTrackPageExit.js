@@ -6,7 +6,7 @@ const useTrackPageExit = () => {
       const currentPageUrl = window.location.href;
 
       // eslint-disable-next-line no-undef
-      fbq("trackCustom", "PageExit", {
+      fbq("trackCustom", `PageExit ${currentPageUrl}`, {
         url: currentPageUrl,
       });
     };
