@@ -146,7 +146,7 @@ function Sidepanel(props) {
 
     let appointmentLength = 0;
     const dayOfWeek = selectedTime.getDay();
-    if (dayOfWeek === 1 || dayOfWeek === 2 || dayOfWeek === 5) {
+    if (dayOfWeek === 1 || dayOfWeek === 2) {
       return false;
     }
 

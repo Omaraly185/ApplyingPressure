@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./package.css";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
-import Exterior from "./Exterior.JPG";
-import Interior from "./Interior.JPG";
-import Special from "./plusServices.png";
+import Exterior from "./Exterior.jpeg";
+import Interior from "./Interior.jpeg";
+import Special from "./plusServices.JPEG";
 
 const Packages = () => {
   const [items, setItems] = useState([Exterior, Interior, Special]);
