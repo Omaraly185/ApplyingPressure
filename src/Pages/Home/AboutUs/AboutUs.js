@@ -27,7 +27,7 @@ function AboutUs() {
                 packages. We understand that your car is a reflection of you,
                 and we are committed to ensuring it always shines brilliantly,
                 capturing the essence of your personality in its gleaming
-                finish.
+                finish. Call us now at (718) 635-3758
               </p>
 
               {/* <a href="#" title="About Us Button">
