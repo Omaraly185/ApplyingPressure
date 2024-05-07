@@ -5,22 +5,13 @@
 body {
   margin: 0;
   width: 100%;
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 12pt;
   font-weight: 400;
 }
 
 h2 {
-  font-family: 'Bebas Neue', cursive;
-}
-
-a {
-  text-decoration: none;
-  transition: all 0.5s ease-in-out;
-}
-
-a:hover {
-  transition: all 0.5s ease-in-out;
+  font-family: "Bebas Neue", cursive;
 }
 
 .we-are-block {
@@ -173,21 +164,9 @@ a:hover {
   }
 }
 
-.about-us-info a {
-  background-color: white;
-  color: #0c4c91;
-  width: 180px;
-  text-align: center;
-  padding: 15px 0px 15px 0px;
-  font-size: 14pt;
-  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-}
-
-.about-us-info a:hover {
-  background: #404140;
+.PhonenumberLink {
+  background-color: transparent !important;
   color: white;
-  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-  transform: translateY(10px);
 }
 
 #history-section {
@@ -316,21 +295,4 @@ a:hover {
   .history-info p {
     text-align: center;
   }
-}
-
-.history-info a {
-  background-color: #0c4c91;
-  color: white;
-  width: 180px;
-  text-align: center;
-  padding: 15px 0px 15px 0px;
-  font-size: 14pt;
-  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-}
-
-.history-info a:hover {
-  background: #404140;
-  color: white;
-  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-  transform: translateY(10px);
 }
