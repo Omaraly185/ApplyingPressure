@@ -71,7 +71,7 @@ export const options = [
 export const exteriorOptions = [
   { label: "N/A", value: "NA" },
   { label: "Standard Exterior", value: "standardExterior" },
-  { label: "Standard Plus Exterior", value: "standardPlus" },
+  { label: "Wash and Wax", value: "washWax" },
   { label: "1-Step Paint Correction", value: "oneStep" },
   { label: "2-Step Paint Correction", value: "twoStep" },
 ];

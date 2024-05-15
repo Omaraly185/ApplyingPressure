@@ -9,7 +9,7 @@
     "exteriors": {
       "NA": { "minPrice": 0, "maxPrice": 0 },
       "standardExterior": { "minPrice": 60, "maxPrice": 60 },
-      "standardPlus": { "minPrice": 125, "maxPrice": 125 },
+      "washWax": { "minPrice": 125, "maxPrice": 125 },
       "oneStep": { "minPrice": 400, "maxPrice": 400 },
       "twoStep": { "minPrice": 600, "maxPrice": 600 }
     },
@@ -30,7 +30,7 @@
     "exteriors": {
       "NA": { "minPrice": 0, "maxPrice": 0 },
       "standardExterior": { "minPrice": 65, "maxPrice": 65 },
-      "standardPlus": { "minPrice": 140, "maxPrice": 140 },
+      "washWax": { "minPrice": 140, "maxPrice": 140 },
       "oneStep": { "minPrice": 450, "maxPrice": 450 },
       "twoStep": { "minPrice": 675, "maxPrice": 675 }
     },
@@ -51,7 +51,7 @@
     "exteriors": {
       "NA": { "minPrice": 0, "maxPrice": 0 },
       "standardExterior": { "minPrice": 80, "maxPrice": 80 },
-      "standardPlus": { "minPrice": 175, "maxPrice": 175 },
+      "washWax": { "minPrice": 175, "maxPrice": 175 },
       "oneStep": { "minPrice": 550, "maxPrice": 550 },
       "twoStep": { "minPrice": 825, "maxPrice": 825 }
     },
@@ -72,7 +72,7 @@
     "exteriors": {
       "NA": { "minPrice": 0, "maxPrice": 0 },
       "standardExterior": { "minPrice": 105, "maxPrice": 105 },
-      "standardPlus": { "minPrice": 240, "maxPrice": 240 },
+      "washWax": { "minPrice": 240, "maxPrice": 240 },
       "oneStep": { "minPrice": 600, "maxPrice": 600 },
       "twoStep": { "minPrice": 900, "maxPrice": 900 }
     },
