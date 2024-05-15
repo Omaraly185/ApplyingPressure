@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./package.css";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import Exterior from "./Exterior.jpeg";
-import Interior from "./Interior.jpeg";
+import Interior from "./Interior.JPEG";
 import Special from "./plusServices.JPEG";
 
 const Packages = () => {

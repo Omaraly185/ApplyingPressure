@@ -62,8 +62,8 @@ export const validateFields = (
 };
 
 export const options = [
-  { label: "Waxes", value: "wax" },
-  { label: "Water Spot Removal", value: "waterSpot" },
+  { label: "Ceramic Coating", value: "coating" },
+  { label: "DIY Kit", value: "diy" },
   { label: "Engine Bay Clean", value: "engineClean" },
   { label: "Headlight Clean", value: "headlight" },
 ];
