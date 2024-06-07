@@ -10,6 +10,7 @@ import ContactUs from "./Pages/ContactUs/ContactUs";
 import SuccessPage from "./Success/SuccessPage";
 import MonthlySub from "./Pages/Monthly/MonthlySub";
 import useTrackPageExit from "./Component/useTrackPageExit";
+import CeramicCoating from "./Pages/Ceramic-Coating/ceramic-coating";
 
 function App() {
   const [sessionId, setSessionId] = useState(
@@ -33,6 +34,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/Book_Now" element={<BookNow />} />
+        <Route exact path="/Ceramic-Coating" element={<CeramicCoating />} />
         <Route exact path="/ContactUs" element={<ContactUs />} />
         <Route exact path="/Monthly" element={<MonthlySub />} />
         <Route exact path="/success" element={<SuccessPage />} />

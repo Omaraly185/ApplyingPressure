@@ -3,7 +3,7 @@
     "services": {
       "coating": { "minPrice": 400, "maxPrice": 400 },
       "diy": { "minPrice": 15, "maxPrice": 15 },
-      "engineClean": { "minPrice": 35, "maxPrice": 35 },
+      "engineClean": { "minPrice": 50, "maxPrice": 50 },
       "headlight": { "minPrice": 40, "maxPrice": 40 }
     },
     "exteriors": {
@@ -24,7 +24,7 @@
     "services": {
       "coating": { "minPrice": 450, "maxPrice": 450 },
       "diy": { "minPrice": 15, "maxPrice": 15 },
-      "engineClean": { "minPrice": 35, "maxPrice": 35 },
+      "engineClean": { "minPrice": 50, "maxPrice": 50 },
       "headlight": { "minPrice": 40, "maxPrice": 40 }
     },
     "exteriors": {
@@ -45,7 +45,7 @@
     "services": {
       "coating": { "minPrice": 550, "maxPrice": 550 },
       "diy": { "minPrice": 15, "maxPrice": 15 },
-      "engineClean": { "minPrice": 35, "maxPrice": 35 },
+      "engineClean": { "minPrice": 50, "maxPrice": 50 },
       "headlight": { "minPrice": 40, "maxPrice": 40 }
     },
     "exteriors": {
@@ -66,7 +66,7 @@
     "services": {
       "coating": { "minPrice": 650, "maxPrice": 650 },
       "diy": { "minPrice": 15, "maxPrice": 15 },
-      "engineClean": { "minPrice": 35, "maxPrice": 35 },
+      "engineClean": { "minPrice": 50, "maxPrice": 50 },
       "headlight": { "minPrice": 40, "maxPrice": 40 }
     },
     "exteriors": {

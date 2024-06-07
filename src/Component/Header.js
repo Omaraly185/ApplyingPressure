@@ -16,7 +16,7 @@ function Header() {
         !menuButtonRef.current.contains(e.target) &&
         $(window).width() < 750
       ) {
-        $("li").slideUp(); // Collapse the header
+        $(".domanip").slideUp();
       }
     };
 
@@ -25,12 +25,12 @@ function Header() {
   }, []);
 
   $(document).ready(function () {
-    $("li").slideDown();
+    $(".dommanip").slideDown();
     $(".menu")
       .off("click")
       .on("click", function () {
         if ($(window).width() < 750) {
-          $("li").slideToggle("50");
+          $(".dommanip").slideToggle("50");
         }
       });
   });
@@ -40,7 +40,7 @@ function Header() {
     .on("resize", function () {
       if ($(window).width() > 750) {
         $(document).ready(function () {
-          $("li").slideDown();
+          $(".dommanip").slideDown();
         });
       }
     });
@@ -57,22 +57,27 @@ function Header() {
         </Link>
         <div className="active">
           <ul className="defaultFont">
-            <li>
+            <li className="dommanip">
               <Link className="header-routing" to="/">
                 Home
               </Link>
             </li>
-            <li>
+            <li className="dommanip">
               <Link className="header-routing" to="/Book_Now">
                 Book
               </Link>
             </li>
-            <li>
+            <li className="dommanip">
+              <Link className="header-routing" to="/Ceramic-Coating">
+                Ceramic Coating
+              </Link>
+            </li>
+            <li className="dommanip">
               <a className="header-routing" href="/Monthly">
                 Monthly
               </a>
             </li>
-            <li>
+            <li className="dommanip">
               <a className="header-routing" href="/ContactUS">
                 Contact Us
               </a>
