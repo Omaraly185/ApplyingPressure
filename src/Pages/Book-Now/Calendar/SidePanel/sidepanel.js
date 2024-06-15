@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./sidepanel.css";
 import { useSelector } from "react-redux";
-import store from "../../../../redux/store";
 
 function Sidepanel(props) {
   const [loading, setLoading] = useState(false);
@@ -146,7 +145,7 @@ function Sidepanel(props) {
 
     let appointmentLength = 0;
     const dayOfWeek = selectedTime.getDay();
-    if (dayOfWeek === 1 || dayOfWeek === 2) {
+    if (dayOfWeek === 5) {
       return false;
     }
 
