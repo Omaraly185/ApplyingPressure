@@ -1,7 +1,7 @@
 {
   "sedan": {
     "services": {
-      "coating": { "minPrice": 400, "maxPrice": 400 },
+      "coating": { "minPrice": 650, "maxPrice": 650 },
       "diy": { "minPrice": 15, "maxPrice": 15 },
       "engineClean": { "minPrice": 50, "maxPrice": 50 },
       "headlight": { "minPrice": 40, "maxPrice": 40 }
@@ -22,7 +22,7 @@
   },
   "twoRow": {
     "services": {
-      "coating": { "minPrice": 450, "maxPrice": 450 },
+      "coating": { "minPrice": 725, "maxPrice": 725 },
       "diy": { "minPrice": 15, "maxPrice": 15 },
       "engineClean": { "minPrice": 50, "maxPrice": 50 },
       "headlight": { "minPrice": 40, "maxPrice": 40 }
@@ -43,7 +43,7 @@
   },
   "threeRow": {
     "services": {
-      "coating": { "minPrice": 550, "maxPrice": 550 },
+      "coating": { "minPrice": 875, "maxPrice": 875 },
       "diy": { "minPrice": 15, "maxPrice": 15 },
       "engineClean": { "minPrice": 50, "maxPrice": 50 },
       "headlight": { "minPrice": 40, "maxPrice": 40 }
@@ -64,7 +64,7 @@
   },
   "van": {
     "services": {
-      "coating": { "minPrice": 650, "maxPrice": 650 },
+      "coating": { "minPrice": 1000, "maxPrice": 1000 },
       "diy": { "minPrice": 15, "maxPrice": 15 },
       "engineClean": { "minPrice": 50, "maxPrice": 50 },
       "headlight": { "minPrice": 40, "maxPrice": 40 }
