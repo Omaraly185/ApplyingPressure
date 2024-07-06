@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../Component/Header";
 import "./MonthlySub.scss";
-import MonthlyPic from "./Monthly.JPG";
+import MonthlyPic from "./Monthly.PNG";
 function MonthlySub() {
   return (
     <div className="fluid myCustomHeight">
