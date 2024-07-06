@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import BookNow from "./Pages/Book-Now/bookNow";
 import FacebookPixel from "./Component/FacebookPixel";
@@ -11,6 +11,14 @@ import SuccessPage from "./Success/SuccessPage";
 import MonthlySub from "./Pages/Monthly/MonthlySub";
 import useTrackPageExit from "./Component/useTrackPageExit";
 import CeramicCoating from "./Pages/Ceramic-Coating/ceramic-coating";
+
+const RedirectToGoogle = () => {
+  useEffect(() => {
+    window.location.href =
+      "https://search.google.com/local/writereview?placeid=ChIJZfCgNDa1AaUReXadfzxTu7g";
+  }, []);
+  return null;
+};
 
 function App() {
   const [sessionId, setSessionId] = useState(
@@ -38,6 +46,7 @@ function App() {
         <Route exact path="/ContactUs" element={<ContactUs />} />
         <Route exact path="/Monthly" element={<MonthlySub />} />
         <Route exact path="/success" element={<SuccessPage />} />
+        <Route exact path="/review" element={<RedirectToGoogle />} />
       </Routes>
     </div>
   );
