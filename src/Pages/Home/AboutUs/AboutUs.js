@@ -24,10 +24,10 @@ function AboutUs() {
                 importance in your day-to-day life. Using advanced tools,
                 innovative techniques, and eco-friendly products, we offer a
                 wide range of services from quick washes to full detailing
-                packages. We understand that your car is a reflection of you,
-                and we are committed to ensuring it always shines brilliantly,
-                capturing the essence of your personality in its gleaming
-                finish. Call us now at{" "}
+                packages and ceramic coatings. We understand that your car is a
+                reflection of you, and we are committed to ensuring it always
+                shines brilliantly, capturing the essence of your personality in
+                its gleaming finish. Call us now at{" "}
                 <a href="tel:7186353758" className="PhonenumberLink">
                   (718) 635-3758
                 </a>
