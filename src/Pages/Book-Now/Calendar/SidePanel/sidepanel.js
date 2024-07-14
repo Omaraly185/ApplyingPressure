@@ -25,8 +25,6 @@ function Sidepanel(props) {
   const plusService = useSelector((state) => state.bookingForm.plusServices);
   console.log(plusService);
   const arrayAT = [
-    "7:00 AM",
-    "8:00 AM",
     "9:00 AM",
     "10:00 AM",
     "11:00 AM",
@@ -34,6 +32,7 @@ function Sidepanel(props) {
     "1:00 PM",
     "2:00 PM",
     "3:00 PM",
+    "4:00 PM",
   ];
 
   const [cardNumber, setCardNumber] = useState("");
@@ -79,7 +78,7 @@ function Sidepanel(props) {
     const selectedDateTime = new Date(selectedDateTimeString);
     const endDateTime = new Date(selectedDateTime.getTime());
     const endTime = endDateTime.setHours(
-      selectedDateTime.getHours() + appointmentLength + 1
+      selectedDateTime.getHours() + appointmentLength
     );
 
     if (!selectedDate || !selectedTime) {
@@ -170,6 +169,7 @@ function Sidepanel(props) {
     if (interiorPackage === "pressureSpecial") {
       appointmentLength = appointmentLength + 4;
     }
+    appointmentLength += 1;
 
     const endTime = new Date(selectedTime.getTime());
     endTime.setHours(selectedTime.getHours() + appointmentLength);
