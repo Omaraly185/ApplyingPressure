@@ -61,7 +61,13 @@ function CeramicCoating() {
     <div className="fluid myCustomHeight2 black-background">
       <Header />
       <div className="video-container">
-        <video autoPlay loop muted playsInline>
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          aria-label="Promotional video showing ceramic coating process"
+        >
           <source src={video1} type="video/mp4" />
         </video>
         <div className="overlay">
@@ -127,8 +133,12 @@ function CeramicCoating() {
             <p className="header">Request A Quote</p>
             <form style={{ width: "100%" }} onSubmit={handleSubmit}>
               <div className="fitem namecont">
+                <label htmlFor="name" className="visually-hidden">
+                  Name
+                </label>
                 <input
                   className="ceramic-input"
+                  id="name"
                   name="name"
                   placeholder="Name"
                   value={formData.name}
@@ -136,42 +146,55 @@ function CeramicCoating() {
                 />
               </div>
               <div className="fitem emailcont">
+                <label htmlFor="email" className="visually-hidden">
+                  Email
+                </label>
                 <input
                   className="ceramic-input"
+                  id="email"
                   name="email"
                   placeholder="Email"
                   value={formData.email}
                   onChange={handleChange}
+                  required
                 />
               </div>
               <div className="fitem phoneNumbercont">
+                <label htmlFor="phoneNumber" className="visually-hidden">
+                  Phone Number
+                </label>
                 <input
                   className="ceramic-input"
+                  id="phoneNumber"
                   name="phoneNumber"
                   placeholder="Phone Number"
                   value={formData.phoneNumber}
                   onChange={handleChange}
+                  required
                 />
               </div>
               <div className="fitem carTypecont">
+                <label htmlFor="carType" className="visually-hidden">
+                  Car Type
+                </label>
                 <input
                   className="ceramic-input"
+                  id="carType"
                   name="carType"
                   placeholder="Car Type"
                   value={formData.carType}
                   onChange={handleChange}
+                  required
                 />
               </div>
               <div className="buttoncont">
-                <div>
-                  <button
-                    className="ReqQuote"
-                    type="submit"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? "Submitting..." : "Submit"}
-                  </button>
-                </div>
+                <button
+                  className="ReqQuote"
+                  type="submit"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Submitting..." : "Submit"}
+                </button>
               </div>
             </form>
           </div>

@@ -3,15 +3,21 @@ import video1 from "./HomeVideo.mp4";
 import "./home.css";
 import Button from "../../Component/Button";
 
-function homeForm() {
+function HomeForm() {
   return (
-    <div>
+    <main>
       <section className="content">
-        <video autoPlay loop muted playsInline>
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          aria-label="Background video showing detailing service"
+        >
           <source src={video1} type="video/mp4" />
         </video>
         <div className="parent">
-          <div className="title">
+          <header className="title">
             <h2>Applying</h2>
             <h1>Pressure</h1>
             <div className="tagline">
@@ -20,11 +26,11 @@ function homeForm() {
               </p>
             </div>
             <Button />
-          </div>
+          </header>
         </div>
       </section>
-    </div>
+    </main>
   );
 }
 
-export default homeForm;
+export default HomeForm;

@@ -47,45 +47,75 @@ function Header() {
 
   return (
     <>
-      <div className="navbar" ref={navbarRef}>
-        <Link to="/" className="logo">
+      <nav className="navbar" ref={navbarRef} aria-label="Main navigation">
+        <Link to="/" className="logo" aria-label="Home">
           <img
             style={{ borderRadius: "100%", width: 65 }}
             src={AP}
-            alt="Logo"
+            alt="Applying Pressure Logo"
           />
         </Link>
         <div className="active">
-          <ul className="defaultFont">
-            <li className="dommanip">
-              <Link className="header-routing" to="/">
+          <ul className="defaultFont" role="menu">
+            <li className="dommanip" role="none">
+              <Link
+                className="header-routing"
+                to="/"
+                title="Home"
+                role="menuitem"
+              >
                 Home
               </Link>
             </li>
-            <li className="dommanip">
-              <Link className="header-routing" to="/Book_Now">
+            <li className="dommanip" role="none">
+              <Link
+                className="header-routing"
+                to="/Book_Now"
+                title="Book Now"
+                role="menuitem"
+              >
                 Book
               </Link>
             </li>
-            <li className="dommanip">
-              <Link className="header-routing" to="/Ceramic-Coating">
+            <li className="dommanip" role="none">
+              <Link
+                className="header-routing"
+                to="/Ceramic-Coating"
+                title="Ceramic Coating"
+                role="menuitem"
+              >
                 Ceramic Coating
               </Link>
             </li>
-            <li className="dommanip">
-              <a className="header-routing" href="/Monthly">
+            <li className="dommanip" role="none">
+              <a
+                className="header-routing"
+                href="/Monthly"
+                title="Monthly Services"
+                role="menuitem"
+              >
                 Monthly
               </a>
             </li>
-            <li className="dommanip">
-              <a className="header-routing" href="/ContactUS">
+            <li className="dommanip" role="none">
+              <a
+                className="header-routing"
+                href="/ContactUS"
+                title="Contact Us"
+                role="menuitem"
+              >
                 Contact Us
               </a>
             </li>
           </ul>
         </div>
-      </div>
-      <button className="menu" id="toggleButton" ref={menuButtonRef}>
+      </nav>
+      <button
+        className="menu"
+        id="toggleButton"
+        ref={menuButtonRef}
+        aria-label="Toggle Menu"
+      >
         <div className="menu-line"></div>
         <div className="menu-line"></div>
         <div className="menu-line"></div>

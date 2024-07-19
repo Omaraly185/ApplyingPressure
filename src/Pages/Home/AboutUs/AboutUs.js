@@ -5,16 +5,23 @@ import About9 from "./AboutUsPics/About9.jpg";
 
 function AboutUs() {
   return (
-    <div className="fullAbout">
-      <div className="About-Us-Name">
+    <main className="fullAbout">
+      <section className="About-Us-Name">
         <div className="we-are-block">
-          <div id="about-us-section">
+          <section id="about-us-section">
             <div className="about-us-image">
-              <img src={About5} width="808" height="458" alt="Lobby" />
+              <img
+                src={About5}
+                width="808"
+                height="458"
+                alt="Interior Cleaning Applying Pressure Mobile Detailing"
+              />
             </div>
 
             <div className="about-us-info">
-              <h2>We are Applying Pressure</h2>
+              <header>
+                <h2>We are Applying Pressure</h2>
+              </header>
 
               <p className="letter-spacing">
                 Welcome to Applying Pressure Mobile Detailing - your go-to
@@ -32,20 +39,23 @@ function AboutUs() {
                   (718) 635-3758
                 </a>
               </p>
-
-              {/* <a href="#" title="About Us Button">
-              ABOUT US
-            </a> */}
             </div>
-          </div>
+          </section>
 
-          <div id="history-section">
+          <section id="history-section">
             <div className="history-image">
-              <img src={About9} width="951" height="471" alt="Building Pic" />
+              <img
+                src={About9}
+                width="951"
+                height="471"
+                alt="Ceramic Coating job Applying Pressure Mobile Detailing"
+              />
             </div>
 
             <div className="history-info">
-              <h2>Why Choose Us</h2>
+              <header>
+                <h2>Why Choose Us</h2>
+              </header>
 
               <p className="letter-spacing">
                 What sets us apart from others in the market is our unwavering
@@ -59,15 +69,12 @@ function AboutUs() {
                 is your best choice. Contact us today to schedule your
                 appointment. WE COME TO YOU!
               </p>
-
-              {/* <a href="#" title="History Button">
-              HISTORY
-            </a> */}
             </div>
-          </div>
+          </section>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
+
 export default AboutUs;
