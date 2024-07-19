@@ -1,0 +1,147 @@
+.testimonial-slider-container {
+  position: relative;
+  max-width: 100%;
+  margin: auto;
+  overflow: hidden;
+  background-color: black;
+}
+
+.testimonial-slide {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 20px;
+  cursor: grab;
+}
+
+.testimonial-slide:active {
+  cursor: grabbing;
+}
+.testimonial-title {
+  color: #00aeef;
+  font-size: 40pt;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.testimonial {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 400px; /* Maximum width for each testimonial */
+  text-align: center;
+  padding: 30px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  border-right: 4px solid #2a3d7d;
+  position: relative;
+  background: #fff;
+  margin: 10px;
+}
+
+.star-rating {
+  color: #ffd403;
+  font-size: 1em;
+  text-align: center;
+}
+
+.testimonial .pic {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 15px;
+  align-items: center;
+  justify-content: center;
+  background-color: #00aeef;
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.testimonial .letter-avatar {
+  width: 100%;
+  text-align: center;
+  line-height: 80px;
+}
+
+.testimonial .description {
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: #6f6f6f;
+  line-height: 25px;
+  margin-bottom: 15px;
+}
+
+.testimonial .testimonial-name {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #00aeef;
+}
+
+.testimonial .post {
+  display: inline-block;
+  font-size: 17px;
+  color: #00aeef;
+  font-style: italic;
+}
+
+.arrow {
+  position: absolute;
+  top: 65%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.arrow.prev {
+  left: 10px;
+}
+
+.arrow.next {
+  right: 10px;
+}
+
+.arrow:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.triangle-corner {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  position: absolute;
+}
+
+.triangle-corner.top-left {
+  top: 0;
+  left: 0;
+  border-width: 0 25px 25px 0;
+  border-color: transparent #00aeef transparent transparent;
+  rotate: 270deg;
+}
+
+.triangle-corner.bottom-left {
+  bottom: 0;
+  left: 0;
+  border-width: 25px 0 0 25px;
+  border-color: transparent transparent transparent #00aeef;
+}
+
+@media only screen and (max-width: 1200px) {
+  .testimonial {
+    max-width: 45%;
+  }
+}
+
+@media only screen and (max-width: 580px) {
+  .testimonial {
+    max-width: 100%;
+  }
+}

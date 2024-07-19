@@ -15,7 +15,9 @@ function homeForm() {
             <h2>Applying</h2>
             <h1>Pressure</h1>
             <div className="tagline">
-              <p>We wash and wax while you sit and relax!</p>
+              <p className="letter-spacing">
+                We wash and wax while you sit and relax!
+              </p>
             </div>
             <Button />
           </div>

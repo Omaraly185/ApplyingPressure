@@ -129,6 +129,7 @@
   .navbar ul li a {
     align-content: center;
     color: #fff;
+    text-transform: none;
   }
   .navbar ul li:hover {
     background-color: rgba(0, 0, 0, 0.75);

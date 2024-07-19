@@ -16,7 +16,7 @@ function AboutUs() {
             <div className="about-us-info">
               <h2>We are Applying Pressure</h2>
 
-              <p>
+              <p className="letter-spacing">
                 Welcome to Applying Pressure Mobile Detailing - your go-to
                 solution for exceptional car cleaning and detailing services in
                 New York and New Jersey. As a team of experienced professionals,
@@ -47,7 +47,7 @@ function AboutUs() {
             <div className="history-info">
               <h2>Why Choose Us</h2>
 
-              <p>
+              <p className="letter-spacing">
                 What sets us apart from others in the market is our unwavering
                 commitment to customer satisfaction. We take the time to
                 understand your needs, evaluate your car's condition, and
