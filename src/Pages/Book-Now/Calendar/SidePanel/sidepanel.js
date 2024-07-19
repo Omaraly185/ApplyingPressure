@@ -23,7 +23,6 @@ function Sidepanel(props) {
   );
   const email = useSelector((state) => state.bookingForm.email);
   const plusService = useSelector((state) => state.bookingForm.plusServices);
-  console.log(plusService);
   const arrayAT = [
     "9:00 AM",
     "10:00 AM",
@@ -52,7 +51,7 @@ function Sidepanel(props) {
     if (ExteriorPackage === "standardExterior") {
       appointmentLength = appointmentLength + 2;
     }
-    if (ExteriorPackage === "standardPlus") {
+    if (ExteriorPackage === "washWax") {
       appointmentLength = appointmentLength + 2;
     }
     if (ExteriorPackage === "oneStep") {

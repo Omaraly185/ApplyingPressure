@@ -125,12 +125,23 @@ export const computePriceRange = (
   let minPrice = 0;
   let maxPrice = 0;
 
+  let hasCoating = selectedOptions.includes("coating");
+  let coatingPrice = 0;
+
+  if (hasCoating) {
+    const carCoatingPackage =
+      carPricing[selectedCar.value]?.services["coating"];
+    coatingPrice = carCoatingPackage ? carCoatingPackage.minPrice : 0;
+  }
+
   if (selectedOptions.length > 0) {
     selectedOptions.forEach((option) => {
-      const carPackage = carPricing[selectedCar.value]?.services[option];
-      if (carPackage) {
-        minPrice += carPackage.minPrice;
-        maxPrice += carPackage.maxPrice;
+      if (option !== "coating") {
+        const carPackage = carPricing[selectedCar.value]?.services[option];
+        if (carPackage) {
+          minPrice += carPackage.minPrice;
+          maxPrice += carPackage.maxPrice;
+        }
       }
     });
   }
@@ -138,8 +149,28 @@ export const computePriceRange = (
   const exteriorOptionPrice =
     carPricing[selectedCar.value]?.exteriors[selectedExteriorOption.value];
   if (exteriorOptionPrice) {
-    minPrice += exteriorOptionPrice.minPrice;
-    maxPrice += exteriorOptionPrice.maxPrice;
+    if (
+      hasCoating &&
+      ["standardExterior", "washWax"].includes(selectedExteriorOption.value)
+    ) {
+      minPrice = coatingPrice;
+      maxPrice = coatingPrice;
+    } else if (
+      hasCoating &&
+      ["oneStep", "twoStep"].includes(selectedExteriorOption.value)
+    ) {
+      minPrice =
+        coatingPrice +
+        exteriorOptionPrice.minPrice -
+        getDiscount(selectedCar.value, selectedExteriorOption.value);
+      maxPrice =
+        coatingPrice +
+        exteriorOptionPrice.maxPrice -
+        getDiscount(selectedCar.value, selectedExteriorOption.value);
+    } else {
+      minPrice += exteriorOptionPrice.minPrice;
+      maxPrice += exteriorOptionPrice.maxPrice;
+    }
   }
 
   const interiorOptionPrice =
@@ -150,4 +181,27 @@ export const computePriceRange = (
   }
 
   return { min: minPrice, max: maxPrice };
+};
+
+const getDiscount = (carType, exteriorOption) => {
+  let discount = 0;
+  if (exteriorOption === "oneStep" || exteriorOption === "twoStep") {
+    switch (carType) {
+      case "sedan":
+        discount = 200;
+        break;
+      case "twoRow":
+        discount = 225;
+        break;
+      case "threeRow":
+        discount = 275;
+        break;
+      case "van":
+        discount = 300;
+        break;
+      default:
+        break;
+    }
+  }
+  return discount;
 };
