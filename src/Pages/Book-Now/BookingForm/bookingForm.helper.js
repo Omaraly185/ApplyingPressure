@@ -151,7 +151,9 @@ export const computePriceRange = (
   if (exteriorOptionPrice) {
     if (
       hasCoating &&
-      ["standardExterior", "washWax"].includes(selectedExteriorOption.value)
+      ["standardExterior", "NA", "washWax"].includes(
+        selectedExteriorOption.value
+      )
     ) {
       minPrice = coatingPrice;
       maxPrice = coatingPrice;
