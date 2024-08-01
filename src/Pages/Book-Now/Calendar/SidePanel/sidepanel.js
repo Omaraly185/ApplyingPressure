@@ -58,7 +58,7 @@ function Sidepanel(props) {
       appointmentLength = appointmentLength + 4;
     }
     if (ExteriorPackage === "twoStep") {
-      appointmentLength = appointmentLength + 8;
+      appointmentLength = appointmentLength + 6;
     }
     if (interiorPackage === "silverInterior") {
       appointmentLength = appointmentLength + 2;
@@ -70,6 +70,7 @@ function Sidepanel(props) {
     if (interiorPackage === "pressureSpecial") {
       appointmentLength = appointmentLength + 4;
     }
+    appointmentLength += 1;
     e.preventDefault();
     setLoading(true);
 
@@ -149,7 +150,7 @@ function Sidepanel(props) {
 
     if (
       ExteriorPackage === "standardExterior" ||
-      ExteriorPackage === "standardPlus"
+      ExteriorPackage === "washWax"
     ) {
       appointmentLength = appointmentLength + 2;
     }
@@ -157,7 +158,7 @@ function Sidepanel(props) {
       appointmentLength = appointmentLength + 4;
     }
     if (ExteriorPackage === "twoStep") {
-      appointmentLength = appointmentLength + 8;
+      appointmentLength = appointmentLength + 6;
     }
     if (interiorPackage === "silverInterior") {
       appointmentLength = appointmentLength + 2;
@@ -172,7 +173,9 @@ function Sidepanel(props) {
 
     const endTime = new Date(selectedTime.getTime());
     endTime.setHours(selectedTime.getHours() + appointmentLength);
-
+    if (endTime.getHours() > 21) {
+      return false;
+    }
     return !events.some((event) => {
       const eventStart = new Date(event.start);
       const eventEnd = new Date(event.end);
