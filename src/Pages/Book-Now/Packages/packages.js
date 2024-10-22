@@ -71,7 +71,7 @@ const Packages = () => {
 
   return (
     <div className="myCustomHeight backborder-leftmm">
-      <div style={{ marginLeft: 20 }}>
+      <div className="navigation-buttons" style={{ marginLeft: 20 }}>
         <button
           className={`navigation-button ${current === 0 ? "active-nav" : ""}`}
           onClick={() => handleNavigationButtonClick(0)} // Go to Exterior

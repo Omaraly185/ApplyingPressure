@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import Header from "../../Component/Header";
 import "./ceramic-coating.scss";
 import video1 from "./cc.mp4";
+import Footer from "../../Component/Footer";
 
 function CeramicCoating() {
   const formRef = useRef(null);
@@ -200,6 +201,7 @@ function CeramicCoating() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

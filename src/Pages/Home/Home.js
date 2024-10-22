@@ -4,6 +4,7 @@ import "./home.css";
 import HomeForm from "./HomeForm";
 import AboutUs from "./AboutUs/AboutUs";
 import TestimonialSlider from "./testimonials/testimonial";
+import Footer from "../../Component/Footer"; // Correct way to import default export
 
 function Home() {
   return (
@@ -21,6 +22,7 @@ function Home() {
       <br /> <br />
       <AboutUs />
       <TestimonialSlider />
+      <Footer />
     </div>
   );
 }

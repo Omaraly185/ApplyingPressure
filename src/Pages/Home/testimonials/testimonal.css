@@ -19,7 +19,7 @@
   cursor: grabbing;
 }
 .testimonial-title {
-  color: #00aeef;
+  color: #fff;
   font-size: 40pt;
   margin-top: 20px;
   margin-bottom: 30px;
@@ -31,9 +31,9 @@
   text-align: center;
   padding: 30px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
-  border-right: 4px solid #2a3d7d;
+  border-right: 2px solid #fff;
   position: relative;
-  background: #fff;
+  background: #000;
   margin: 10px;
 }
 
@@ -67,7 +67,7 @@
 .testimonial .description {
   font-size: 15px;
   letter-spacing: 1px;
-  color: #6f6f6f;
+  color: #fff;
   line-height: 25px;
   margin-bottom: 15px;
 }
@@ -78,9 +78,14 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #00aeef;
+  color: white;
 }
 
+.testimonial-link {
+  color: #00aeef;
+  font-style: normal;
+  text-decoration: none;
+}
 .testimonial .post {
   display: inline-block;
   font-size: 17px;
@@ -92,12 +97,13 @@
   position: absolute;
   top: 65%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #00aeef;
   color: white;
   border: none;
   padding: 10px;
   cursor: pointer;
   z-index: 2;
+  border-radius: 3px;
 }
 
 .arrow.prev {
@@ -109,7 +115,7 @@
 }
 
 .arrow:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: #00aeef;
 }
 
 .triangle-corner {
@@ -117,6 +123,7 @@
   height: 0;
   border-style: solid;
   position: absolute;
+  display: none;
 }
 
 .triangle-corner.top-left {

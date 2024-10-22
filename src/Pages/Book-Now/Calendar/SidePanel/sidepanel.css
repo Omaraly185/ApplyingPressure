@@ -74,6 +74,7 @@
 .panel-close-button .label {
   opacity: 0;
   transition: all 0.2s ease-out;
+  font-size: 12px;
 }
 
 .panel-close-button:focus:before,
@@ -128,10 +129,10 @@
   margin-top: 20px;
 }
 
-.credit-card-form label {
+.credit-card-form .label {
   display: block;
   margin-bottom: 8px;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: bold;
 }
 
@@ -171,6 +172,10 @@
 }
 .credit-card-form button[type="submit"]:hover {
   background-color: #008ac7;
+}
+.no-available-times {
+  grid-template-columns: none;
+  text-align: center;
 }
 
 @media all and (max-width: 750px) {

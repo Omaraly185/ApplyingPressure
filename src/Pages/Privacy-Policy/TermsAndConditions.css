@@ -1,0 +1,38 @@
+.terms-container {
+  margin: 20px;
+  text-align: left;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.terms-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.last-updated {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.subsection-title {
+  font-size: 1.3rem;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+.section-paragraph {
+  margin-bottom: 15px;
+}
+
+.list {
+  margin-left: 20px;
+  margin-bottom: 15px;
+}

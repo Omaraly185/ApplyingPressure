@@ -203,7 +203,13 @@ function Sidepanel(props) {
               <div className="panel-title">
                 Available times for {selectedDate}
               </div>
-              <div className="available-times">
+              <div
+                className={` ${
+                  arrayAT.some((time) => isTimeAvailable(time))
+                    ? "available-times"
+                    : "no-available-times"
+                }`}
+              >
                 {arrayAT.some((time) => isTimeAvailable(time)) ? (
                   arrayAT.map((time) =>
                     isTimeAvailable(time) ? (

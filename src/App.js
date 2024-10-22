@@ -11,6 +11,8 @@ import SuccessPage from "./Success/SuccessPage";
 import MonthlySub from "./Pages/Monthly/MonthlySub";
 import useTrackPageExit from "./Component/useTrackPageExit";
 import CeramicCoating from "./Pages/Ceramic-Coating/ceramic-coating";
+import PrivacyPolicy from "./Pages/Privacy-Policy/privacy-policy";
+import TermsAndConditions from "./Pages/Privacy-Policy/terms-condtions";
 
 const RedirectToGoogle = () => {
   useEffect(() => {
@@ -46,6 +48,12 @@ function App() {
         <Route exact path="/ContactUs" element={<ContactUs />} />
         <Route exact path="/Monthly" element={<MonthlySub />} />
         <Route exact path="/success" element={<SuccessPage />} />
+        <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route
+          exact
+          path="/terms-conditions"
+          element={<TermsAndConditions />}
+        />
         <Route exact path="/review" element={<RedirectToGoogle />} />
       </Routes>
     </div>

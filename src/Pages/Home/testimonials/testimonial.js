@@ -141,19 +141,17 @@ const TestimonialSlider = () => {
           <div key={index} className="testimonial">
             <div className="triangle-corner top-left"></div>
             <div className="triangle-corner bottom-left"></div>
-            <div className="pic">
-              <div className="letter-avatar">
-                {getLetterAvatar(testimonial.title)}
-              </div>
-            </div>
+            <span className="testimonial-name">{testimonial.title}</span>
+            <br /> <br />
             <div className="star-rating">★★★★★</div>
             <p className="description">{testimonial.description}</p>
             <small className="post">
-              <span className="testimonial-name">{testimonial.title}</span>
+              {/* <span className="testimonial-name">{testimonial.title}</span> */}
               <br />
               <a
                 href={testimonial.link}
                 target="_blank"
+                className="testimonial-link"
                 rel="noopener noreferrer"
               >
                 Read Full Review

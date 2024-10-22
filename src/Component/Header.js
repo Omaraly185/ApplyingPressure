@@ -14,7 +14,7 @@ function Header() {
         navbarRef.current &&
         !navbarRef.current.contains(e.target) &&
         !menuButtonRef.current.contains(e.target) &&
-        $(window).width() < 750
+        $(window).width() < 800
       ) {
         $(".domanip").slideUp();
       }
@@ -29,7 +29,7 @@ function Header() {
     $(".menu")
       .off("click")
       .on("click", function () {
-        if ($(window).width() < 750) {
+        if ($(window).width() < 800) {
           $(".dommanip").slideToggle("50");
         }
       });
@@ -38,7 +38,7 @@ function Header() {
   $(window)
     .off("resize")
     .on("resize", function () {
-      if ($(window).width() > 750) {
+      if ($(window).width() > 800) {
         $(document).ready(function () {
           $(".dommanip").slideDown();
         });
@@ -50,7 +50,7 @@ function Header() {
       <nav className="navbar" ref={navbarRef} aria-label="Main navigation">
         <Link to="/" className="logo" aria-label="Home">
           <img
-            style={{ borderRadius: "100%", width: 65 }}
+            style={{ borderRadius: "100%", width: 100 }}
             src={AP}
             alt="Applying Pressure Logo"
           />

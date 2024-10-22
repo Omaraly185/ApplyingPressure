@@ -6,6 +6,7 @@ import Header from "../../Component/Header";
 import Sidepanel from "./Calendar/SidePanel/sidepanel";
 import BookingForm from "./BookingForm/bookingForm";
 import { useState } from "react";
+import Footer from "../../Component/Footer";
 
 function BookNow() {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,6 +51,7 @@ function BookNow() {
             {isOpen ? null : <BookingForm />} */}
           </div>
         </div>
+        <Footer />
       </>
     </>
   );

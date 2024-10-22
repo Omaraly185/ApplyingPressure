@@ -129,8 +129,8 @@ const BookingForm = ({ handleOpen }) => {
 
   return (
     <div className="myCustomHeight contact-form-container bookformcontainer">
-      <ToastContainer style={{ marginTop: "50px" }} />
-      <h1>Book Your Service</h1>
+      <ToastContainer style={{ marginTop: "80px" }} />
+      <h1 style={{ marginBottom: "20px" }}>BOOK YOUR SERVICE</h1>
       <form onSubmit={handleSubmit}>
         <div className="testing1234">
           <label htmlFor="name">Name:</label>
@@ -158,26 +158,61 @@ const BookingForm = ({ handleOpen }) => {
             className="inputForm"
             required
           />
-          <label htmlFor="city">City:</label>
+          <label htmlFor="zipCode">Zip Code:</label>
           <input
             type="text"
-            name="city"
-            value={bookingForm.city}
+            name="zipCode"
+            value={bookingForm.zipCode}
             onChange={handleChange}
             className="inputForm"
-            required
           />
-          <label htmlFor="state">
+          <label
+            htmlFor="state"
+            className="state-label"
+            style={{
+              position: "relative",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
             State:
-            <img
-              height={20}
-              padding={10}
-              className="invert"
-              src={Info}
-              onMouseEnter={() => setPopoverOpen(true)}
-              onMouseLeave={() => setPopoverOpen(false)}
-              alt="i"
-            />
+            <Popover
+              isOpen={isPopoverOpen}
+              positions={["top", "right"]} // Keep the popover positioned above the label
+              align="center" // Align the popover to the center of the label
+              padding={5}
+              containerStyle={{
+                zIndex: 100,
+                backgroundColor: "white",
+              }}
+              onClickOutside={() => setPopoverOpen(false)}
+              reposition={true} // Automatically repositions if needed
+              content={
+                <div
+                  style={{
+                    padding: "5px",
+                    backgroundColor: "white",
+                    borderRadius: "10px",
+                    boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+                    position: "relative",
+                  }}
+                >
+                  We only service NY and NJ addresses
+                  <br />
+                  Please Note: there may be a travel <br />
+                  fee for up to $45 depending on distance
+                </div>
+              }
+            >
+              <img
+                height={20}
+                className="invert"
+                src={Info}
+                alt="info"
+                onClick={() => setPopoverOpen(!isPopoverOpen)}
+                style={{ cursor: "pointer", marginLeft: "5px" }}
+              />
+            </Popover>
           </label>
           <Select
             name="state"
@@ -198,41 +233,19 @@ const BookingForm = ({ handleOpen }) => {
             styles={selectStyles}
             required
           />
-          <Popover
-            isOpen={isPopoverOpen}
-            positions={["top", "right"]}
-            align={"end"}
-            content={
-              <div
-                style={{
-                  padding: "5px",
-                  backgroundColor: "white",
-                  borderRadius: "10px",
-                }}
-              >
-                We only service NY and NJ addresses
-                <br />
-                Please Note: there may be a travel <br />
-                fee for up to $45 depending on distance
-              </div>
-            }
-            containerStyle={{
-              zIndex: 100,
-              backgroundColor: "white",
-            }}
-          >
-            <div
-              onMouseEnter={() => setPopoverOpen(true)}
-              onMouseLeave={() => setPopoverOpen(true)} // Here, I assume you meant to setPopoverOpen to false.
-            ></div>
-          </Popover>
           <br /> <br />
           <div id="wrapper">
-            <label for="yes_no">
+            <label htmlFor="yes_no">
               Is there any dog hair or spillage that may have caused odor
             </label>
-            <div style={{ display: "inline-flex" }}>
-              <p style={{ padding: "0 10px" }}>
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "50px",
+              }}
+            >
+              <p>
                 <input
                   type="radio"
                   id="yes"
@@ -241,9 +254,11 @@ const BookingForm = ({ handleOpen }) => {
                   checked={bookingForm.yes_no === "yes"}
                   onChange={handleRadioChange}
                 />
-                <label for="yes">Yes</label>
+                <label htmlFor="yes" className="yes-no-label">
+                  Yes
+                </label>
               </p>
-              <p style={{ padding: "0 10px" }}>
+              <p>
                 <input
                   type="radio"
                   id="no"
@@ -252,19 +267,13 @@ const BookingForm = ({ handleOpen }) => {
                   checked={bookingForm.yes_no === "no"}
                   onChange={handleRadioChange}
                 />
-                <label for="no">No</label>
+                <label htmlFor="no" className="yes-no-label">
+                  No
+                </label>
               </p>
             </div>
             <br /> <br />
           </div>
-          <label htmlFor="zipCode">Zip Code:</label>
-          <input
-            type="text"
-            name="zipCode"
-            value={bookingForm.zipCode}
-            onChange={handleChange}
-            className="inputForm"
-          />
           <label htmlFor="email">Email:</label>
           <input
             type="text"
@@ -328,6 +337,12 @@ const BookingForm = ({ handleOpen }) => {
             value={bookingForm.message}
             onChange={handleChange}
             className={"inputForm"}
+            style={{
+              minHeight: 115,
+              maxHeight: 115,
+              minWidth: "100%",
+              maxWidth: "100%",
+            }}
           />
         </div>
         <button className="minecraft" onClick={handleSubmit}>

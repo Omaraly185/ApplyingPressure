@@ -14,7 +14,7 @@ body {
 }
 
 h2 {
-  font-family: "Bebas Neue", cursive;
+  font-family: "TitleFont";
 }
 
 .we-are-block {
@@ -40,7 +40,7 @@ h2 {
 }
 
 #about-us-section {
-  background: #0c4c91;
+  background: #000;
   width: 100%;
   height: 50%;
   display: flex;
@@ -103,7 +103,7 @@ h2 {
   .about-us-info {
     margin-right: 400px;
     width: 60%;
-    background: #0c4c9199;
+    background: #0000008c;
     padding: 0px 25px 0px 0px;
   }
 }
@@ -178,6 +178,7 @@ h2 {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  background-color: #000;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -236,7 +237,7 @@ h2 {
   .history-info {
     margin-left: 400px;
     width: 60%;
-    background: #ffffff99;
+    background: #0000008c;
     padding: 0px 0px 0px 25px;
   }
 }
@@ -277,7 +278,7 @@ h2 {
 }
 
 .history-info h2 {
-  color: #0c4c91;
+  color: #fff;
   font-size: 40pt;
   text-align: left;
 }
@@ -289,7 +290,7 @@ h2 {
 }
 
 .history-info p {
-  color: #0c4c91;
+  color: #fff;
   font-size: 14pt;
   text-align: left;
 }

@@ -17,7 +17,6 @@ export const validateFields = (
     "name",
     "phoneNumber",
     "address",
-    "city",
     "state",
     "email",
     "zipCode",
@@ -58,7 +57,7 @@ export const validateFields = (
     return false;
   }
 
-  return true; // Return true if all validations pass.
+  return true;
 };
 
 export const options = [
@@ -92,6 +91,13 @@ export const selectStyles = {
     "&:hover": {
       borderColor: "#9e9e9e",
     },
+    fontFamily: "roboto",
+    fontSize: 14,
+    marginBottom: 20,
+  }),
+  dropdownIndicator: (base) => ({
+    ...base,
+    padding: 4,
   }),
   menu: (base) => ({
     ...base,
