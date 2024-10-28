@@ -21,7 +21,7 @@
 }
 .monthly-container {
   width: 100vw; // occupies 100% of the viewport width
-  height: 100vh; // occupies 100% of the viewport height
+  height: 100%; // occupies 100% of the viewport height
   overflow: hidden; // to prevent any overflower for absolute positioned child elements
 }
 .monthly-service-image {

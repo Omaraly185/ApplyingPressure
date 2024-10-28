@@ -18,7 +18,7 @@ function ContactUs() {
   };
   return (
     <>
-      <div className="myCustomHeight backGround-Img">
+      <div className="customHeight backGround-Img">
         <Header />
         <div className="Section2">
           <div className="controller-img">

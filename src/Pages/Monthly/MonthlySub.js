@@ -4,7 +4,7 @@ import "./MonthlySub.scss";
 import MonthlyPic from "./Monthly.PNG";
 function MonthlySub() {
   return (
-    <div className="fluid myCustomHeight">
+    <div className="fluid customHeight">
       <Header />
 
       <div className="monthly-container">

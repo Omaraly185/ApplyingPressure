@@ -130,7 +130,9 @@ const BookingForm = ({ handleOpen }) => {
   return (
     <div className="customHeight contact-form-container bookformcontainer">
       <ToastContainer style={{ marginTop: "80px" }} />
-      <h1 style={{ marginBottom: "20px" }}>BOOK YOUR SERVICE</h1>
+      <h1 style={{ marginBottom: "20px", marginTop: "15px" }}>
+        BOOK YOUR SERVICE
+      </h1>
       <form onSubmit={handleSubmit}>
         <div className="testing1234">
           <label htmlFor="name">Name:</label>
@@ -206,7 +208,7 @@ const BookingForm = ({ handleOpen }) => {
             >
               <img
                 height={20}
-                className="invert"
+                className=""
                 src={Info}
                 alt="info"
                 onClick={() => setPopoverOpen(!isPopoverOpen)}
@@ -366,7 +368,7 @@ const BookingForm = ({ handleOpen }) => {
         style={{
           marginTop: "20px",
           fontSize: "14px",
-          color: "#cccccc",
+          color: "#000",
           fontStyle: "italic",
         }}
       >

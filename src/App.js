@@ -4,6 +4,7 @@ import Home from "./Pages/Home/Home";
 import BookNow from "./Pages/Book-Now/bookNow";
 import FacebookPixel from "./Component/FacebookPixel";
 import { v4 as uuidv4 } from "uuid";
+import ScrollToTop from "./Component/ScrollTotop";
 import "./App.css";
 import useTrackPageView from "./Component/useTrackPageView";
 import ContactUs from "./Pages/ContactUs/ContactUs";
@@ -41,6 +42,8 @@ function App() {
   return (
     <div className="App">
       <FacebookPixel />
+      <ScrollToTop />
+
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/Book_Now" element={<BookNow />} />
