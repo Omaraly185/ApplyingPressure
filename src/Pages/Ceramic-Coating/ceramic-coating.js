@@ -1,12 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Header from "../../Component/Header";
 import "./ceramic-coating.scss";
 import video1 from "./cc.mp4";
 import Footer from "../../Component/Footer";
 
 function CeramicCoating() {
-  const formRef = useRef(null);
-  const [formData, setFormData] = useState({
+  const [ceramicForm, setCeramicForm] = useState({
     name: "",
     email: "",
     phoneNumber: "",
@@ -15,12 +14,15 @@ function CeramicCoating() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const scrollToForm = () => {
-    formRef.current.scrollIntoView({ behavior: "smooth" });
+    const formElement = document.querySelector(".form-container");
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setCeramicForm({ ...ceramicForm, [name]: value });
   };
 
   const handleSubmit = async (e) => {
@@ -34,12 +36,12 @@ function CeramicCoating() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(ceramicForm),
         }
       );
       if (response.ok) {
         alert("Quote request submitted successfully!");
-        setFormData({
+        setCeramicForm({
           name: "",
           email: "",
           phoneNumber: "",
@@ -129,7 +131,7 @@ function CeramicCoating() {
             </li>
           </ul>
         </div>
-        <div className="form-container" ref={formRef}>
+        <div className="form-container">
           <div className="form">
             <p className="header">Request A Quote</p>
             <form style={{ width: "100%" }} onSubmit={handleSubmit}>
@@ -142,7 +144,7 @@ function CeramicCoating() {
                   id="name"
                   name="name"
                   placeholder="Name"
-                  value={formData.name}
+                  value={ceramicForm.name}
                   onChange={handleChange}
                 />
               </div>
@@ -155,7 +157,7 @@ function CeramicCoating() {
                   id="email"
                   name="email"
                   placeholder="Email"
-                  value={formData.email}
+                  value={ceramicForm.email}
                   onChange={handleChange}
                   required
                 />
@@ -169,7 +171,7 @@ function CeramicCoating() {
                   id="phoneNumber"
                   name="phoneNumber"
                   placeholder="Phone Number"
-                  value={formData.phoneNumber}
+                  value={ceramicForm.phoneNumber}
                   onChange={handleChange}
                   required
                 />
@@ -183,7 +185,7 @@ function CeramicCoating() {
                   id="carType"
                   name="carType"
                   placeholder="Car Type"
-                  value={formData.carType}
+                  value={ceramicForm.carType}
                   onChange={handleChange}
                   required
                 />

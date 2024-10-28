@@ -70,7 +70,7 @@ const Packages = () => {
   let src = items[index];
 
   return (
-    <div className="myCustomHeight backborder-leftmm">
+    <div className="customHeight backborder-leftmm">
       <div className="navigation-buttons" style={{ marginLeft: 20 }}>
         <button
           className={`navigation-button ${current === 0 ? "active-nav" : ""}`}

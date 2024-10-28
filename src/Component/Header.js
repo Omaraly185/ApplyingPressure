@@ -16,16 +16,20 @@ function Header() {
         !menuButtonRef.current.contains(e.target) &&
         $(window).width() < 800
       ) {
-        $(".domanip").slideUp();
+        $(".domanip").hide();
       }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside); // Cleanup listener on unmount
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   $(document).ready(function () {
-    $(".dommanip").slideDown();
+    if ($(window).width() < 800) {
+      $(".dommanip").hide();
+    } else {
+      $(".dommanip").slideDown();
+    }
     $(".menu")
       .off("click")
       .on("click", function () {

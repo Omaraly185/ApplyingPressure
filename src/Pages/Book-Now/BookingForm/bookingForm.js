@@ -128,7 +128,7 @@ const BookingForm = ({ handleOpen }) => {
   };
 
   return (
-    <div className="myCustomHeight contact-form-container bookformcontainer">
+    <div className="customHeight contact-form-container bookformcontainer">
       <ToastContainer style={{ marginTop: "80px" }} />
       <h1 style={{ marginBottom: "20px" }}>BOOK YOUR SERVICE</h1>
       <form onSubmit={handleSubmit}>
@@ -234,7 +234,7 @@ const BookingForm = ({ handleOpen }) => {
             required
           />
           <br /> <br />
-          <div id="wrapper">
+          <div id="wrapper" style={{ marginBottom: 10 }}>
             <label htmlFor="yes_no">
               Is there any dog hair or spillage that may have caused odor
             </label>

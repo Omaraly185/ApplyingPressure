@@ -241,7 +241,7 @@ function Sidepanel(props) {
                 <button
                   style={{
                     backgroundColor: "red",
-                    width: "185px",
+                    width: "50%",
                     height: "30px",
                   }}
                   type="cancel"

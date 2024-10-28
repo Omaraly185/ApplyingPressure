@@ -27,10 +27,10 @@ const MyCalendar = (props) => {
       );
       const events = await response.json();
       setEvents(events);
-      setLoading(false); // Update loading state
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching events:", error);
-      setLoading(false); // Update loading state even if there is an error
+      setLoading(false);
     }
   };
 
@@ -49,7 +49,11 @@ const MyCalendar = (props) => {
     const { start, action } = slotInfo;
     if (action === "click" || action === "select") {
       if (start < new Date()) {
-        toast.error("You can't select a date before today!");
+        if (!toast.isActive("error-toast")) {
+          toast.error("You can't select a date before today!", {
+            toastId: "error-toast",
+          });
+        }
         return;
       }
 
