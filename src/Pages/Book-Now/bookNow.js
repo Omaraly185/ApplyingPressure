@@ -50,9 +50,9 @@ function BookNow() {
             {/* {isOpen ? null : <Packages />}
             {isOpen ? null : <BookingForm />} */}
           </div>
+          <Footer />
         </div>
       </>
-      <Footer />
     </>
   );
 }
