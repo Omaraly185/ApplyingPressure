@@ -212,7 +212,7 @@ const PrivacyPolicy = () => {
             https://www.apdetailers.com/
           </a>
         </li>
-        <li>Phone: +17186353758</li>
+        <li>Phone: +19295285191</li>
       </ul>
     </div>
   );

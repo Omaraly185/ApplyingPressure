@@ -85,8 +85,8 @@ function CeramicCoating() {
               >
                 Get a Quote
               </button>
-              <a href="tel:7186353758" className="custom-button get-quote">
-                Call (718) 635-3758
+              <a href="tel:+19295285191" className="custom-button get-quote">
+                Call (929) 528-5191
               </a>
             </div>
           </div>

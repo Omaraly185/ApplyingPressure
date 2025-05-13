@@ -16,8 +16,8 @@
     "interiors": {
       "NA": { "minPrice": 0, "maxPrice": 0 },
       "silverInterior": { "minPrice": 55, "maxPrice": 155 },
-      "goldInterior": { "minPrice": 100, "maxPrice": 250 },
-      "pressureSpecial": { "minPrice": 200, "maxPrice": 350 }
+      "goldInterior": { "minPrice": 150, "maxPrice": 250 },
+      "pressureSpecial": { "minPrice": 250, "maxPrice": 350 }
     }
   },
   "twoRow": {
@@ -37,8 +37,8 @@
     "interiors": {
       "NA": { "minPrice": 0, "maxPrice": 0 },
       "silverInterior": { "minPrice": 60, "maxPrice": 160 },
-      "goldInterior": { "minPrice": 120, "maxPrice": 270 },
-      "pressureSpecial": { "minPrice": 240, "maxPrice": 390 }
+      "goldInterior": { "minPrice": 170, "maxPrice": 270 },
+      "pressureSpecial": { "minPrice": 290, "maxPrice": 390 }
     }
   },
   "threeRow": {
@@ -58,8 +58,8 @@
     "interiors": {
       "NA": { "minPrice": 0, "maxPrice": 0 },
       "silverInterior": { "minPrice": 70, "maxPrice": 170 },
-      "goldInterior": { "minPrice": 140, "maxPrice": 290 },
-      "pressureSpecial": { "minPrice": 280, "maxPrice": 430 }
+      "goldInterior": { "minPrice": 190, "maxPrice": 290 },
+      "pressureSpecial": { "minPrice": 330, "maxPrice": 430 }
     }
   },
   "van": {
@@ -79,8 +79,8 @@
     "interiors": {
       "NA": { "minPrice": 0, "maxPrice": 0 },
       "silverInterior": { "minPrice": 95, "maxPrice": 195 },
-      "goldInterior": { "minPrice": 185, "maxPrice": 335 },
-      "pressureSpecial": { "minPrice": 300, "maxPrice": 430 }
+      "goldInterior": { "minPrice": 135, "maxPrice": 335 },
+      "pressureSpecial": { "minPrice": 350, "maxPrice": 450 }
     }
   }
 }

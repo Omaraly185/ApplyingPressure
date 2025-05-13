@@ -58,7 +58,7 @@ function ContactUs() {
               </div>
             </a>
             {/* #81fb6b */}
-            <a href="tel:7186353758" className="game-link phoneNumber">
+            <a href="tel:+19295285191" className="game-link phoneNumber">
               <div className="svgLogo">
                 <img width="25px" src={Phone} />
               </div>
