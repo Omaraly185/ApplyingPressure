@@ -9,6 +9,10 @@
   background-color: #fffbfb;
   box-shadow: 0 0 1.6vmin rgba(0, 0, 0, 0.5);
 }
+.disabled-date {
+  text-decoration: line-through;
+  color: #d3d3d3;
+}
 
 .panel-close-button {
   position: absolute;

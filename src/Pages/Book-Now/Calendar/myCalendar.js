@@ -77,7 +77,7 @@ const MyCalendar = (props) => {
   };
 
   if (loading) {
-    return <div style={{ color: "white" }}>Loading...</div>; // Display a loading message or spinner while events are being fetched
+    return <div style={{ color: "white" }}>Loading...</div>;
   }
 
   return (
