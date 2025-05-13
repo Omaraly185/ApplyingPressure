@@ -79,7 +79,7 @@
     "interiors": {
       "NA": { "minPrice": 0, "maxPrice": 0 },
       "silverInterior": { "minPrice": 95, "maxPrice": 195 },
-      "goldInterior": { "minPrice": 135, "maxPrice": 335 },
+      "goldInterior": { "minPrice": 235, "maxPrice": 335 },
       "pressureSpecial": { "minPrice": 350, "maxPrice": 450 }
     }
   }
