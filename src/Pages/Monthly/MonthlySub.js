@@ -1,5 +1,7 @@
-// src/pages/MonthlySub/MonthlySub.jsx
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Header from "../../Component/Header";
 import "./MonthlySub.scss";
 import DatePicker from "react-datepicker";
@@ -14,13 +16,12 @@ import exteriorInterior from "./Exterior-and-interior.png";
 import ceramic from "./ceramic-coating.png";
 import polish from "./polish.png";
 import CheckIcon from "./check.png";
-// import goldBackground from "./gold-opacity.png";
-// import pressureBackground from "./pressure_opacity.png";
+import carPricing from "../Book-Now/BookingForm/carPricing.json";
 
 import { format, startOfMonth, addMonths, addDays } from "date-fns";
 
 function MonthlySub() {
-  // existing state
+  const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState("");
   const [events, setEvents] = useState([]);
@@ -28,10 +29,24 @@ function MonthlySub() {
   const [currentMonth, setCurrentMonth] = useState(startOfMonth(new Date()));
   const [activeStep, setActiveStep] = useState(1);
   const [selectedService, setSelectedService] = useState("");
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [zip, setZip] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [selectedCar, setSelectedCar] = useState(null);
 
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [showPlusServices, setShowPlusServices] = useState(false);
   const [selectedPlusServices, setSelectedPlusServices] = useState([]);
+  const [confirmedInteriorPackage, setConfirmedInteriorPackage] =
+    useState(null);
+  const [confirmedExteriorPackage, setConfirmedExteriorPackage] =
+    useState(null);
+  const [confirmedInteriorPlusServices, setConfirmedInteriorPlusServices] =
+    useState([]);
+  const [confirmedExteriorPlusServices, setConfirmedExteriorPlusServices] =
+    useState([]);
 
   const plusServicesByPackage = {
     GOLD: [
@@ -70,13 +85,11 @@ function MonthlySub() {
     ],
   };
 
-  // handle clicking on any package
   const handlePackageClick = (pkg) => {
     setSelectedPackage(pkg);
     setShowPlusServices(true);
   };
 
-  // toggle a plus-service
   const handleTogglePlusService = (svc) => {
     setSelectedPlusServices((prev) =>
       prev.includes(svc.name)
@@ -138,8 +151,8 @@ function MonthlySub() {
   const breadcrumbs = [
     { label: "Car Type", step: 1 },
     { label: "Service", step: 2 },
-    { label: "Package", step: 3 },
-    { label: "Confirmation", step: 4 },
+    { label: "Interior Package", step: 3 },
+    { label: "Exterior Package", step: 4 },
     { label: "Date & Time", step: 5 },
   ];
 
@@ -211,10 +224,211 @@ function MonthlySub() {
     setSelectedTime(time);
   };
 
+  // Function to get car type key for pricing
+  const getCarTypeKey = (carName) => {
+    const carTypeMap = {
+      Sedan: "sedan",
+      "2 Row SUV": "twoRow",
+      "3 Row/ Pickup truck": "threeRow",
+      Van: "van",
+    };
+    return carTypeMap[carName] || "sedan";
+  };
+
+  // Function to get price range for a service
+  const getPriceRange = (serviceType, serviceKey) => {
+    if (!selectedCar) return { min: 0, max: 0 };
+
+    const carKey = getCarTypeKey(selectedCar.name);
+    const carData = carPricing[carKey];
+
+    if (
+      !carData ||
+      !carData[serviceType] ||
+      !carData[serviceType][serviceKey]
+    ) {
+      return { min: 0, max: 0 };
+    }
+
+    const pricing = carData[serviceType][serviceKey];
+    return { min: pricing.minPrice, max: pricing.maxPrice };
+  };
+
+  const calculateAppointmentDuration = () => {
+    let totalHours = 0;
+
+    if (confirmedInteriorPackage) {
+      switch (confirmedInteriorPackage.name) {
+        case "PRESSURE":
+          totalHours += 3;
+          break;
+        case "GOLD":
+          totalHours += 2;
+          break;
+        default:
+          totalHours += 1.5;
+      }
+
+      confirmedInteriorPlusServices.forEach((serviceName) => {
+        switch (serviceName) {
+          case "Dog Hair Removal":
+          case "Heavy Spills/Odor Removal":
+            totalHours += 0.5;
+            break;
+          case "Flooring":
+          case "Headliner":
+            totalHours += 0.5;
+            break;
+          default:
+            totalHours += 0.25;
+        }
+      });
+    }
+
+    // Base time for exterior packages
+    if (confirmedExteriorPackage) {
+      switch (confirmedExteriorPackage.name) {
+        case "Paint Enhancement":
+          totalHours += 4; // 4 hours for paint enhancement
+          break;
+        case "Wash & Wax":
+          totalHours += 2; // 2 hours for wash & wax
+          break;
+        case "Standard Exterior":
+          totalHours += 1.5; // 1.5 hours for standard
+          break;
+        default:
+          totalHours += 2; // default exterior time
+      }
+
+      // Add time for exterior plus services
+      confirmedExteriorPlusServices.forEach((serviceName) => {
+        switch (serviceName) {
+          case "Engine Bay Cleaning":
+            totalHours += 0.5; // 30 minutes
+            break;
+          case "Headlight Restoration":
+            totalHours += 0.5; // 30 minutes
+            break;
+          case "Ceramic Coating":
+            totalHours += 1; // 1 hour
+            break;
+          default:
+            totalHours += 0.25; // 15 minutes for other services
+        }
+      });
+    }
+
+    // Convert to hours and minutes
+    const hours = Math.floor(totalHours);
+    const minutes = Math.round((totalHours - hours) * 60);
+
+    if (hours === 0) {
+      return `${minutes} min`;
+    } else if (minutes === 0) {
+      return `${hours} hr`;
+    } else {
+      return `${hours} hr ${minutes} min`;
+    }
+  };
+
+  // Function to calculate total confirmed price range
+  const calculateTotalPriceRange = () => {
+    let minTotal = 0;
+    let maxTotal = 0;
+
+    // Add interior package price
+    if (confirmedInteriorPackage) {
+      minTotal += confirmedInteriorPackage.price;
+      maxTotal +=
+        confirmedInteriorPackage.maxPrice || confirmedInteriorPackage.price;
+
+      // Add interior plus services
+      confirmedInteriorPlusServices.forEach((serviceName) => {
+        const service = plusServicesByPackage[
+          confirmedInteriorPackage.name
+        ]?.find((s) => s.name === serviceName);
+        if (service) {
+          if (typeof service.price === "number") {
+            minTotal += service.price;
+            maxTotal += service.price;
+          } else if (
+            typeof service.price === "string" &&
+            service.price.includes("-")
+          ) {
+            // Handle range prices like "50-150"
+            const [min, max] = service.price
+              .split("-")
+              .map((p) => parseFloat(p.trim()));
+            minTotal += min || 0;
+            maxTotal += max || min || 0;
+          } else {
+            const price = parseFloat(service.price) || 0;
+            minTotal += price;
+            maxTotal += price;
+          }
+        }
+      });
+    }
+
+    // Add exterior package price
+    if (confirmedExteriorPackage) {
+      minTotal += confirmedExteriorPackage.price;
+      maxTotal +=
+        confirmedExteriorPackage.maxPrice || confirmedExteriorPackage.price;
+
+      // Add exterior plus services
+      confirmedExteriorPlusServices.forEach((serviceName) => {
+        const service = plusServicesByPackage[
+          confirmedExteriorPackage.name
+        ]?.find((s) => s.name === serviceName);
+        if (service) {
+          if (typeof service.price === "number") {
+            minTotal += service.price;
+            maxTotal += service.price;
+          } else if (
+            typeof service.price === "string" &&
+            service.price.includes("-")
+          ) {
+            // Handle range prices like "50-150"
+            const [min, max] = service.price
+              .split("-")
+              .map((p) => parseFloat(p.trim()));
+            minTotal += min || 0;
+            maxTotal += max || min || 0;
+          } else {
+            const price = parseFloat(service.price) || 0;
+            minTotal += price;
+            maxTotal += price;
+          }
+        }
+      });
+    }
+
+    return { min: minTotal, max: maxTotal };
+  };
+
   const isTimeAvailable = (date, time) => {
     const dateTime = new Date(`${format(date, "yyyy-MM-dd")} ${time}`);
     const endTime = new Date(dateTime);
-    endTime.setHours(endTime.getHours() + 1);
+
+    // Calculate duration in hours based on confirmed packages
+    let durationHours = 1; // default 1 hour
+    if (confirmedInteriorPackage || confirmedExteriorPackage) {
+      const durationStr = calculateAppointmentDuration();
+      // Parse duration string to get hours
+      const hourMatch = durationStr.match(/(\d+)\s*hr/);
+      const minMatch = durationStr.match(/(\d+)\s*min/);
+
+      let totalHours = 0;
+      if (hourMatch) totalHours += parseInt(hourMatch[1]);
+      if (minMatch) totalHours += parseInt(minMatch[1]) / 60;
+
+      durationHours = Math.max(totalHours, 1); // minimum 1 hour
+    }
+
+    endTime.setHours(endTime.getHours() + Math.ceil(durationHours));
+
     return !events.some((evt) => {
       const start = new Date(evt.start);
       const end = new Date(evt.end);
@@ -228,6 +442,7 @@ function MonthlySub() {
 
   return (
     <div className="monthly-sub-container">
+      <ToastContainer style={{ marginTop: "80px" }} />
       {/* Breadcrumbs (desktop) */}
       <nav className="breadcrumb large-screen-only">
         <ul>
@@ -268,7 +483,10 @@ function MonthlySub() {
               <div
                 key={i}
                 className="service-card"
-                onClick={() => setActiveStep(2)}
+                onClick={() => {
+                  setSelectedCar(ct);
+                  setActiveStep(2);
+                }}
               >
                 <img src={ct.image} alt={ct.name} className="service-image" />
                 <h2 className="service-name">{ct.name}</h2>
@@ -312,7 +530,17 @@ function MonthlySub() {
                 // }}
               >
                 <h2 className="package-title">PRESSURE</h2>
-                <p className="package-price">Starting at $249</p>
+                <p className="package-price">
+                  {selectedCar
+                    ? (() => {
+                        const priceRange = getPriceRange(
+                          "interiors",
+                          "pressureSpecial"
+                        );
+                        return `$${priceRange.min} - $${priceRange.max}`;
+                      })()
+                    : "Starting at $200"}
+                </p>
                 <div className="package-list">
                   <ul className="package-details">
                     <li>
@@ -368,9 +596,17 @@ function MonthlySub() {
                 </div>
                 <button
                   className="package-button"
-                  onClick={() =>
-                    handlePackageClick({ name: "PRESSURE", price: 249 })
-                  }
+                  onClick={() => {
+                    const priceRange = getPriceRange(
+                      "interiors",
+                      "pressureSpecial"
+                    );
+                    handlePackageClick({
+                      name: "PRESSURE",
+                      price: priceRange.min,
+                      maxPrice: priceRange.max,
+                    });
+                  }}
                 >
                   Book
                 </button>
@@ -385,7 +621,17 @@ function MonthlySub() {
                 // }}
               >
                 <h2 className="package-title">GOLD</h2>
-                <p className="package-price">Starting at $149</p>
+                <p className="package-price">
+                  {selectedCar
+                    ? (() => {
+                        const priceRange = getPriceRange(
+                          "interiors",
+                          "goldInterior"
+                        );
+                        return `$${priceRange.min} - $${priceRange.max}`;
+                      })()
+                    : "Starting at $100"}
+                </p>
                 <div className="package-list">
                   <ul
                     className="package-details"
@@ -438,9 +684,17 @@ function MonthlySub() {
                 </div>
                 <button
                   className="package-button"
-                  onClick={() =>
-                    handlePackageClick({ name: "GOLD", price: 149 })
-                  }
+                  onClick={() => {
+                    const priceRange = getPriceRange(
+                      "interiors",
+                      "goldInterior"
+                    );
+                    handlePackageClick({
+                      name: "GOLD",
+                      price: priceRange.min,
+                      maxPrice: priceRange.max,
+                    });
+                  }}
                 >
                   Book
                 </button>
@@ -458,7 +712,17 @@ function MonthlySub() {
               <div className="package pressure">
                 <h2 className="package-title">Paint Enhancement</h2>
                 <div className="sub-package">
-                  <p className="package-price">Starting at $399</p>
+                  <p className="package-price">
+                    {selectedCar
+                      ? (() => {
+                          const priceRange = getPriceRange(
+                            "exteriors",
+                            "oneStep"
+                          );
+                          return `$${priceRange.min} - $${priceRange.max}`;
+                        })()
+                      : "Starting at $400"}
+                  </p>
                   <div className="package-list">
                     <ul className="package-details">
                       <li>Foam pre-rinse and bath</li>
@@ -473,12 +737,14 @@ function MonthlySub() {
                   </div>
                   <button
                     className="package-button"
-                    onClick={() =>
+                    onClick={() => {
+                      const priceRange = getPriceRange("exteriors", "oneStep");
                       handlePackageClick({
                         name: "Paint Enhancement",
-                        price: 399,
-                      })
-                    }
+                        price: priceRange.min,
+                        maxPrice: priceRange.max,
+                      });
+                    }}
                   >
                     Learn more
                   </button>
@@ -486,7 +752,17 @@ function MonthlySub() {
               </div>
               <div className="package gold">
                 <h2 className="package-title">Wash & Wax</h2>
-                <p className="package-price">Starting at $149</p>
+                <p className="package-price">
+                  {selectedCar
+                    ? (() => {
+                        const priceRange = getPriceRange(
+                          "exteriors",
+                          "washWax"
+                        );
+                        return `$${priceRange.min} - $${priceRange.max}`;
+                      })()
+                    : "Starting at $125"}
+                </p>
                 <div className="package-list">
                   <ul className="package-details">
                     <li>Foam pre-rinse and bath</li>
@@ -506,16 +782,31 @@ function MonthlySub() {
                 </div>
                 <button
                   className="package-button"
-                  onClick={() =>
-                    handlePackageClick({ name: "Wash & Wax", price: 149 })
-                  }
+                  onClick={() => {
+                    const priceRange = getPriceRange("exteriors", "washWax");
+                    handlePackageClick({
+                      name: "Wash & Wax",
+                      price: priceRange.min,
+                      maxPrice: priceRange.max,
+                    });
+                  }}
                 >
                   Book
                 </button>
               </div>
               <div className="package standard">
                 <h2 className="package-title">Standard Exterior</h2>
-                <p className="package-price">Starting at $129</p>
+                <p className="package-price">
+                  {selectedCar
+                    ? (() => {
+                        const priceRange = getPriceRange(
+                          "exteriors",
+                          "standardExterior"
+                        );
+                        return `$${priceRange.min} - $${priceRange.max}`;
+                      })()
+                    : "Starting at $60"}
+                </p>
                 <div className="package-list">
                   <ul className="package-details">
                     <li>Foam pre-rinse & contact wash</li>
@@ -536,12 +827,17 @@ function MonthlySub() {
                 </div>
                 <button
                   className="package-button"
-                  onClick={() =>
+                  onClick={() => {
+                    const priceRange = getPriceRange(
+                      "exteriors",
+                      "standardExterior"
+                    );
                     handlePackageClick({
                       name: "Standard Exterior",
-                      price: 129,
-                    })
-                  }
+                      price: priceRange.min,
+                      maxPrice: priceRange.max,
+                    });
+                  }}
                 >
                   Book
                 </button>
@@ -549,22 +845,103 @@ function MonthlySub() {
             </div>
           </div>
         )}
-      {/* STEP 5: Date & Time */}
       {activeStep === 5 && (
         <div className="appointment-container">
           <div className="left-panel">
             <div className="header">
               <div className="icon">🤝</div>
               <h2>Make an appointment</h2>
-              <p>Approx. 30 min</p>
+              <p>
+                Approx.{" "}
+                {confirmedInteriorPackage || confirmedExteriorPackage
+                  ? calculateAppointmentDuration()
+                  : "30 min"}
+              </p>
+              {(confirmedInteriorPackage || confirmedExteriorPackage) && (
+                <div className="total-price-display">
+                  {(() => {
+                    const priceRange = calculateTotalPriceRange();
+                    return priceRange.min === priceRange.max ? (
+                      <h3>Total Price: ${priceRange.min}</h3>
+                    ) : (
+                      <h3>
+                        Total Price: ${priceRange.min} - ${priceRange.max}
+                      </h3>
+                    );
+                  })()}
+                </div>
+              )}
             </div>
+            {/* — Your Info Form — */}
+            <form
+              className="customer-form"
+              onSubmit={(e) => {
+                e.preventDefault();
+                // now you have: name, address, zip, phone
+              }}
+            >
+              <div className="form-group">
+                <label htmlFor="name">Name</label>
+                <input
+                  id="name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="address">Address</label>
+                <input
+                  id="address"
+                  type="text"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="zip">Zip Code</label>
+                <input
+                  id="zip"
+                  type="text"
+                  value={zip}
+                  onChange={(e) => setZip(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="phone">Phone Number</label>
+                <input
+                  id="phone"
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+            </form>
+
             <p>Select a date and an available time slot to finish booking.</p>
           </div>
 
           <div className="right-panel">
             <h3>Select a Date & Time</h3>
 
-            {/* — Calendar — */}
             <div className="calendar-container">
               <DatePicker
                 selected={selectedDate}
@@ -616,6 +993,25 @@ function MonthlySub() {
               Base Price: ${selectedPackage.price}
             </p>
 
+            {/* Show what's been confirmed so far */}
+            {(confirmedInteriorPackage || confirmedExteriorPackage) && (
+              <div className="confirmed-summary">
+                <h4>Previously Confirmed:</h4>
+                {confirmedInteriorPackage && (
+                  <p>
+                    Interior: {confirmedInteriorPackage.name} - $
+                    {confirmedInteriorPackage.price}
+                  </p>
+                )}
+                {confirmedExteriorPackage && (
+                  <p>
+                    Exterior: {confirmedExteriorPackage.name} - $
+                    {confirmedExteriorPackage.price}
+                  </p>
+                )}
+              </div>
+            )}
+
             <h3>Add Plus Services</h3>
             <div className="plus-services-grid">
               {(plusServicesByPackage[selectedPackage.name] || []).map(
@@ -644,13 +1040,75 @@ function MonthlySub() {
                 }
               )}
             </div>
-            <p className="package-summary">Total: ${totalPrice}</p>
+            <p className="package-summary">
+              {(() => {
+                // Calculate current package total with plus services
+                let minTotal = selectedPackage.price;
+                let maxTotal =
+                  selectedPackage.maxPrice || selectedPackage.price;
+
+                selectedPlusServices.forEach((serviceName) => {
+                  const service = currentPlusServices.find(
+                    (s) => s.name === serviceName
+                  );
+                  if (service) {
+                    if (typeof service.price === "number") {
+                      minTotal += service.price;
+                      maxTotal += service.price;
+                    } else if (
+                      typeof service.price === "string" &&
+                      service.price.includes("-")
+                    ) {
+                      const [min, max] = service.price
+                        .split("-")
+                        .map((p) => parseFloat(p.trim()));
+                      minTotal += min || 0;
+                      maxTotal += max || min || 0;
+                    } else {
+                      const price = parseFloat(service.price) || 0;
+                      minTotal += price;
+                      maxTotal += price;
+                    }
+                  }
+                });
+
+                return minTotal === maxTotal
+                  ? `Total: $${minTotal}`
+                  : `Total: $${minTotal} - $${maxTotal}`;
+              })()}
+            </p>
             <div className="panel-buttons">
               <button
                 className="confirm-button"
                 onClick={() => {
-                  /* TODO: fire your booking API with selectedPackage, selectedPlusServices, etc. */
+                  // Determine if this is an interior or exterior package
+                  const isInteriorPackage = ["PRESSURE", "GOLD"].includes(
+                    selectedPackage.name
+                  );
+
+                  if (isInteriorPackage) {
+                    // Save interior package and plus services
+                    setConfirmedInteriorPackage(selectedPackage);
+                    setConfirmedInteriorPlusServices([...selectedPlusServices]);
+
+                    // If user selected "Exterior and Interior", move to exterior step
+                    if (selectedService === "Exterior and Interior") {
+                      setActiveStep(4); // Move to exterior packages
+                    } else {
+                      // If only interior, move to date/time
+                      setActiveStep(5);
+                    }
+                  } else {
+                    // Save exterior package and plus services
+                    setConfirmedExteriorPackage(selectedPackage);
+                    setConfirmedExteriorPlusServices([...selectedPlusServices]);
+
+                    // Move to date/time step
+                    setActiveStep(5);
+                  }
+
                   setShowPlusServices(false);
+                  setSelectedPlusServices([]); // Reset for next package
                 }}
               >
                 Confirm

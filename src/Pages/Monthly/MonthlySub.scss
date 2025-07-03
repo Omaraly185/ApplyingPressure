@@ -32,58 +32,284 @@
 // }
 .appointment-container {
   display: flex;
-  flex-wrap: wrap; /* Allows responsive stacking on smaller screens */
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
-  border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
+  flex-direction: column; // Mobile-first: stack vertically
+  max-width: 100%;
+  margin: 10px;
+  padding: 0;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  box-shadow: 0 10px 30px rgba(0, 174, 239, 0.3);
+  font-family: "roboto", sans-serif;
+  overflow: hidden;
+  min-height: auto;
+  border: 2px solid #00aeef;
+
+  // Desktop override
+  @media (min-width: 768px) {
+    flex-direction: row;
+    max-width: 1200px;
+    margin: 40px auto;
+    border-radius: 20px;
+    min-height: 600px;
+  }
 }
 
 .left-panel {
-  flex: 1 1 300px;
-  padding: 20px;
-  border-right: 1px solid #e0e0e0;
+  flex: none; // Mobile-first: don't flex
+  padding: 20px 15px;
+  background: linear-gradient(135deg, #00aeef 0%, #0088cc 100%);
+  color: white;
+  position: relative;
+  min-height: auto;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  // Desktop override
+  @media (min-width: 768px) {
+    flex: 1 1 400px;
+    padding: 40px;
+  }
 }
 
 .left-panel .header {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  text-align: center;
+  margin-bottom: 15px;
+  padding: 10px 0;
+
+  // Desktop override
+  @media (min-width: 768px) {
+    margin-bottom: 30px;
+    padding: 20px 0;
+  }
 }
 
 .left-panel .icon {
-  font-size: 24px;
+  font-size: 36px;
+  margin-bottom: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+
+  // Desktop override
+  @media (min-width: 768px) {
+    font-size: 48px;
+    margin-bottom: 15px;
+    padding: 20px;
+  }
 }
 
 .left-panel h2 {
-  font-size: 18px;
-  margin: 0;
+  font-size: 22px;
+  margin: 0 0 8px 0;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  // Desktop override
+  @media (min-width: 768px) {
+    font-size: 28px;
+    margin: 0 0 10px 0;
+  }
 }
 
 .left-panel p {
   font-size: 14px;
-  color: #666;
-  margin: 10px 0 0;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 3px 0;
+  font-weight: 300;
+
+  // Desktop override
+  @media (min-width: 768px) {
+    font-size: 16px;
+    margin: 5px 0;
+  }
+}
+
+.total-price-display {
+  margin-top: 15px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+
+  h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+    // Desktop override
+    @media (min-width: 768px) {
+      font-size: 24px;
+    }
+  }
+
+  // Desktop override
+  @media (min-width: 768px) {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 15px;
+  }
+}
+
+// Customer Form Styling
+.customer-form {
+  margin-top: 20px;
+
+  .form-group {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+
+      // Desktop override
+      @media (min-width: 768px) {
+        margin-bottom: 8px;
+        font-size: 14px;
+      }
+    }
+
+    input {
+      width: 100%;
+      padding: 18px 16px; // Larger touch target for mobile
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.2);
+      color: white;
+      font-size: 16px; // Prevents zoom on iOS
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      font-family: "roboto", sans-serif;
+      box-sizing: border-box;
+      -webkit-appearance: none; // Remove iOS styling
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      &:focus {
+        outline: none;
+        border-color: #00aeef;
+        background: rgba(0, 0, 0, 0.3);
+        box-shadow: 0 0 20px rgba(0, 174, 239, 0.3);
+        transform: scale(1.02); // Subtle feedback
+      }
+
+      &:valid {
+        border-color: #00aeef;
+      }
+
+      // Desktop override
+      @media (min-width: 768px) {
+        padding: 15px 20px;
+        border-radius: 12px;
+      }
+    }
+
+    // Desktop override
+    @media (min-width: 768px) {
+      margin-bottom: 25px;
+    }
+  }
+
+  // Desktop override
+  @media (min-width: 768px) {
+    margin-top: 30px;
+  }
 }
 
 .right-panel {
-  flex: 1 1 400px;
-  padding: 20px;
+  flex: none; // Mobile-first: don't flex
+  padding: 20px 15px;
+  background: #ffffff;
+  position: relative;
+
+  // Desktop override
+  @media (min-width: 768px) {
+    flex: 1 1 500px;
+    padding: 40px;
+  }
 }
 
 .right-panel h3 {
   margin-top: 0;
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #333333;
+  text-align: center;
+  position: relative;
+  font-family: "roboto", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, #00aeef, #0088cc);
+    border-radius: 2px;
+  }
+
+  // Desktop override
+  @media (min-width: 768px) {
+    font-size: 24px;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+
+    &::after {
+      bottom: -10px;
+      width: 60px;
+      height: 3px;
+    }
+  }
 }
 
 .calendar-container {
   margin-bottom: 20px;
+  padding: 15px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 174, 239, 0.1);
+  border: 2px solid #00aeef;
+
+  // Desktop override
+  @media (min-width: 768px) {
+    margin-bottom: 30px;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 174, 239, 0.1);
+  }
 }
 
 .custom-calendar .react-datepicker__day--selected,
@@ -94,62 +320,293 @@
 }
 
 .time-slots {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); // Mobile-first: 2 columns
+  gap: 12px;
+  margin-top: 20px;
+  padding: 15px;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 174, 239, 0.1);
+  border: 2px solid #00aeef;
+
+  // Tablet override
+  @media (min-width: 480px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  // Desktop override
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+    margin-top: 25px;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 174, 239, 0.1);
+  }
 }
 
 .time-slot {
-  width: 80px;
-  padding: 10px;
-  border: 1px solid #007bff;
-  border-radius: 8px;
-  background-color: #fff;
-  color: #007bff;
+  padding: 20px 12px; // Larger touch target for mobile
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  color: #495057;
   cursor: pointer;
   text-align: center;
-  transition: 0.2s ease;
-}
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 14px;
+  position: relative;
+  overflow: hidden;
+  min-height: 60px; // Ensure minimum touch target
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent; // Remove iOS tap highlight
 
-.time-slot:hover {
-  background-color: #007bff20;
-}
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
 
-.time-slot.active {
-  background-color: #007bff;
-  color: #fff;
-  font-weight: bold;
+  &:hover {
+    border-color: #00aeef;
+    background: linear-gradient(135deg, #00aeef 0%, #0088cc 100%);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 174, 239, 0.3);
+
+    &::before {
+      left: 100%;
+    }
+  }
+
+  &.active {
+    border-color: #00aeef;
+    background: linear-gradient(135deg, #00aeef 0%, #0088cc 100%);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 174, 239, 0.4);
+
+    &::after {
+      content: "✓";
+      position: absolute;
+      top: 5px;
+      right: 8px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+  }
+
+  // Desktop override
+  @media (min-width: 768px) {
+    padding: 15px 20px;
+    border-radius: 15px;
+    min-height: auto;
+  }
 }
 
 .react-datepicker {
-  font-size: 18px;
+  font-size: 16px;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  width: 100%;
 }
 
 .react-datepicker__header {
-  padding-top: 0.8em;
-}
-
-.react-datepicker__month {
-  margin: 0.4em 1em;
-}
-
-.react-datepicker__day-name,
-.react-datepicker__day {
-  width: 2em;
-  line-height: 2em;
-  margin: 0.166em;
+  padding-top: 20px;
+  background: transparent;
+  border-bottom: 2px solid #e9ecef;
+  margin-bottom: 10px;
 }
 
 .react-datepicker__current-month {
-  font-size: 1em;
-  font-weight: bold;
-  margin-bottom: 0.5em;
+  font-size: 20px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.react-datepicker__month {
+  margin: 0;
+  padding: 10px;
+}
+
+.react-datepicker__day-names {
+  margin-bottom: 10px;
+}
+
+.react-datepicker__day-name {
+  width: 2.5em;
+  line-height: 2.5em;
+  margin: 0.2em;
+  color: #6c757d;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.react-datepicker__day {
+  width: 2.2em; // Slightly smaller for mobile
+  line-height: 2.2em;
+  margin: 0.15em;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-size: 14px;
+  -webkit-tap-highlight-color: transparent; // Remove iOS tap highlight
+
+  &:hover {
+    background: #00aeef;
+    color: white;
+    transform: scale(1.1);
+  }
+
+  &--selected {
+    background: linear-gradient(135deg, #00aeef 0%, #0088cc 100%);
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 174, 239, 0.4);
+  }
+
+  &--today {
+    background: #ffc107;
+    color: #212529;
+    font-weight: bold;
+  }
+
+  &--disabled {
+    color: #ccc;
+    cursor: not-allowed;
+
+    &:hover {
+      background: transparent;
+      transform: none;
+    }
+  }
+
+  // Desktop override
+  @media (min-width: 768px) {
+    width: 2.5em;
+    line-height: 2.5em;
+    margin: 0.2em;
+    font-size: 16px;
+  }
 }
 
 .react-datepicker__navigation {
-  top: 1em;
-  border-width: 0.45em;
+  top: 25px;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #00aeef;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #0088cc;
+    transform: scale(1.1);
+  }
+
+  &--previous {
+    left: 20px;
+
+    &::before {
+      content: "‹";
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &--next {
+    right: 20px;
+
+    &::before {
+      content: "›";
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+// Additional mobile optimizations
+@media (max-width: 360px) {
+  .appointment-container {
+    margin: 5px;
+    border-radius: 10px;
+  }
+
+  .left-panel {
+    padding: 15px 10px;
+
+    .header {
+      padding: 8px 0;
+      margin-bottom: 12px;
+
+      .icon {
+        font-size: 32px;
+        padding: 12px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .right-panel {
+    padding: 15px 10px;
+
+    h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+  }
+
+  .time-slots {
+    gap: 8px;
+    padding: 12px;
+
+    .time-slot {
+      padding: 16px 8px;
+      font-size: 13px;
+      min-height: 50px;
+    }
+  }
+
+  .calendar-container {
+    padding: 12px;
+  }
+
+  .react-datepicker__day {
+    width: 2em;
+    line-height: 2em;
+    margin: 0.1em;
+    font-size: 13px;
+  }
 }
 
 $primary-blue: #007bff;
