@@ -620,117 +620,287 @@ $card-max-width: 400px;
 $card-max-height: 400px;
 
 .service-options-container {
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  color: $dark-gray;
-  background-color: #f5f5f582;
+  padding: 15px;
+  font-family: "roboto", sans-serif;
+  color: #333333;
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  min-height: 100vh;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      45deg,
+      rgba(0, 174, 239, 0.05) 0%,
+      rgba(0, 0, 0, 0.8) 100%
+    );
+    z-index: 1;
+  }
+
+  > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  // Desktop override
+  @media (min-width: 768px) {
+    padding: 40px;
+  }
 }
 
 .service-header {
-  font-size: 28px;
-  font-weight: bold;
-  color: $dark-gray;
-  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #00aeef, #0088cc);
+    border-radius: 2px;
+  }
+
+  // Desktop override
+  @media (min-width: 768px) {
+    font-size: 32px;
+    margin-bottom: 40px;
+
+    &::after {
+      width: 100px;
+      height: 4px;
+    }
+  }
 }
 
 .service-options {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Always 2 cards per row */
-  gap: 20px; /* Space between cards */
-  justify-content: center; /* Center items horizontally */
-  width: 100%; /* Full width */
-  max-width: 1000px; /* Restrict maximum grid width */
+  grid-template-columns: repeat(2, 1fr); // Mobile-first: 2 cards per row
+  gap: 15px;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 10px;
+
+  // Tablet override
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 800px;
+    padding: 0;
+  }
+
+  // Desktop override
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    max-width: 1200px;
+  }
 }
 
 .service-card {
-  background: $white;
-  border-radius: $border-radius;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 174, 239, 0.15);
   text-align: center;
-  padding: 20px;
-  max-width: $card-max-width; /* Restrict card width */
-  max-height: $card-max-height; /* Restrict card height */
+  padding: 20px 15px;
   cursor: pointer;
-  transition: transform $transition-speed, box-shadow $transition-speed;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  -webkit-tap-highlight-color: transparent; // Remove iOS tap highlight
 
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 174, 239, 0.1),
+      transparent
+    );
+    transition: left 0.6s ease;
+  }
+
+  &:hover,
+  &:active {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0, 174, 239, 0.25);
+    border-color: #00aeef;
+
+    &::before {
+      left: 100%;
+    }
+  }
+
+  // Desktop override
+  @media (min-width: 768px) {
+    padding: 25px 20px;
+    border-radius: 25px;
+    min-height: 280px;
+
+    &:hover {
+      transform: translateY(-10px) scale(1.05);
+    }
   }
 }
 
 .service-image {
   width: 100%;
-  height: auto; /* Maintain aspect ratio */
-  max-height: 200px; /* Prevent images from becoming too large */
-  object-fit: contain; /* Ensure the whole image fits within the space */
-  border-radius: $border-radius;
+  height: 120px; // Fixed height for consistency
+  object-fit: contain;
+  border-radius: 15px;
   margin-bottom: 15px;
+  padding: 10px;
+  transition: all 0.3s ease;
+
+  // Desktop override
+  @media (min-width: 768px) {
+    height: 150px;
+    margin-bottom: 20px;
+    padding: 15px;
+  }
 }
 
 .service-name {
-  font-size: 18px;
-  font-weight: bold;
-  color: $dark-gray;
-  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #333333;
+  margin-bottom: 8px;
   text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: "roboto", sans-serif;
+  line-height: 1.2;
+
+  // Desktop override
+  @media (min-width: 768px) {
+    font-size: 18px;
+    margin-bottom: 12px;
+    letter-spacing: 1.5px;
+  }
 }
 
 .view-options-button {
-  background-color: $primary-blue;
-  color: $white;
+  background: linear-gradient(135deg, #00aeef 0%, #0088cc 100%);
+  color: #ffffff;
   border: none;
-  border-radius: $border-radius;
-  padding: 10px 15px;
+  border-radius: 12px;
+  padding: 12px 20px;
   font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color $transition-speed;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: "roboto", sans-serif;
+  box-shadow: 0 4px 15px rgba(0, 174, 239, 0.3);
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
 
-  &:hover {
-    background-color: $primary-blue-dark;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  &:hover,
+  &:active {
+    background: linear-gradient(135deg, #0088cc 0%, #006699 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 174, 239, 0.4);
+
+    &::before {
+      left: 100%;
+    }
+  }
+
+  // Desktop override
+  @media (min-width: 768px) {
+    padding: 14px 24px;
+    font-size: 15px;
+    border-radius: 15px;
   }
 }
 
-/* Responsive Design */
-/* No changes to grid-template-columns for small screens */
-@media (max-width: 768px) {
+/* Additional mobile optimizations for car selection */
+@media (max-width: 360px) {
+  .service-options-container {
+    padding: 10px;
+  }
+
+  .service-header {
+    font-size: 20px;
+    margin-bottom: 20px;
+
+    &::after {
+      width: 60px;
+      height: 2px;
+    }
+  }
+
   .service-options {
-    grid-template-columns: repeat(2, 1fr); /* Keep 2 items per row */
-    gap: 15px;
+    gap: 10px;
+    padding: 0 5px;
   }
 
   .service-card {
-    padding: 15px;
-    max-width: 300px; /* Adjust card size */
+    padding: 15px 10px;
+    min-height: 180px;
+    border-radius: 15px;
   }
 
   .service-image {
-    max-height: 180px;
+    height: 100px;
+    margin-bottom: 10px;
   }
 
   .service-name {
-    font-size: 16px;
+    font-size: 14px;
+    margin-bottom: 6px;
   }
 
   .view-options-button {
+    padding: 10px 16px;
     font-size: 13px;
-    padding: 8px 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  .service-options {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-
-  .service-card {
-    max-width: 100%;
   }
 }
 
