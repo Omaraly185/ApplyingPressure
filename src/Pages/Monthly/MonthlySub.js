@@ -248,13 +248,10 @@ function MonthlySub() {
   };
 
   const handleStepChange = (step) => {
-    // If user tries to navigate between interior/exterior steps, redirect to service selection
     if (selectedService === "Interior Only" && step === 4) {
-      // Redirect to service selection to change service type
       setActiveStep(2);
       return;
     } else if (selectedService === "Exterior Only" && step === 3) {
-      // Redirect to service selection to change service type
       setActiveStep(2);
       return;
     } else if (
@@ -334,41 +331,38 @@ function MonthlySub() {
       });
     }
 
-    // Base time for exterior packages
     if (confirmedExteriorPackage) {
       switch (confirmedExteriorPackage.name) {
         case "Paint Enhancement":
-          totalHours += 4; // 4 hours for paint enhancement
+          totalHours += 4;
           break;
         case "Wash & Wax":
-          totalHours += 2; // 2 hours for wash & wax
+          totalHours += 2;
           break;
         case "Standard Exterior":
-          totalHours += 1.5; // 1.5 hours for standard
+          totalHours += 1.5;
           break;
         default:
-          totalHours += 2; // default exterior time
+          totalHours += 2;
       }
 
-      // Add time for exterior plus services
       confirmedExteriorPlusServices.forEach((serviceName) => {
         switch (serviceName) {
           case "Engine Bay Cleaning":
-            totalHours += 0.5; // 30 minutes
+            totalHours += 0.5;
             break;
           case "Headlight Restoration":
-            totalHours += 0.5; // 30 minutes
+            totalHours += 0.5;
             break;
           case "Ceramic Coating":
-            totalHours += 1; // 1 hour
+            totalHours += 1;
             break;
           default:
-            totalHours += 0.25; // 15 minutes for other services
+            totalHours += 0.25;
         }
       });
     }
 
-    // Convert to hours and minutes
     const hours = Math.floor(totalHours);
     const minutes = Math.round((totalHours - hours) * 60);
 
@@ -381,18 +375,15 @@ function MonthlySub() {
     }
   };
 
-  // Function to calculate total confirmed price range
   const calculateTotalPriceRange = () => {
     let minTotal = 0;
     let maxTotal = 0;
 
-    // Add interior package price
     if (confirmedInteriorPackage) {
       minTotal += confirmedInteriorPackage.price;
       maxTotal +=
         confirmedInteriorPackage.maxPrice || confirmedInteriorPackage.price;
 
-      // Add interior plus services
       confirmedInteriorPlusServices.forEach((serviceName) => {
         const service = plusServicesByPackage[
           confirmedInteriorPackage.name
@@ -405,7 +396,6 @@ function MonthlySub() {
             typeof service.price === "string" &&
             service.price.includes("-")
           ) {
-            // Handle range prices like "50-150"
             const [min, max] = service.price
               .split("-")
               .map((p) => parseFloat(p.trim()));
@@ -420,13 +410,11 @@ function MonthlySub() {
       });
     }
 
-    // Add exterior package price
     if (confirmedExteriorPackage) {
       minTotal += confirmedExteriorPackage.price;
       maxTotal +=
         confirmedExteriorPackage.maxPrice || confirmedExteriorPackage.price;
 
-      // Add exterior plus services
       confirmedExteriorPlusServices.forEach((serviceName) => {
         const service = plusServicesByPackage[
           confirmedExteriorPackage.name
@@ -439,7 +427,6 @@ function MonthlySub() {
             typeof service.price === "string" &&
             service.price.includes("-")
           ) {
-            // Handle range prices like "50-150"
             const [min, max] = service.price
               .split("-")
               .map((p) => parseFloat(p.trim()));
@@ -490,288 +477,400 @@ function MonthlySub() {
   };
 
   return (
-    <div className="monthly-sub-container">
-      <ToastContainer style={{ marginTop: "80px" }} />
-      {/* Breadcrumbs (desktop) */}
-      <nav className="breadcrumb large-screen-only">
-        <ul>
-          {breadcrumbs.map((bc) => {
-            const isCurrent = activeStep === bc.step;
-            const isCompleted = activeStep > bc.step;
-            const isNext = activeStep + 1 === bc.step;
+    <div className="monthly-sub-wrapper">
+      {/* Invisible overlay for closing modal */}
+      {showPlusServices && (
+        <div
+          className="modal-overlay"
+          onClick={() => setShowPlusServices(false)}
+        />
+      )}
 
-            return (
-              <li
-                key={bc.step}
-                className={`${isCurrent ? "current" : ""} ${
-                  isCompleted ? "completed" : ""
-                } ${isNext ? "next" : ""}`}
-                onClick={() => handleStepChange(bc.step)}
-              >
-                <a>{bc.label}</a>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-      {/* Mobile back button */}
-      <div className="navigation-buttons small-screen-only">
-        {activeStep > 1 && (
-          <button
-            className="back-button"
-            onClick={() => handleStepChange(activeStep - 1)}
-          >
-            {activeStep > 1 ? breadcrumbs[activeStep - 2]?.label : "<"}
-          </button>
-        )}
-      </div>
-      {activeStep === 1 && (
-        <div className="service-options-container">
-          <h1 className="service-header">Select Your Car Type</h1>
-          <div className="service-options">
-            {carType.map((ct, i) => (
-              <div
-                key={i}
-                className="service-card"
-                onClick={() => {
-                  setSelectedCar(ct);
-                  setActiveStep(2);
-                }}
-              >
-                <img src={ct.image} alt={ct.name} className="service-image" />
-                <h2 className="service-name">{ct.name}</h2>
-              </div>
-            ))}
-          </div>
+      <div
+        className={`monthly-sub-container ${
+          showPlusServices ? "blur-background" : ""
+        }`}
+      >
+        <ToastContainer style={{ marginTop: "80px" }} />
+        {/* Breadcrumbs (desktop) */}
+        <nav className="breadcrumb large-screen-only">
+          <ul>
+            {breadcrumbs.map((bc) => {
+              const isCurrent = activeStep === bc.step;
+              const isCompleted = activeStep > bc.step;
+              const isNext = activeStep + 1 === bc.step;
+
+              return (
+                <li
+                  key={bc.step}
+                  className={`${isCurrent ? "current" : ""} ${
+                    isCompleted ? "completed" : ""
+                  } ${isNext ? "next" : ""}`}
+                  onClick={() => handleStepChange(bc.step)}
+                >
+                  <a>{bc.label}</a>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+        {/* Mobile back button */}
+        <div className="navigation-buttons small-screen-only">
+          {activeStep > 1 && (
+            <button
+              className="back-button"
+              onClick={() => handleStepChange(activeStep - 1)}
+            >
+              {activeStep > 1 ? breadcrumbs[activeStep - 2]?.label : "<"}
+            </button>
+          )}
         </div>
-      )}
-      {/* STEP 2: Service */}
-      {activeStep === 2 && (
-        <div className="service-options-container">
-          <h1 className="service-header">Select Your Service</h1>
-          <div className="service-options">
-            {services.map((svc, i) => (
-              <div
-                key={i}
-                className="service-card"
-                onClick={() => handleServiceClick(svc.name)}
-              >
-                <img src={svc.image} alt={svc.name} className="service-image" />
-                <h2 className="service-name">{svc.name}</h2>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-      {/* STEP 3: Interior Packages */}
-      {activeStep === 3 &&
-        (selectedService === "Interior Only" ||
-          selectedService === "Exterior and Interior") && (
-          <div className="packages-container">
-            <h1 className="packages-header">Interior Services</h1>
-            <div className="packages-grid">
-              <div
-                className="package pressure"
-                // style={{
-                //   backgroundImage: `linear-gradient(to bottom, rgba(255,255,255,0.5), rgba(0,0,0,0.3)), url(${pressureBackground})`,
-                //   backgroundRepeat: "no-repeat",
-                //   backgroundSize: "cover",
-                //   backgroundPosition: "center",
-                // }}
-              >
-                <h2 className="package-title">PRESSURE</h2>
-                <p className="package-price">
-                  {selectedCar
-                    ? (() => {
-                        const priceRange = getPriceRange(
-                          "interiors",
-                          "pressureSpecial"
-                        );
-                        return `$${priceRange.min} - $${priceRange.max}`;
-                      })()
-                    : "Starting at $200"}
-                </p>
-                <div className="package-list">
-                  <ul className="package-details">
-                    <li>
-                      <img src={CheckIcon} alt="check" className="check-icon" />
-                      Agitate/wipe down doors, jambs, dash, console, and trims
-                    </li>
-                    <li>
-                      {" "}
-                      <img src={CheckIcon} alt="check" className="check-icon" />
-                      Vacuum seats, mats, floor, and trunk
-                    </li>
-                    <li>
-                      {" "}
-                      <img src={CheckIcon} alt="check" className="check-icon" />
-                      Clean all windows
-                    </li>
-                    <li>
-                      {" "}
-                      <img src={CheckIcon} alt="check" className="check-icon" />
-                      Deep clean/shampoo floor mats
-                    </li>
-                    <li>
-                      {" "}
-                      <img src={CheckIcon} alt="check" className="check-icon" />
-                      Deep cleaning - shampoo & condition seats
-                    </li>
-                    <li>
-                      {" "}
-                      <img src={CheckIcon} alt="check" className="check-icon" />
-                      UV Protection & Interior Shine
-                    </li>
-                    <li>
-                      {" "}
-                      <img src={CheckIcon} alt="check" className="check-icon" />
-                      Agitate and clean seat belts
-                    </li>
-                    <li>
-                      {" "}
-                      <img src={CheckIcon} alt="check" className="check-icon" />
-                      Deep clean & remove stains from the floor
-                    </li>
-                    <li>
-                      {" "}
-                      <img src={CheckIcon} alt="check" className="check-icon" />
-                      Deep clean & remove stains from the headliner
-                    </li>
-                    <li>
-                      {" "}
-                      <img src={CheckIcon} alt="check" className="check-icon" />
-                      Aids in reducing car odor
-                    </li>
-                  </ul>
-                </div>
-                <button
-                  className="package-button"
+        {activeStep === 1 && (
+          <div className="service-options-container">
+            <h1 className="service-header">Select Your Car Type</h1>
+            <div className="service-options">
+              {carType.map((ct, i) => (
+                <div
+                  key={i}
+                  className="service-card"
                   onClick={() => {
-                    const priceRange = getPriceRange(
-                      "interiors",
-                      "pressureSpecial"
-                    );
-                    handlePackageClick({
-                      name: "PRESSURE",
-                      price: priceRange.min,
-                      maxPrice: priceRange.max,
-                    });
+                    setSelectedCar(ct);
+                    setActiveStep(2);
                   }}
                 >
-                  Book
-                </button>
-              </div>
-              <div
-                className="package gold"
-                // style={{
-                //   backgroundImage: `url(${goldBackground})`,
-                //   backgroundRepeat: "no-repeat",
-                //   backgroundSize: "cover",
-                //   backgroundPosition: "center",
-                // }}
-              >
-                <h2 className="package-title">GOLD</h2>
-                <p className="package-price">
-                  {selectedCar
-                    ? (() => {
-                        const priceRange = getPriceRange(
-                          "interiors",
-                          "goldInterior"
-                        );
-                        return `$${priceRange.min} - $${priceRange.max}`;
-                      })()
-                    : "Starting at $100"}
-                </p>
-                <div className="package-list">
-                  <ul
-                    className="package-details"
-                    style={{ marginInline: "20px" }}
-                  >
-                    <li>
-                      <img src={CheckIcon} alt="check" className="check-icon" />
-                      Agitate/wipe down doors, jambs, dash, console, and trims
-                    </li>
-                    <li>
-                      {" "}
-                      <img src={CheckIcon} alt="check" className="check-icon" />
-                      Vacuum seats, mats, floor, and trunk
-                    </li>
-                    <li>
-                      {" "}
-                      <img src={CheckIcon} alt="check" className="check-icon" />
-                      Clean all windows
-                    </li>
-                    <li>
-                      {" "}
-                      <img src={CheckIcon} alt="check" className="check-icon" />
-                      Deep clean/shampoo floor mats
-                    </li>
-                    <li>
-                      {" "}
-                      <img src={CheckIcon} alt="check" className="check-icon" />
-                      Deep cleaning - shampoo & condition seats
-                    </li>
-                    <li>
-                      {" "}
-                      <img src={CheckIcon} alt="check" className="check-icon" />
-                      UV Protection & Interior Shine
-                    </li>
-                    <li>
-                      {" "}
-                      <img src={CheckIcon} alt="check" className="check-icon" />
-                      Agitate and clean seat belts
-                    </li>
-                  </ul>
-                  <div className="locked-options">
-                    <h3 className="locked-header">Not Included</h3>
-                    <ul className="package-details locked">
-                      <li>🔒 Deep clean & remove stains from the floor</li>
-                      <li>🔒 Deep clean & remove stains from the headliner</li>
-                      <li>🔒 Aids in reducing car odor</li>
-                    </ul>
-                  </div>
+                  <img src={ct.image} alt={ct.name} className="service-image" />
+                  <h2 className="service-name">{ct.name}</h2>
                 </div>
-                <button
-                  className="package-button"
-                  onClick={() => {
-                    const priceRange = getPriceRange(
-                      "interiors",
-                      "goldInterior"
-                    );
-                    handlePackageClick({
-                      name: "GOLD",
-                      price: priceRange.min,
-                      maxPrice: priceRange.max,
-                    });
-                  }}
-                >
-                  Book
-                </button>
-              </div>
+              ))}
             </div>
           </div>
         )}
-      {/* STEP 4: Exterior Packages */}
-      {activeStep === 4 &&
-        (selectedService === "Exterior Only" ||
-          (selectedService === "Exterior and Interior" &&
-            confirmedInteriorPackage)) && (
-          <div className="packages-container">
-            <h1 className="packages-header">Exterior Detail</h1>
-            <div className="packages-grid">
-              <div className="package pressure">
-                <h2 className="package-title">Paint Enhancement</h2>
-                <div className="sub-package">
+        {/* STEP 2: Service */}
+        {activeStep === 2 && (
+          <div className="service-options-container">
+            <h1 className="service-header">Select Your Service</h1>
+            <div className="service-options">
+              {services.map((svc, i) => (
+                <div
+                  key={i}
+                  className="service-card"
+                  onClick={() => handleServiceClick(svc.name)}
+                >
+                  <img
+                    src={svc.image}
+                    alt={svc.name}
+                    className="service-image"
+                  />
+                  <h2 className="service-name">{svc.name}</h2>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        {activeStep === 3 &&
+          (selectedService === "Interior Only" ||
+            selectedService === "Exterior and Interior") && (
+            <div className="packages-container">
+              <h1 className="packages-header">Interior Services</h1>
+              <div className="packages-grid">
+                <div className="package pressure">
+                  <h2 className="package-title">PRESSURE</h2>
+                  <p className="package-price">
+                    {selectedCar
+                      ? (() => {
+                          const priceRange = getPriceRange(
+                            "interiors",
+                            "pressureSpecial"
+                          );
+                          return `$${priceRange.min} - $${priceRange.max}`;
+                        })()
+                      : "Starting at $200"}
+                  </p>
+                  <div className="package-list">
+                    <ul className="package-details">
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Agitate/wipe down doors, jambs, dash, console, and trims
+                      </li>
+                      <li>
+                        {" "}
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Vacuum seats, mats, floor, and trunk
+                      </li>
+                      <li>
+                        {" "}
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Clean all windows
+                      </li>
+                      <li>
+                        {" "}
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Deep clean/shampoo floor mats
+                      </li>
+                      <li>
+                        {" "}
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Deep cleaning - shampoo & condition seats
+                      </li>
+                      <li>
+                        {" "}
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        UV Protection & Interior Shine
+                      </li>
+                      <li>
+                        {" "}
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Agitate and clean seat belts
+                      </li>
+                      <li>
+                        {" "}
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Deep clean & remove stains from the floor
+                      </li>
+                      <li>
+                        {" "}
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Deep clean & remove stains from the headliner
+                      </li>
+                      <li>
+                        {" "}
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Aids in reducing car odor
+                      </li>
+                    </ul>
+                  </div>
+                  <button
+                    className="package-button"
+                    onClick={() => {
+                      const priceRange = getPriceRange(
+                        "interiors",
+                        "pressureSpecial"
+                      );
+                      handlePackageClick({
+                        name: "PRESSURE",
+                        price: priceRange.min,
+                        maxPrice: priceRange.max,
+                      });
+                    }}
+                  >
+                    Book
+                  </button>
+                </div>
+                <div className="package gold">
+                  <h2 className="package-title">GOLD</h2>
+                  <p className="package-price">
+                    {selectedCar
+                      ? (() => {
+                          const priceRange = getPriceRange(
+                            "interiors",
+                            "goldInterior"
+                          );
+                          return `$${priceRange.min} - $${priceRange.max}`;
+                        })()
+                      : "Starting at $100"}
+                  </p>
+                  <div className="package-list">
+                    <ul
+                      className="package-details"
+                      style={{ marginInline: "20px" }}
+                    >
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Agitate/wipe down doors, jambs, dash, console, and trims
+                      </li>
+                      <li>
+                        {" "}
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Vacuum seats, mats, floor, and trunk
+                      </li>
+                      <li>
+                        {" "}
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Clean all windows
+                      </li>
+                      <li>
+                        {" "}
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Deep clean/shampoo floor mats
+                      </li>
+                      <li>
+                        {" "}
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Deep cleaning - shampoo & condition seats
+                      </li>
+                      <li>
+                        {" "}
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        UV Protection & Interior Shine
+                      </li>
+                      <li>
+                        {" "}
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Agitate and clean seat belts
+                      </li>
+                    </ul>
+                    <div className="locked-options">
+                      <h3 className="locked-header">Not Included</h3>
+                      <ul className="package-details locked">
+                        <li>🔒 Deep clean & remove stains from the floor</li>
+                        <li>
+                          🔒 Deep clean & remove stains from the headliner
+                        </li>
+                        <li>🔒 Aids in reducing car odor</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <button
+                    className="package-button"
+                    onClick={() => {
+                      const priceRange = getPriceRange(
+                        "interiors",
+                        "goldInterior"
+                      );
+                      handlePackageClick({
+                        name: "GOLD",
+                        price: priceRange.min,
+                        maxPrice: priceRange.max,
+                      });
+                    }}
+                  >
+                    Book
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        {activeStep === 4 &&
+          (selectedService === "Exterior Only" ||
+            (selectedService === "Exterior and Interior" &&
+              confirmedInteriorPackage)) && (
+            <div className="packages-container">
+              <h1 className="packages-header">Exterior Detail</h1>
+              <div className="packages-grid">
+                <div className="package pressure">
+                  <h2 className="package-title">Paint Enhancement</h2>
+                  <div className="sub-package">
+                    <p className="package-price">
+                      {selectedCar
+                        ? (() => {
+                            const priceRange = getPriceRange(
+                              "exteriors",
+                              "oneStep"
+                            );
+                            return `$${priceRange.min} - $${priceRange.max}`;
+                          })()
+                        : "Starting at $400"}
+                    </p>
+                    <div className="package-list">
+                      <ul className="package-details">
+                        <li>Foam pre-rinse and bath</li>
+                        <li>Full decontamination (clay/iron treatment)</li>
+                        <li>Bug and tar removal</li>
+                        <li>Shine all exterior surfaces</li>
+                        <li>Apply 6-months protection</li>
+                        <li>Reduce minor swirls and surface imperfections</li>
+                        <li>Boost depth and clarity for showroom shine</li>
+                        <li>Eliminate water spots and surface oxidation</li>
+                      </ul>
+                    </div>
+                    <button
+                      className="package-button"
+                      onClick={() => {
+                        const priceRange = getPriceRange(
+                          "exteriors",
+                          "oneStep"
+                        );
+                        handlePackageClick({
+                          name: "Paint Enhancement",
+                          price: priceRange.min,
+                          maxPrice: priceRange.max,
+                        });
+                      }}
+                    >
+                      Learn more
+                    </button>
+                  </div>
+                </div>
+                <div className="package standard">
+                  <h2 className="package-title">Wash & Wax</h2>
                   <p className="package-price">
                     {selectedCar
                       ? (() => {
                           const priceRange = getPriceRange(
                             "exteriors",
-                            "oneStep"
+                            "washWax"
                           );
                           return `$${priceRange.min} - $${priceRange.max}`;
                         })()
-                      : "Starting at $400"}
+                      : "Starting at $125"}
                   </p>
                   <div className="package-list">
                     <ul className="package-details">
@@ -780,259 +879,222 @@ function MonthlySub() {
                       <li>Bug and tar removal</li>
                       <li>Shine all exterior surfaces</li>
                       <li>Apply 6-months protection</li>
-                      <li>Reduce minor swirls and surface imperfections</li>
-                      <li>Boost depth and clarity for showroom shine</li>
-                      <li>Eliminate water spots and surface oxidation</li>
                     </ul>
+                    <div className="locked-options">
+                      <h3 className="locked-header">Not Included</h3>
+                      <ul className="package-details locked">
+                        <li>🔒 Reduce minor swirls and imperfections</li>
+                        <li>🔒 Boost depth and clarity</li>
+                        <li>🔒 Eliminate water spots and oxidation</li>
+                      </ul>
+                    </div>
                   </div>
                   <button
                     className="package-button"
                     onClick={() => {
-                      const priceRange = getPriceRange("exteriors", "oneStep");
+                      const priceRange = getPriceRange("exteriors", "washWax");
                       handlePackageClick({
-                        name: "Paint Enhancement",
+                        name: "Wash & Wax",
                         price: priceRange.min,
                         maxPrice: priceRange.max,
                       });
                     }}
                   >
-                    Learn more
+                    Book
+                  </button>
+                </div>
+                <div className="package standard">
+                  <h2 className="package-title">Standard Exterior</h2>
+                  <p className="package-price">
+                    {selectedCar
+                      ? (() => {
+                          const priceRange = getPriceRange(
+                            "exteriors",
+                            "standardExterior"
+                          );
+                          return `$${priceRange.min} - $${priceRange.max}`;
+                        })()
+                      : "Starting at $60"}
+                  </p>
+                  <div className="package-list">
+                    <ul className="package-details">
+                      <li>Foam pre-rinse & contact wash</li>
+                      <li>Bug & tar removal</li>
+                      <li>Full decontamination (clay / iron treatment)</li>
+                      <li>Apply 3-month spray-wax protection</li>
+                    </ul>
+
+                    <div className="locked-options">
+                      <h3 className="locked-header">Not Included</h3>
+                      <ul className="package-details locked">
+                        <li>🔒 6-month sealant upgrade</li>
+                        <li>🔒 Swirl-mark reduction / paint correction</li>
+                        <li>🔒 Water-spot / oxidation removal</li>
+                        <li>🔒 Depth-&-gloss enhancement</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <button
+                    className="package-button"
+                    onClick={() => {
+                      const priceRange = getPriceRange(
+                        "exteriors",
+                        "standardExterior"
+                      );
+                      handlePackageClick({
+                        name: "Standard Exterior",
+                        price: priceRange.min,
+                        maxPrice: priceRange.max,
+                      });
+                    }}
+                  >
+                    Book
                   </button>
                 </div>
               </div>
-              <div className="package standard">
-                <h2 className="package-title">Wash & Wax</h2>
-                <p className="package-price">
-                  {selectedCar
-                    ? (() => {
-                        const priceRange = getPriceRange(
-                          "exteriors",
-                          "washWax"
-                        );
-                        return `$${priceRange.min} - $${priceRange.max}`;
-                      })()
-                    : "Starting at $125"}
+            </div>
+          )}
+        {activeStep === 5 && (
+          <div className="appointment-container">
+            <div className="left-panel">
+              <div className="header">
+                <div className="icon">🤝</div>
+                <h2>Make an appointment</h2>
+                <p>
+                  Approx.{" "}
+                  {confirmedInteriorPackage || confirmedExteriorPackage
+                    ? calculateAppointmentDuration()
+                    : "30 min"}
                 </p>
-                <div className="package-list">
-                  <ul className="package-details">
-                    <li>Foam pre-rinse and bath</li>
-                    <li>Full decontamination (clay/iron treatment)</li>
-                    <li>Bug and tar removal</li>
-                    <li>Shine all exterior surfaces</li>
-                    <li>Apply 6-months protection</li>
-                  </ul>
-                  <div className="locked-options">
-                    <h3 className="locked-header">Not Included</h3>
-                    <ul className="package-details locked">
-                      <li>🔒 Reduce minor swirls and imperfections</li>
-                      <li>🔒 Boost depth and clarity</li>
-                      <li>🔒 Eliminate water spots and oxidation</li>
-                    </ul>
+                {(confirmedInteriorPackage || confirmedExteriorPackage) && (
+                  <div className="total-price-display">
+                    {(() => {
+                      const priceRange = calculateTotalPriceRange();
+                      return priceRange.min === priceRange.max ? (
+                        <h3>Total Price: ${priceRange.min}</h3>
+                      ) : (
+                        <h3>
+                          Total Price: ${priceRange.min} - ${priceRange.max}
+                        </h3>
+                      );
+                    })()}
                   </div>
-                </div>
-                <button
-                  className="package-button"
-                  onClick={() => {
-                    const priceRange = getPriceRange("exteriors", "washWax");
-                    handlePackageClick({
-                      name: "Wash & Wax",
-                      price: priceRange.min,
-                      maxPrice: priceRange.max,
-                    });
-                  }}
-                >
-                  Book
-                </button>
+                )}
               </div>
-              <div className="package standard">
-                <h2 className="package-title">Standard Exterior</h2>
-                <p className="package-price">
-                  {selectedCar
-                    ? (() => {
-                        const priceRange = getPriceRange(
-                          "exteriors",
-                          "standardExterior"
-                        );
-                        return `$${priceRange.min} - $${priceRange.max}`;
-                      })()
-                    : "Starting at $60"}
-                </p>
-                <div className="package-list">
-                  <ul className="package-details">
-                    <li>Foam pre-rinse & contact wash</li>
-                    <li>Bug & tar removal</li>
-                    <li>Full decontamination (clay / iron treatment)</li>
-                    <li>Apply 3-month spray-wax protection</li>
-                  </ul>
-
-                  <div className="locked-options">
-                    <h3 className="locked-header">Not Included</h3>
-                    <ul className="package-details locked">
-                      <li>🔒 6-month sealant upgrade</li>
-                      <li>🔒 Swirl-mark reduction / paint correction</li>
-                      <li>🔒 Water-spot / oxidation removal</li>
-                      <li>🔒 Depth-&-gloss enhancement</li>
-                    </ul>
-                  </div>
+              <form
+                className="customer-form"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                }}
+              >
+                <div className="form-group">
+                  <label htmlFor="name">Name</label>
+                  <input
+                    id="name"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                  />
                 </div>
-                <button
-                  className="package-button"
-                  onClick={() => {
-                    const priceRange = getPriceRange(
-                      "exteriors",
-                      "standardExterior"
-                    );
-                    handlePackageClick({
-                      name: "Standard Exterior",
-                      price: priceRange.min,
-                      maxPrice: priceRange.max,
-                    });
-                  }}
-                >
-                  Book
-                </button>
+
+                <div className="form-group">
+                  <label htmlFor="address">Address</label>
+                  <input
+                    id="address"
+                    type="text"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="zip">Zip Code</label>
+                  <input
+                    id="zip"
+                    type="text"
+                    value={zip}
+                    onChange={(e) => setZip(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="phone">Phone Number</label>
+                  <input
+                    id="phone"
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+              </form>
+
+              <p>Select a date and an available time slot to finish booking.</p>
+            </div>
+
+            <div className="right-panel">
+              <h3>Select a Date & Time</h3>
+
+              <div className="calendar-container">
+                <DatePicker
+                  selected={selectedDate}
+                  onChange={handleDateChange}
+                  onMonthChange={handleMonthChange}
+                  minDate={addDays(new Date(), 1)}
+                  maxDate={maxDate}
+                  inline
+                  excludeDates={[
+                    ...staticExcludedDates,
+                    ...excludedDynamicDates,
+                  ]}
+                  calendarClassName="custom-calendar"
+                  dayClassName={(date) =>
+                    date.getDate() === selectedDate.getDate() &&
+                    date.getMonth() === selectedDate.getMonth()
+                      ? "selected-date"
+                      : undefined
+                  }
+                />
+              </div>
+
+              {/* — Time slots — */}
+              <div className="time-slots">
+                {timeSlots
+                  .filter((t) => isTimeAvailable(selectedDate, t))
+                  .map((t) => (
+                    <button
+                      key={t}
+                      className={`time-slot ${
+                        selectedTime === t ? "active" : ""
+                      }`}
+                      onClick={() => handleTimeSelect(t)}
+                    >
+                      {t}
+                    </button>
+                  ))}
+                {timeSlots.every((t) => !isTimeAvailable(selectedDate, t)) && (
+                  <div>No available times on this day</div>
+                )}
               </div>
             </div>
           </div>
         )}
-      {activeStep === 5 && (
-        <div className="appointment-container">
-          <div className="left-panel">
-            <div className="header">
-              <div className="icon">🤝</div>
-              <h2>Make an appointment</h2>
-              <p>
-                Approx.{" "}
-                {confirmedInteriorPackage || confirmedExteriorPackage
-                  ? calculateAppointmentDuration()
-                  : "30 min"}
-              </p>
-              {(confirmedInteriorPackage || confirmedExteriorPackage) && (
-                <div className="total-price-display">
-                  {(() => {
-                    const priceRange = calculateTotalPriceRange();
-                    return priceRange.min === priceRange.max ? (
-                      <h3>Total Price: ${priceRange.min}</h3>
-                    ) : (
-                      <h3>
-                        Total Price: ${priceRange.min} - ${priceRange.max}
-                      </h3>
-                    );
-                  })()}
-                </div>
-              )}
-            </div>
-            {/* — Your Info Form — */}
-            <form
-              className="customer-form"
-              onSubmit={(e) => {
-                e.preventDefault();
-                // now you have: name, address, zip, phone
-              }}
-            >
-              <div className="form-group">
-                <label htmlFor="name">Name</label>
-                <input
-                  id="name"
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
-              </div>
+      </div>
 
-              <div className="form-group">
-                <label htmlFor="address">Address</label>
-                <input
-                  id="address"
-                  type="text"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="zip">Zip Code</label>
-                <input
-                  id="zip"
-                  type="text"
-                  value={zip}
-                  onChange={(e) => setZip(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="phone">Phone Number</label>
-                <input
-                  id="phone"
-                  type="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-            </form>
-
-            <p>Select a date and an available time slot to finish booking.</p>
-          </div>
-
-          <div className="right-panel">
-            <h3>Select a Date & Time</h3>
-
-            <div className="calendar-container">
-              <DatePicker
-                selected={selectedDate}
-                onChange={handleDateChange}
-                onMonthChange={handleMonthChange}
-                minDate={addDays(new Date(), 1)}
-                maxDate={maxDate}
-                inline
-                excludeDates={[...staticExcludedDates, ...excludedDynamicDates]}
-                calendarClassName="custom-calendar"
-                dayClassName={(date) =>
-                  date.getDate() === selectedDate.getDate() &&
-                  date.getMonth() === selectedDate.getMonth()
-                    ? "selected-date"
-                    : undefined
-                }
-              />
-            </div>
-
-            {/* — Time slots — */}
-            <div className="time-slots">
-              {timeSlots
-                .filter((t) => isTimeAvailable(selectedDate, t))
-                .map((t) => (
-                  <button
-                    key={t}
-                    className={`time-slot ${
-                      selectedTime === t ? "active" : ""
-                    }`}
-                    onClick={() => handleTimeSelect(t)}
-                  >
-                    {t}
-                  </button>
-                ))}
-              {timeSlots.every((t) => !isTimeAvailable(selectedDate, t)) && (
-                <div>No available times on this day</div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
       <div
         className={`plus-services-panel ${showPlusServices ? "slide-up" : ""}`}
       >
@@ -1068,7 +1130,6 @@ function MonthlySub() {
             </div>
             <p className="package-summary">
               {(() => {
-                // Calculate current package total with plus services
                 let minTotal = selectedPackage.price;
                 let maxTotal =
                   selectedPackage.maxPrice || selectedPackage.price;
@@ -1107,34 +1168,28 @@ function MonthlySub() {
               <button
                 className="confirm-button"
                 onClick={() => {
-                  // Determine if this is an interior or exterior package
                   const isInteriorPackage = ["PRESSURE", "GOLD"].includes(
                     selectedPackage.name
                   );
 
                   if (isInteriorPackage) {
-                    // Save interior package and plus services
                     setConfirmedInteriorPackage(selectedPackage);
                     setConfirmedInteriorPlusServices([...selectedPlusServices]);
 
-                    // If user selected "Exterior and Interior", move to exterior step
                     if (selectedService === "Exterior and Interior") {
-                      setActiveStep(4); // Move to exterior packages
+                      setActiveStep(4);
                     } else {
-                      // If only interior, move to date/time
                       setActiveStep(5);
                     }
                   } else {
-                    // Save exterior package and plus services
                     setConfirmedExteriorPackage(selectedPackage);
                     setConfirmedExteriorPlusServices([...selectedPlusServices]);
 
-                    // Move to date/time step
                     setActiveStep(5);
                   }
 
                   setShowPlusServices(false);
-                  setSelectedPlusServices([]); // Reset for next package
+                  setSelectedPlusServices([]);
                 }}
               >
                 Confirm

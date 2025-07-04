@@ -1140,6 +1140,31 @@ $card-max-height: 400px;
     }
   }
 }
+/* Wrapper for the entire monthly subscription page */
+.monthly-sub-wrapper {
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Invisible overlay for closing modal when clicking outside */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999; /* Below plus services panel but above content */
+  cursor: pointer;
+  background: transparent;
+}
+
+/* Blur effect for background when plus services panel is open */
+.monthly-sub-container.blur-background {
+  filter: blur(3px);
+  transition: filter 0.3s ease-out;
+  pointer-events: none; /* Disable all interactions with blurred content */
+}
+
 /* KEEP this entire block */
 .plus-services-panel {
   position: fixed;
@@ -1148,13 +1173,13 @@ $card-max-height: 400px;
   right: 0;
   background: #fff;
   border-top: 2px solid #ddd;
-  max-height: 60%;
-  overflow-y: auto;
+  /* Removed max-height to allow full content display */
+  overflow: hidden; /* Remove scroll behavior */
   transform: translateY(100%);
   transition: transform 0.3s ease-out;
   padding: 1rem 1.5rem;
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+  z-index: 1001; /* Higher than blurred content */
 
   h2 {
     margin-top: 0;
