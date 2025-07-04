@@ -148,13 +148,44 @@ function MonthlySub() {
   ];
   const staticExcludedDates = [];
 
-  const breadcrumbs = [
-    { label: "Car Type", step: 1 },
-    { label: "Service", step: 2 },
-    { label: "Interior Package", step: 3 },
-    { label: "Exterior Package", step: 4 },
-    { label: "Date & Time", step: 5 },
-  ];
+  // Dynamic breadcrumbs based on selected service
+  const getBreadcrumbs = () => {
+    const baseBreadcrumbs = [
+      { label: "Car Type", step: 1 },
+      { label: "Service", step: 2 },
+    ];
+
+    if (selectedService === "Interior Only") {
+      return [
+        ...baseBreadcrumbs,
+        { label: "Interior Package", step: 3 },
+        { label: "Date & Time", step: 5 },
+      ];
+    } else if (selectedService === "Exterior Only") {
+      return [
+        ...baseBreadcrumbs,
+        { label: "Exterior Package", step: 4 },
+        { label: "Date & Time", step: 5 },
+      ];
+    } else if (selectedService === "Exterior and Interior") {
+      return [
+        ...baseBreadcrumbs,
+        { label: "Interior Package", step: 3 },
+        { label: "Exterior Package", step: 4 },
+        { label: "Date & Time", step: 5 },
+      ];
+    } else {
+      // Default breadcrumbs when no service is selected
+      return [
+        ...baseBreadcrumbs,
+        { label: "Interior Package", step: 3 },
+        { label: "Exterior Package", step: 4 },
+        { label: "Date & Time", step: 5 },
+      ];
+    }
+  };
+
+  const breadcrumbs = getBreadcrumbs();
 
   useEffect(() => {
     async function fetchEvents() {
@@ -217,6 +248,24 @@ function MonthlySub() {
   };
 
   const handleStepChange = (step) => {
+    // If user tries to navigate between interior/exterior steps, redirect to service selection
+    if (selectedService === "Interior Only" && step === 4) {
+      // Redirect to service selection to change service type
+      setActiveStep(2);
+      return;
+    } else if (selectedService === "Exterior Only" && step === 3) {
+      // Redirect to service selection to change service type
+      setActiveStep(2);
+      return;
+    } else if (
+      selectedService === "Exterior and Interior" &&
+      step === 4 &&
+      !confirmedInteriorPackage
+    ) {
+      // For both services: must complete interior before exterior, but allow navigation
+      return;
+    }
+
     setActiveStep(step);
   };
 
@@ -450,6 +499,7 @@ function MonthlySub() {
             const isCurrent = activeStep === bc.step;
             const isCompleted = activeStep > bc.step;
             const isNext = activeStep + 1 === bc.step;
+
             return (
               <li
                 key={bc.step}
@@ -680,7 +730,6 @@ function MonthlySub() {
                       <li>🔒 Aids in reducing car odor</li>
                     </ul>
                   </div>
-                  <button className="package-button">Book</button>
                 </div>
                 <button
                   className="package-button"
@@ -705,7 +754,8 @@ function MonthlySub() {
       {/* STEP 4: Exterior Packages */}
       {activeStep === 4 &&
         (selectedService === "Exterior Only" ||
-          selectedService === "Exterior and Interior") && (
+          (selectedService === "Exterior and Interior" &&
+            confirmedInteriorPackage)) && (
           <div className="packages-container">
             <h1 className="packages-header">Exterior Detail</h1>
             <div className="packages-grid">
@@ -750,7 +800,7 @@ function MonthlySub() {
                   </button>
                 </div>
               </div>
-              <div className="package gold">
+              <div className="package standard">
                 <h2 className="package-title">Wash & Wax</h2>
                 <p className="package-price">
                   {selectedCar
@@ -988,30 +1038,6 @@ function MonthlySub() {
       >
         {showPlusServices && (
           <>
-            <h2>{selectedPackage.name} Summary</h2>
-            <p className="package-summary">
-              Base Price: ${selectedPackage.price}
-            </p>
-
-            {/* Show what's been confirmed so far */}
-            {(confirmedInteriorPackage || confirmedExteriorPackage) && (
-              <div className="confirmed-summary">
-                <h4>Previously Confirmed:</h4>
-                {confirmedInteriorPackage && (
-                  <p>
-                    Interior: {confirmedInteriorPackage.name} - $
-                    {confirmedInteriorPackage.price}
-                  </p>
-                )}
-                {confirmedExteriorPackage && (
-                  <p>
-                    Exterior: {confirmedExteriorPackage.name} - $
-                    {confirmedExteriorPackage.price}
-                  </p>
-                )}
-              </div>
-            )}
-
             <h3>Add Plus Services</h3>
             <div className="plus-services-grid">
               {(plusServicesByPackage[selectedPackage.name] || []).map(
