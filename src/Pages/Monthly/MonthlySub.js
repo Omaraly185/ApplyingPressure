@@ -16,7 +16,15 @@ import exteriorInterior from "./Exterior-and-interior.png";
 import ceramic from "./ceramic-coating.png";
 import polish from "./polish.png";
 import CheckIcon from "./check.png";
+import engineBayClean from "./engine-bay-clean.png";
+import trimRestoration from "./trim-restoration.png";
+import headlightRestoration from "./headlight-restoration.png";
 import carPricing from "../Book-Now/BookingForm/carPricing.json";
+import {
+  validateMonthlyFields,
+  formatPhoneNumber,
+  formatZipCode,
+} from "./monthlyValidation";
 
 import { format, startOfMonth, addMonths, addDays } from "date-fns";
 
@@ -47,9 +55,20 @@ function MonthlySub() {
     useState([]);
   const [confirmedExteriorPlusServices, setConfirmedExteriorPlusServices] =
     useState([]);
+  const [showPriceBreakdown, setShowPriceBreakdown] = useState(false);
 
   const plusServicesByPackage = {
     GOLD: [
+      { name: "Flooring", price: 50, image: Sedan },
+      { name: "Headliner", price: 50, image: Sedan },
+      { name: "Dog Hair Removal", price: "50-150", image: Sedan },
+      {
+        name: "Heavy Spills/Odor Removal",
+        price: "50-150",
+        image: Sedan,
+      },
+    ],
+    SILVER: [
       { name: "Flooring", price: 50, image: Sedan },
       { name: "Headliner", price: 50, image: Sedan },
       { name: "Dog Hair Removal", price: "50-150", image: Sedan },
@@ -69,19 +88,30 @@ function MonthlySub() {
     ],
     Standard: [
       { name: "Ceramic Sealant", price: 40, image: Sedan },
-      { name: "Trim Restoration", price: "75-150", image: Sedan },
+      { name: "Trim Restoration", price: "75-150", image: trimRestoration },
       { name: "Engine Bay Cleaning", price: 50, image: Sedan },
-      { name: "Headlight Restoration", price: "40-80", image: Sedan },
+      { name: "Headlight Restoration", price: "40-80", image: headlightRestoration },
     ],
     "Wash & Wax": [
-      { name: "Trim Restoration", price: "75-150", image: Sedan },
-      { name: "Engine Bay Cleaning", price: 50, image: Sedan },
-      { name: "Headlight Restoration", price: "40-80", image: Sedan },
+      { name: "Headlight Restoration", price: "40-80", image: headlightRestoration },
+      { name: "Engine Bay Cleaning", price: 50, image: engineBayClean },
+      { name: "Trim Restoration", price: "75-150", image: trimRestoration },
     ],
     "Paint Enhancement": [
-      { name: "Trim Restoration", price: "75-150", image: Sedan },
-      { name: "Engine Bay Cleaning", price: 50, image: Sedan },
-      { name: "Headlight Restoration", price: "40-80", image: Sedan },
+      { name: "Headlight Restoration", price: "40-80", image: headlightRestoration },
+      { name: "Engine Bay Cleaning", price: 50, image: engineBayClean },
+      { name: "Trim Restoration", price: "75-150", image: trimRestoration },
+      {
+        name: "Ceramic Coating",
+        price: "ceramic-coating-dynamic",
+        image: ceramic,
+      },
+    ],
+    "Standard Exterior": [
+      { name: "6-8 Month Sealant", price: 25, image: Sedan },
+      { name: "Headlight Restoration", price: "40-80", image: headlightRestoration },
+      { name: "Engine Bay Cleaning", price: 50, image: engineBayClean },
+      { name: "Trim Restoration", price: "75-150", image: trimRestoration },
     ],
   };
 
@@ -105,7 +135,9 @@ function MonthlySub() {
     selectedPlusServices.reduce((sum, name) => {
       const svc = currentPlusServices.find((s) => s.name === name);
       const price =
-        typeof svc?.price === "number"
+        svc?.price === "ceramic-coating-dynamic"
+          ? getCeramicCoatingPrice()
+          : typeof svc?.price === "number"
           ? svc.price
           : parseFloat(svc?.price) || 0;
       return sum + price;
@@ -133,7 +165,7 @@ function MonthlySub() {
     }
   };
   const carType = [
-    { name: "Sedan", image: Sedan },
+    { name: "Sedan/Coupe", image: Sedan },
     { name: "2 Row SUV", image: SUV },
     { name: "3 Row/ Pickup truck", image: Mini },
     { name: "Van", image: Van },
@@ -248,19 +280,64 @@ function MonthlySub() {
   };
 
   const handleStepChange = (step) => {
-    if (selectedService === "Interior Only" && step === 4) {
-      setActiveStep(2);
-      return;
-    } else if (selectedService === "Exterior Only" && step === 3) {
-      setActiveStep(2);
-      return;
-    } else if (
-      selectedService === "Exterior and Interior" &&
-      step === 4 &&
-      !confirmedInteriorPackage
-    ) {
-      // For both services: must complete interior before exterior, but allow navigation
-      return;
+    // Only allow backward navigation (step must be less than current activeStep)
+    if (step >= activeStep) {
+      return; // Prevent forward navigation
+    }
+
+    // Clear data from steps after the target step
+    if (step < activeStep) {
+      // Clear data based on which step we're going back to
+      if (step <= 1) {
+        // Going back to car selection - clear everything
+        setSelectedCar(null);
+        setSelectedService("");
+        setConfirmedInteriorPackage(null);
+        setConfirmedExteriorPackage(null);
+        setConfirmedInteriorPlusServices([]);
+        setConfirmedExteriorPlusServices([]);
+        setSelectedDate(null);
+        setSelectedTime("");
+        setName("");
+        setAddress("");
+        setZip("");
+        setPhone("");
+        setEmail("");
+      } else if (step <= 2) {
+        // Going back to service selection - clear packages and form data
+        setSelectedService("");
+        setConfirmedInteriorPackage(null);
+        setConfirmedExteriorPackage(null);
+        setConfirmedInteriorPlusServices([]);
+        setConfirmedExteriorPlusServices([]);
+        setSelectedDate(null);
+        setSelectedTime("");
+        setName("");
+        setAddress("");
+        setZip("");
+        setPhone("");
+        setEmail("");
+      } else if (step <= 3) {
+        // Going back to interior packages - clear exterior and form data
+        setConfirmedExteriorPackage(null);
+        setConfirmedExteriorPlusServices([]);
+        setSelectedDate(null);
+        setSelectedTime("");
+        setName("");
+        setAddress("");
+        setZip("");
+        setPhone("");
+        setEmail("");
+      } else if (step <= 4) {
+        // Going back to exterior packages - clear form data only
+        setSelectedDate(null);
+        setSelectedTime("");
+        setName("");
+        setAddress("");
+        setZip("");
+        setPhone("");
+        setEmail("");
+      }
     }
 
     setActiveStep(step);
@@ -270,15 +347,65 @@ function MonthlySub() {
     setSelectedTime(time);
   };
 
-  // Function to get car type key for pricing
+  const handlePhoneChange = (e) => {
+    const formattedPhone = formatPhoneNumber(e.target.value);
+    setPhone(formattedPhone);
+  };
+
+  const handleZipChange = (e) => {
+    const formattedZip = formatZipCode(e.target.value);
+    setZip(formattedZip);
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    const isValid = validateMonthlyFields(
+      name,
+      address,
+      zip,
+      phone,
+      email,
+      selectedDate,
+      selectedTime,
+      confirmedInteriorPackage,
+      confirmedExteriorPackage
+    );
+
+    if (isValid) {
+      console.log("Booking data:", {
+        name,
+        address,
+        zip,
+        phone,
+        email,
+        selectedDate,
+        selectedTime,
+        selectedCar,
+        confirmedInteriorPackage,
+        confirmedExteriorPackage,
+        confirmedInteriorPlusServices,
+        confirmedExteriorPlusServices,
+        totalPrice: calculateTotalPriceRange(),
+      });
+    }
+  };
+
   const getCarTypeKey = (carName) => {
     const carTypeMap = {
-      Sedan: "sedan",
+      "Sedan/Coupe": "sedan",
       "2 Row SUV": "twoRow",
       "3 Row/ Pickup truck": "threeRow",
       Van: "van",
     };
     return carTypeMap[carName] || "sedan";
+  };
+
+  // Function to get ceramic coating price based on selected car
+  const getCeramicCoatingPrice = () => {
+    if (!selectedCar) return 350; // Default to sedan price
+    const carTypeKey = getCarTypeKey(selectedCar.name);
+    return carPricing[carTypeKey]?.services?.ceramicCoating?.minPrice || 350;
   };
 
   // Function to get price range for a service
@@ -331,38 +458,41 @@ function MonthlySub() {
       });
     }
 
+    // Base time for exterior packages
     if (confirmedExteriorPackage) {
       switch (confirmedExteriorPackage.name) {
         case "Paint Enhancement":
-          totalHours += 4;
+          totalHours += 4; // 4 hours for paint enhancement
           break;
         case "Wash & Wax":
-          totalHours += 2;
+          totalHours += 2; // 2 hours for wash & wax
           break;
         case "Standard Exterior":
-          totalHours += 1.5;
+          totalHours += 1.5; // 1.5 hours for standard
           break;
         default:
-          totalHours += 2;
+          totalHours += 2; // default exterior time
       }
 
+      // Add time for exterior plus services
       confirmedExteriorPlusServices.forEach((serviceName) => {
         switch (serviceName) {
           case "Engine Bay Cleaning":
-            totalHours += 0.5;
+            totalHours += 0.5; // 30 minutes
             break;
           case "Headlight Restoration":
-            totalHours += 0.5;
+            totalHours += 0.5; // 30 minutes
             break;
           case "Ceramic Coating":
-            totalHours += 1;
+            totalHours += 2; // 1 hour
             break;
           default:
-            totalHours += 0.25;
+            totalHours += 0.25; // 15 minutes for other services
         }
       });
     }
 
+    // Convert to hours and minutes
     const hours = Math.floor(totalHours);
     const minutes = Math.round((totalHours - hours) * 60);
 
@@ -375,15 +505,18 @@ function MonthlySub() {
     }
   };
 
+  // Function to calculate total confirmed price range
   const calculateTotalPriceRange = () => {
     let minTotal = 0;
     let maxTotal = 0;
 
+    // Add interior package price
     if (confirmedInteriorPackage) {
       minTotal += confirmedInteriorPackage.price;
       maxTotal +=
         confirmedInteriorPackage.maxPrice || confirmedInteriorPackage.price;
 
+      // Add interior plus services
       confirmedInteriorPlusServices.forEach((serviceName) => {
         const service = plusServicesByPackage[
           confirmedInteriorPackage.name
@@ -396,6 +529,7 @@ function MonthlySub() {
             typeof service.price === "string" &&
             service.price.includes("-")
           ) {
+            // Handle range prices like "50-150"
             const [min, max] = service.price
               .split("-")
               .map((p) => parseFloat(p.trim()));
@@ -410,23 +544,31 @@ function MonthlySub() {
       });
     }
 
+    // Add exterior package price
     if (confirmedExteriorPackage) {
       minTotal += confirmedExteriorPackage.price;
       maxTotal +=
         confirmedExteriorPackage.maxPrice || confirmedExteriorPackage.price;
 
+      // Add exterior plus services
       confirmedExteriorPlusServices.forEach((serviceName) => {
         const service = plusServicesByPackage[
           confirmedExteriorPackage.name
         ]?.find((s) => s.name === serviceName);
         if (service) {
-          if (typeof service.price === "number") {
+          if (service.price === "ceramic-coating-dynamic") {
+            // Handle dynamic ceramic coating pricing
+            const ceramicPrice = getCeramicCoatingPrice();
+            minTotal += ceramicPrice;
+            maxTotal += ceramicPrice;
+          } else if (typeof service.price === "number") {
             minTotal += service.price;
             maxTotal += service.price;
           } else if (
             typeof service.price === "string" &&
             service.price.includes("-")
           ) {
+            // Handle range prices like "50-150"
             const [min, max] = service.price
               .split("-")
               .map((p) => parseFloat(p.trim()));
@@ -445,14 +587,17 @@ function MonthlySub() {
   };
 
   const isTimeAvailable = (date, time) => {
+    // Check if date is valid before formatting
+    if (!date || !(date instanceof Date) || isNaN(date.getTime())) {
+      return false;
+    }
+
     const dateTime = new Date(`${format(date, "yyyy-MM-dd")} ${time}`);
     const endTime = new Date(dateTime);
 
-    // Calculate duration in hours based on confirmed packages
-    let durationHours = 1; // default 1 hour
+    let durationHours = 1;
     if (confirmedInteriorPackage || confirmedExteriorPackage) {
       const durationStr = calculateAppointmentDuration();
-      // Parse duration string to get hours
       const hourMatch = durationStr.match(/(\d+)\s*hr/);
       const minMatch = durationStr.match(/(\d+)\s*min/);
 
@@ -460,7 +605,7 @@ function MonthlySub() {
       if (hourMatch) totalHours += parseInt(hourMatch[1]);
       if (minMatch) totalHours += parseInt(minMatch[1]) / 60;
 
-      durationHours = Math.max(totalHours, 1); // minimum 1 hour
+      durationHours = Math.max(totalHours, 1);
     }
 
     endTime.setHours(endTime.getHours() + Math.ceil(durationHours));
@@ -477,21 +622,10 @@ function MonthlySub() {
   };
 
   return (
-    <div className="monthly-sub-wrapper">
-      {/* Invisible overlay for closing modal */}
-      {showPlusServices && (
-        <div
-          className="modal-overlay"
-          onClick={() => setShowPlusServices(false)}
-        />
-      )}
+    <div className="monthly-sub-container">
+      <ToastContainer style={{ marginTop: "80px" }} />
 
-      <div
-        className={`monthly-sub-container ${
-          showPlusServices ? "blur-background" : ""
-        }`}
-      >
-        <ToastContainer style={{ marginTop: "80px" }} />
+      <div className={`main-content ${showPlusServices ? "blurred" : ""}`}>
         {/* Breadcrumbs (desktop) */}
         <nav className="breadcrumb large-screen-only">
           <ul>
@@ -499,14 +633,20 @@ function MonthlySub() {
               const isCurrent = activeStep === bc.step;
               const isCompleted = activeStep > bc.step;
               const isNext = activeStep + 1 === bc.step;
+              const isClickable = bc.step < activeStep; // Only previous steps are clickable
 
               return (
                 <li
                   key={bc.step}
                   className={`${isCurrent ? "current" : ""} ${
                     isCompleted ? "completed" : ""
-                  } ${isNext ? "next" : ""}`}
-                  onClick={() => handleStepChange(bc.step)}
+                  } ${isNext ? "next" : ""} ${
+                    !isClickable && !isCurrent ? "disabled" : ""
+                  }`}
+                  onClick={() =>
+                    isClickable ? handleStepChange(bc.step) : null
+                  }
+                  style={{ cursor: isClickable ? "pointer" : "default" }}
                 >
                   <a>{bc.label}</a>
                 </li>
@@ -567,13 +707,22 @@ function MonthlySub() {
             </div>
           </div>
         )}
+        {/* STEP 3: Interior Packages */}
         {activeStep === 3 &&
           (selectedService === "Interior Only" ||
             selectedService === "Exterior and Interior") && (
             <div className="packages-container">
               <h1 className="packages-header">Interior Services</h1>
               <div className="packages-grid">
-                <div className="package pressure">
+                <div
+                  className="package pressure"
+                  // style={{
+                  //   backgroundImage: `linear-gradient(to bottom, rgba(255,255,255,0.5), rgba(0,0,0,0.3)), url(${pressureBackground})`,
+                  //   backgroundRepeat: "no-repeat",
+                  //   backgroundSize: "cover",
+                  //   backgroundPosition: "center",
+                  // }}
+                >
                   <h2 className="package-title">PRESSURE</h2>
                   <p className="package-price">
                     {selectedCar
@@ -582,7 +731,9 @@ function MonthlySub() {
                             "interiors",
                             "pressureSpecial"
                           );
-                          return `$${priceRange.min} - $${priceRange.max}`;
+                          return priceRange.min === priceRange.max
+                            ? `$${priceRange.min}`
+                            : `$${priceRange.min} - $${priceRange.max}`;
                         })()
                       : "Starting at $200"}
                   </p>
@@ -696,7 +847,100 @@ function MonthlySub() {
                     Book
                   </button>
                 </div>
-                <div className="package gold">
+
+                <div className="package silver">
+                  <h2 className="package-title">SILVER</h2>
+                  <p className="package-price">
+                    {selectedCar
+                      ? (() => {
+                          const priceRange = getPriceRange(
+                            "interiors",
+                            "silverInterior"
+                          );
+                          return priceRange.min === priceRange.max
+                            ? `$${priceRange.min}`
+                            : `$${priceRange.min} - $${priceRange.max}`;
+                        })()
+                      : "Starting at $55"}
+                  </p>
+                  <div className="package-list">
+                    <ul className="package-details">
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Agitate/ wipe down doors, jambs, dash, console & plastic
+                        trims.
+                      </li>
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Vacuum seats, mats, floor & trunk.
+                      </li>
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Clean all windows.
+                      </li>
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Deep clean/shampoo floor mats
+                      </li>
+                    </ul>
+
+                    <div className="locked-options">
+                      <h3 className="locked-header">Not Included</h3>
+                      <ul className="package-details locked">
+                        <li>🔒 Deep cleaning - shampoo & condition seats</li>
+                        <li>🔒 UV Protection & Interior Shine</li>
+                        <li>🔒 Agitate and clean seat belts</li>
+                        <li>🔒 Deep clean & remove stains from the floor</li>
+                        <li>
+                          🔒 Deep clean & remove stains from the headliner
+                        </li>
+                        <li>🔒 Aids in reducing car odor</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <button
+                    className="package-button"
+                    onClick={() => {
+                      const priceRange = getPriceRange(
+                        "interiors",
+                        "silverInterior"
+                      );
+                      handlePackageClick({
+                        name: "SILVER",
+                        price: priceRange.min,
+                        maxPrice: priceRange.max,
+                      });
+                    }}
+                  >
+                    Book
+                  </button>
+                </div>
+
+                <div
+                  className="package gold"
+                  // style={{
+                  //   backgroundImage: `url(${goldBackground})`,
+                  //   backgroundRepeat: "no-repeat",
+                  //   backgroundSize: "cover",
+                  //   backgroundPosition: "center",
+                  // }}
+                >
                   <h2 className="package-title">GOLD</h2>
                   <p className="package-price">
                     {selectedCar
@@ -705,7 +949,9 @@ function MonthlySub() {
                             "interiors",
                             "goldInterior"
                           );
-                          return `$${priceRange.min} - $${priceRange.max}`;
+                          return priceRange.min === priceRange.max
+                            ? `$${priceRange.min}`
+                            : `$${priceRange.min} - $${priceRange.max}`;
                         })()
                       : "Starting at $100"}
                   </p>
@@ -808,6 +1054,7 @@ function MonthlySub() {
               </div>
             </div>
           )}
+        {/* STEP 4: Exterior Packages */}
         {activeStep === 4 &&
           (selectedService === "Exterior Only" ||
             (selectedService === "Exterior and Interior" &&
@@ -817,49 +1064,113 @@ function MonthlySub() {
               <div className="packages-grid">
                 <div className="package pressure">
                   <h2 className="package-title">Paint Enhancement</h2>
-                  <div className="sub-package">
-                    <p className="package-price">
-                      {selectedCar
-                        ? (() => {
-                            const priceRange = getPriceRange(
-                              "exteriors",
-                              "oneStep"
-                            );
-                            return `$${priceRange.min} - $${priceRange.max}`;
-                          })()
-                        : "Starting at $400"}
-                    </p>
-                    <div className="package-list">
-                      <ul className="package-details">
-                        <li>Foam pre-rinse and bath</li>
-                        <li>Full decontamination (clay/iron treatment)</li>
-                        <li>Bug and tar removal</li>
-                        <li>Shine all exterior surfaces</li>
-                        <li>Apply 6-months protection</li>
-                        <li>Reduce minor swirls and surface imperfections</li>
-                        <li>Boost depth and clarity for showroom shine</li>
-                        <li>Eliminate water spots and surface oxidation</li>
-                      </ul>
-                    </div>
-                    <button
-                      className="package-button"
-                      onClick={() => {
-                        const priceRange = getPriceRange(
-                          "exteriors",
-                          "oneStep"
-                        );
-                        handlePackageClick({
-                          name: "Paint Enhancement",
-                          price: priceRange.min,
-                          maxPrice: priceRange.max,
-                        });
-                      }}
-                    >
-                      Learn more
-                    </button>
+                  <p className="package-price">
+                    {selectedCar
+                      ? (() => {
+                          const priceRange = getPriceRange(
+                            "exteriors",
+                            "paintEnhancement"
+                          );
+                          return priceRange.min === priceRange.max
+                            ? `$${priceRange.min}`
+                            : `$${priceRange.min} - $${priceRange.max}`;
+                        })()
+                      : "Starting at $400"}
+                  </p>
+                  <div className="package-list">
+                    <ul className="package-details">
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Foam pre-rinse and bath
+                      </li>
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Full decontamination (clay/iron treatment)
+                      </li>
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Bug and tar removal
+                      </li>
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Deep clean wheels and shine tires
+                      </li>
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Shine all exterior trims
+                      </li>
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Apply 6 to 8 months protection
+                      </li>
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Reduce minor swirls and surface imperfections
+                      </li>
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Boost depth and clarity of paint for showroom shine
+                      </li>
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Eliminate water spots and surface oxidation
+                      </li>
+                    </ul>
                   </div>
+                  <button
+                    className="package-button"
+                    onClick={() => {
+                      const priceRange = getPriceRange(
+                        "exteriors",
+                        "paintEnhancement"
+                      );
+                      handlePackageClick({
+                        name: "Paint Enhancement",
+                        price: priceRange.min,
+                        maxPrice: priceRange.max,
+                      });
+                    }}
+                  >
+                    Book
+                  </button>
                 </div>
-                <div className="package standard">
+                <div className="package gold">
                   <h2 className="package-title">Wash & Wax</h2>
                   <p className="package-price">
                     {selectedCar
@@ -868,7 +1179,9 @@ function MonthlySub() {
                             "exteriors",
                             "washWax"
                           );
-                          return `$${priceRange.min} - $${priceRange.max}`;
+                          return priceRange.min === priceRange.max
+                            ? `$${priceRange.min}`
+                            : `$${priceRange.min} - $${priceRange.max}`;
                         })()
                       : "Starting at $125"}
                   </p>
@@ -877,14 +1190,17 @@ function MonthlySub() {
                       <li>Foam pre-rinse and bath</li>
                       <li>Full decontamination (clay/iron treatment)</li>
                       <li>Bug and tar removal</li>
-                      <li>Shine all exterior surfaces</li>
-                      <li>Apply 6-months protection</li>
+                      <li>Deep clean wheels and shine tires</li>
+                      <li>Shine all exterior trims</li>
+                      <li>Apply 6 to 8 months protection</li>
                     </ul>
                     <div className="locked-options">
                       <h3 className="locked-header">Not Included</h3>
                       <ul className="package-details locked">
                         <li>🔒 Reduce minor swirls and imperfections</li>
-                        <li>🔒 Boost depth and clarity</li>
+                        <li>
+                          🔒 Boost depth and clarity of paint for showroom shine
+                        </li>
                         <li>🔒 Eliminate water spots and oxidation</li>
                       </ul>
                     </div>
@@ -912,22 +1228,24 @@ function MonthlySub() {
                             "exteriors",
                             "standardExterior"
                           );
-                          return `$${priceRange.min} - $${priceRange.max}`;
+                          return priceRange.min === priceRange.max
+                            ? `$${priceRange.min}`
+                            : `$${priceRange.min} - $${priceRange.max}`;
                         })()
                       : "Starting at $60"}
                   </p>
                   <div className="package-list">
                     <ul className="package-details">
                       <li>Foam pre-rinse & contact wash</li>
-                      <li>Bug & tar removal</li>
-                      <li>Full decontamination (clay / iron treatment)</li>
-                      <li>Apply 3-month spray-wax protection</li>
+                      <li>Deep clean wheels and shine tires</li>
+                      <li>Power wash all door jambs</li>
+                      <li>Apply 1-month spray-wax protection</li>
                     </ul>
 
                     <div className="locked-options">
                       <h3 className="locked-header">Not Included</h3>
                       <ul className="package-details locked">
-                        <li>🔒 6-month sealant upgrade</li>
+                        <li>🔒 6 to 8 month sealant upgrade</li>
                         <li>🔒 Swirl-mark reduction / paint correction</li>
                         <li>🔒 Water-spot / oxidation removal</li>
                         <li>🔒 Depth-&-gloss enhancement</li>
@@ -978,15 +1296,144 @@ function MonthlySub() {
                         </h3>
                       );
                     })()}
+
+                    {/* Collapsible Price Breakdown */}
+                    <div className="price-breakdown-container">
+                      <button
+                        className="price-breakdown-toggle"
+                        onClick={() =>
+                          setShowPriceBreakdown(!showPriceBreakdown)
+                        }
+                        type="button"
+                      >
+                        <span>
+                          {showPriceBreakdown ? "Hide" : "Show"} Price Breakdown
+                        </span>
+                        <span
+                          className={`breakdown-arrow ${
+                            showPriceBreakdown ? "up" : "down"
+                          }`}
+                        >
+                          {showPriceBreakdown ? "▲" : "▼"}
+                        </span>
+                      </button>
+
+                      {showPriceBreakdown && (
+                        <div className="price-breakdown-details">
+                          <div className="breakdown-section">
+                            <h4>Selected Services:</h4>
+
+                            {confirmedInteriorPackage && (
+                              <div className="service-item">
+                                <span className="service-name">
+                                  Interior: {confirmedInteriorPackage.name}
+                                </span>
+                                <span className="service-price">
+                                  ${confirmedInteriorPackage.price}
+                                  {confirmedInteriorPackage.maxPrice &&
+                                    confirmedInteriorPackage.maxPrice !==
+                                      confirmedInteriorPackage.price &&
+                                    ` - $${confirmedInteriorPackage.maxPrice}`}
+                                </span>
+                              </div>
+                            )}
+
+                            {confirmedExteriorPackage && (
+                              <div className="service-item">
+                                <span className="service-name">
+                                  Exterior: {confirmedExteriorPackage.name}
+                                </span>
+                                <span className="service-price">
+                                  ${confirmedExteriorPackage.price}
+                                  {confirmedExteriorPackage.maxPrice &&
+                                    confirmedExteriorPackage.maxPrice !==
+                                      confirmedExteriorPackage.price &&
+                                    ` - $${confirmedExteriorPackage.maxPrice}`}
+                                </span>
+                              </div>
+                            )}
+
+                            {(confirmedInteriorPlusServices.length > 0 ||
+                              confirmedExteriorPlusServices.length > 0) && (
+                              <div className="plus-services-section">
+                                <h5>Plus Services:</h5>
+
+                                {confirmedInteriorPlusServices.map(
+                                  (serviceName) => {
+                                    const service = plusServicesByPackage[
+                                      confirmedInteriorPackage?.name
+                                    ]?.find((s) => s.name === serviceName);
+                                    return service ? (
+                                      <div
+                                        key={serviceName}
+                                        className="service-item plus-service"
+                                      >
+                                        <span className="service-name">
+                                          {serviceName}
+                                        </span>
+                                        <span className="service-price">
+                                          $
+                                          {typeof service.price === "number"
+                                            ? service.price
+                                            : service.price}
+                                        </span>
+                                      </div>
+                                    ) : null;
+                                  }
+                                )}
+
+                                {confirmedExteriorPlusServices.map(
+                                  (serviceName) => {
+                                    const service = plusServicesByPackage[
+                                      confirmedExteriorPackage?.name
+                                    ]?.find((s) => s.name === serviceName);
+                                    return service ? (
+                                      <div
+                                        key={serviceName}
+                                        className="service-item plus-service"
+                                      >
+                                        <span className="service-name">
+                                          {serviceName}
+                                        </span>
+                                        <span className="service-price">
+                                          $
+                                          {service.price ===
+                                          "ceramic-coating-dynamic"
+                                            ? getCeramicCoatingPrice()
+                                            : typeof service.price === "number"
+                                            ? service.price
+                                            : service.price}
+                                        </span>
+                                      </div>
+                                    ) : null;
+                                  }
+                                )}
+                              </div>
+                            )}
+
+                            <div className="breakdown-total">
+                              <div className="service-item total">
+                                <span className="service-name">Total:</span>
+                                <span className="service-price">
+                                  {(() => {
+                                    const priceRange =
+                                      calculateTotalPriceRange();
+                                    return priceRange.min === priceRange.max
+                                      ? `$${priceRange.min}`
+                                      : `$${priceRange.min} - $${priceRange.max}`;
+                                  })()}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 )}
               </div>
-              <form
-                className="customer-form"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                }}
-              >
+              {/* — Your Info Form — */}
+              <form className="customer-form" onSubmit={handleFormSubmit}>
                 <div className="form-group">
                   <label htmlFor="name">Name</label>
                   <input
@@ -994,6 +1441,7 @@ function MonthlySub() {
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    placeholder="Enter your full name"
                     required
                   />
                 </div>
@@ -1005,6 +1453,7 @@ function MonthlySub() {
                     type="text"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
+                    placeholder="Enter your street address"
                     required
                   />
                 </div>
@@ -1015,7 +1464,9 @@ function MonthlySub() {
                     id="zip"
                     type="text"
                     value={zip}
-                    onChange={(e) => setZip(e.target.value)}
+                    onChange={handleZipChange}
+                    placeholder="12345 or 12345-6789"
+                    maxLength="10"
                     required
                   />
                 </div>
@@ -1026,7 +1477,9 @@ function MonthlySub() {
                     id="phone"
                     type="tel"
                     value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
+                    onChange={handlePhoneChange}
+                    placeholder="(123) 456-7890"
+                    maxLength="14"
                     required
                   />
                 </div>
@@ -1038,12 +1491,33 @@ function MonthlySub() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    placeholder="your.email@example.com"
                     required
                   />
                 </div>
+
+                <button
+                  type="submit"
+                  className="submit-booking-btn"
+                  disabled={!selectedDate || !selectedTime}
+                >
+                  Book Monthly Subscription
+                </button>
               </form>
 
               <p>Select a date and an available time slot to finish booking.</p>
+              <div className="form-requirements">
+                <p
+                  style={{
+                    fontSize: "12px",
+                    color: "rgba(255, 255, 255, 0.7)",
+                    marginTop: "15px",
+                  }}
+                >
+                  * All fields are required. Please ensure your contact
+                  information is accurate for appointment confirmation.
+                </p>
+              </div>
             </div>
 
             <div className="right-panel">
@@ -1073,30 +1547,44 @@ function MonthlySub() {
 
               {/* — Time slots — */}
               <div className="time-slots">
-                {timeSlots
-                  .filter((t) => isTimeAvailable(selectedDate, t))
-                  .map((t) => (
-                    <button
-                      key={t}
-                      className={`time-slot ${
-                        selectedTime === t ? "active" : ""
-                      }`}
-                      onClick={() => handleTimeSelect(t)}
-                    >
-                      {t}
-                    </button>
-                  ))}
-                {timeSlots.every((t) => !isTimeAvailable(selectedDate, t)) && (
-                  <div>No available times on this day</div>
+                {selectedDate ? (
+                  timeSlots
+                    .filter((t) => isTimeAvailable(selectedDate, t))
+                    .map((t) => (
+                      <button
+                        key={t}
+                        className={`time-slot ${
+                          selectedTime === t ? "active" : ""
+                        }`}
+                        onClick={() => handleTimeSelect(t)}
+                      >
+                        {t}
+                      </button>
+                    ))
+                ) : (
+                  <div>Please select a date to see available times</div>
                 )}
+                {selectedDate &&
+                  timeSlots.every((t) => !isTimeAvailable(selectedDate, t)) && (
+                    <div>No available times on this day</div>
+                  )}
               </div>
             </div>
           </div>
         )}
       </div>
 
+      {/* Plus Services Modal Backdrop */}
+      {showPlusServices && (
+        <div
+          className="plus-services-backdrop"
+          onClick={() => setShowPlusServices(false)}
+        />
+      )}
+
       <div
         className={`plus-services-panel ${showPlusServices ? "slide-up" : ""}`}
+        onClick={(e) => e.stopPropagation()}
       >
         {showPlusServices && (
           <>
@@ -1120,7 +1608,12 @@ function MonthlySub() {
                       />
                       <h4 className="svc-name">{svc.name}</h4>
                       <p className="svc-price">
-                        ${typeof svc.price === "number" ? svc.price : svc.price}
+                        $
+                        {svc.price === "ceramic-coating-dynamic"
+                          ? getCeramicCoatingPrice()
+                          : typeof svc.price === "number"
+                          ? svc.price
+                          : svc.price}
                       </p>
                       {isSelected && <span className="check-overlay">✓</span>}
                     </div>
@@ -1130,6 +1623,7 @@ function MonthlySub() {
             </div>
             <p className="package-summary">
               {(() => {
+                // Calculate current package total with plus services
                 let minTotal = selectedPackage.price;
                 let maxTotal =
                   selectedPackage.maxPrice || selectedPackage.price;
@@ -1139,7 +1633,11 @@ function MonthlySub() {
                     (s) => s.name === serviceName
                   );
                   if (service) {
-                    if (typeof service.price === "number") {
+                    if (service.price === "ceramic-coating-dynamic") {
+                      const ceramicPrice = getCeramicCoatingPrice();
+                      minTotal += ceramicPrice;
+                      maxTotal += ceramicPrice;
+                    } else if (typeof service.price === "number") {
                       minTotal += service.price;
                       maxTotal += service.price;
                     } else if (
@@ -1168,31 +1666,37 @@ function MonthlySub() {
               <button
                 className="confirm-button"
                 onClick={() => {
+                  // Determine if this is an interior or exterior package
                   const isInteriorPackage = ["PRESSURE", "GOLD"].includes(
                     selectedPackage.name
                   );
 
                   if (isInteriorPackage) {
+                    // Save interior package and plus services
                     setConfirmedInteriorPackage(selectedPackage);
                     setConfirmedInteriorPlusServices([...selectedPlusServices]);
 
+                    // If user selected "Exterior and Interior", move to exterior step
                     if (selectedService === "Exterior and Interior") {
-                      setActiveStep(4);
+                      setActiveStep(4); // Move to exterior packages
                     } else {
+                      // If only interior, move to date/time
                       setActiveStep(5);
                     }
                   } else {
+                    // Save exterior package and plus services
                     setConfirmedExteriorPackage(selectedPackage);
                     setConfirmedExteriorPlusServices([...selectedPlusServices]);
 
+                    // Move to date/time step
                     setActiveStep(5);
                   }
 
                   setShowPlusServices(false);
-                  setSelectedPlusServices([]);
+                  setSelectedPlusServices([]); // Reset for next package
                 }}
               >
-                Confirm
+                Continue
               </button>
               <button
                 className="close-panel"

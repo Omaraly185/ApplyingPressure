@@ -4,12 +4,14 @@
       "coating": { "minPrice": 650, "maxPrice": 650 },
       "diy": { "minPrice": 15, "maxPrice": 15 },
       "engineClean": { "minPrice": 50, "maxPrice": 50 },
-      "headlight": { "minPrice": 40, "maxPrice": 40 }
+      "headlight": { "minPrice": 40, "maxPrice": 40 },
+      "ceramicCoating": { "minPrice": 350, "maxPrice": 350 }
     },
     "exteriors": {
       "NA": { "minPrice": 0, "maxPrice": 0 },
       "standardExterior": { "minPrice": 60, "maxPrice": 60 },
       "washWax": { "minPrice": 125, "maxPrice": 125 },
+      "paintEnhancement": { "minPrice": 300, "maxPrice": 300 },
       "oneStep": { "minPrice": 400, "maxPrice": 400 },
       "twoStep": { "minPrice": 600, "maxPrice": 600 }
     },
@@ -25,12 +27,14 @@
       "coating": { "minPrice": 725, "maxPrice": 725 },
       "diy": { "minPrice": 15, "maxPrice": 15 },
       "engineClean": { "minPrice": 50, "maxPrice": 50 },
-      "headlight": { "minPrice": 40, "maxPrice": 40 }
+      "headlight": { "minPrice": 40, "maxPrice": 40 },
+      "ceramicCoating": { "minPrice": 375, "maxPrice": 375 }
     },
     "exteriors": {
       "NA": { "minPrice": 0, "maxPrice": 0 },
       "standardExterior": { "minPrice": 65, "maxPrice": 65 },
       "washWax": { "minPrice": 140, "maxPrice": 140 },
+      "paintEnhancement": { "minPrice": 350, "maxPrice": 350 },
       "oneStep": { "minPrice": 450, "maxPrice": 450 },
       "twoStep": { "minPrice": 675, "maxPrice": 675 }
     },
@@ -46,12 +50,14 @@
       "coating": { "minPrice": 875, "maxPrice": 875 },
       "diy": { "minPrice": 15, "maxPrice": 15 },
       "engineClean": { "minPrice": 50, "maxPrice": 50 },
-      "headlight": { "minPrice": 40, "maxPrice": 40 }
+      "headlight": { "minPrice": 40, "maxPrice": 40 },
+      "ceramicCoating": { "minPrice": 425, "maxPrice": 425 }
     },
     "exteriors": {
       "NA": { "minPrice": 0, "maxPrice": 0 },
       "standardExterior": { "minPrice": 80, "maxPrice": 80 },
       "washWax": { "minPrice": 175, "maxPrice": 175 },
+      "paintEnhancement": { "minPrice": 450, "maxPrice": 450 },
       "oneStep": { "minPrice": 550, "maxPrice": 550 },
       "twoStep": { "minPrice": 825, "maxPrice": 825 }
     },
@@ -67,12 +73,14 @@
       "coating": { "minPrice": 1000, "maxPrice": 1000 },
       "diy": { "minPrice": 15, "maxPrice": 15 },
       "engineClean": { "minPrice": 50, "maxPrice": 50 },
-      "headlight": { "minPrice": 40, "maxPrice": 40 }
+      "headlight": { "minPrice": 40, "maxPrice": 40 },
+      "ceramicCoating": { "minPrice": 500, "maxPrice": 500 }
     },
     "exteriors": {
       "NA": { "minPrice": 0, "maxPrice": 0 },
       "standardExterior": { "minPrice": 105, "maxPrice": 105 },
       "washWax": { "minPrice": 240, "maxPrice": 240 },
+      "paintEnhancement": { "minPrice": 500, "maxPrice": 500 },
       "oneStep": { "minPrice": 600, "maxPrice": 600 },
       "twoStep": { "minPrice": 900, "maxPrice": 900 }
     },
