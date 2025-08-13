@@ -46,6 +46,7 @@ function MonthlySub() {
   const [zip, setZip] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
   const [selectedCar, setSelectedCar] = useState(null);
 
   const [selectedPackage, setSelectedPackage] = useState(null);
@@ -175,6 +176,23 @@ function MonthlySub() {
         ? prev.filter((s) => s !== svc.name)
         : [...prev, svc.name]
     );
+  };
+
+  const getCarTypeKey = (carName) => {
+    const carTypeMap = {
+      "Sedan/Coupe": "sedan",
+      "2 Row SUV": "twoRow",
+      "3 Row/ Pickup truck": "threeRow",
+      Van: "van",
+    };
+    return carTypeMap[carName] || "sedan";
+  };
+
+  // Function to get ceramic coating price based on selected car
+  const getCeramicCoatingPrice = () => {
+    if (!selectedCar) return 350; // Default to sedan price
+    const carTypeKey = getCarTypeKey(selectedCar.name);
+    return carPricing[carTypeKey]?.services?.ceramicCoating?.minPrice || 350;
   };
 
   const currentPlusServices =
@@ -366,6 +384,7 @@ function MonthlySub() {
         setZip("");
         setPhone("");
         setEmail("");
+        setMessage("");
       } else if (step <= 2) {
         // Going back to service selection - clear packages and form data
         setSelectedService("");
@@ -380,6 +399,7 @@ function MonthlySub() {
         setZip("");
         setPhone("");
         setEmail("");
+        setMessage("");
       } else if (step <= 3) {
         // Going back to interior packages - clear interior confirmation, exterior and form data
         setConfirmedInteriorPackage(null);
@@ -393,6 +413,7 @@ function MonthlySub() {
         setZip("");
         setPhone("");
         setEmail("");
+        setMessage("");
       } else if (step <= 4) {
         // Going back to exterior packages - clear form data only
         setSelectedDate(null);
@@ -402,6 +423,7 @@ function MonthlySub() {
         setZip("");
         setPhone("");
         setEmail("");
+        setMessage("");
       }
     }
 
@@ -478,9 +500,9 @@ function MonthlySub() {
         selectedDate: selectedDateString,
         selectedTime,
         endTime,
-        dogHair: "", // Not applicable for monthly subscriptions
-        message: ``,
-        description: `APL:Monthly Subscription \n\n ${name} ${phone},\n\n ${selectedCar?.name},\n ${exteriorPackageName} ${interiorPackageName} $ ${allPlusServices}\n\n Service: ${selectedService}\n\n ${priceRange.min}-${priceRange.max},\n\nAddress: ${address}, ${zip}\n\nMonthly Subscription Booking`,
+        dogHair: "",
+        message: message || "",
+        description: `APL: Detail \n\n ${name} ${phone},\n\n ${selectedCar?.name},\n ${exteriorPackageName} ${interiorPackageName} $ ${allPlusServices}\n\n Service: ${selectedService}\n\n ${priceRange.min}-${priceRange.max},\n\nAddress: ${address}, ${zip}\n\nMonthly Subscription Booking`,
         location: `${address}, ${zip}`,
       };
 
@@ -496,10 +518,7 @@ function MonthlySub() {
       );
 
       if (response.ok) {
-        toast.success("Monthly subscription booked successfully!");
-        console.log("Monthly subscription created successfully");
-
-        // Reset form or redirect
+        toast.success("Appointment booked successfully!");
         setTimeout(() => {
           navigate("/");
         }, 2000);
@@ -534,23 +553,6 @@ function MonthlySub() {
       // Create booking request
       await submitMonthlyBooking();
     }
-  };
-
-  const getCarTypeKey = (carName) => {
-    const carTypeMap = {
-      "Sedan/Coupe": "sedan",
-      "2 Row SUV": "twoRow",
-      "3 Row/ Pickup truck": "threeRow",
-      Van: "van",
-    };
-    return carTypeMap[carName] || "sedan";
-  };
-
-  // Function to get ceramic coating price based on selected car
-  const getCeramicCoatingPrice = () => {
-    if (!selectedCar) return 350; // Default to sedan price
-    const carTypeKey = getCarTypeKey(selectedCar.name);
-    return carPricing[carTypeKey]?.services?.ceramicCoating?.minPrice || 350;
   };
 
   // Function to get price range for a service
@@ -607,10 +609,10 @@ function MonthlySub() {
     if (confirmedExteriorPackage) {
       switch (confirmedExteriorPackage.name) {
         case "Paint Enhancement":
-          totalHours += 4; // 4 hours for paint enhancement
+          totalHours += 4;
           break;
         case "Wash & Wax":
-          totalHours += 2; // 2 hours for wash & wax
+          totalHours += 2;
           break;
         case "Standard Exterior":
           totalHours += 1.5; // 1.5 hours for standard
@@ -807,18 +809,32 @@ function MonthlySub() {
               className="back-button"
               onClick={() => {
                 // Find the actual previous step that exists in breadcrumbs
-                const sortedBreadcrumbs = breadcrumbs.sort((a, b) => a.step - b.step);
-                const currentIndex = sortedBreadcrumbs.findIndex(bc => bc.step === activeStep);
-                const previousStep = currentIndex > 0 ? sortedBreadcrumbs[currentIndex - 1].step : activeStep - 1;
+                const sortedBreadcrumbs = breadcrumbs.sort(
+                  (a, b) => a.step - b.step
+                );
+                const currentIndex = sortedBreadcrumbs.findIndex(
+                  (bc) => bc.step === activeStep
+                );
+                const previousStep =
+                  currentIndex > 0
+                    ? sortedBreadcrumbs[currentIndex - 1].step
+                    : activeStep - 1;
                 handleStepChange(previousStep);
               }}
             >
               {(() => {
                 // Find the actual previous step label
-                const sortedBreadcrumbs = breadcrumbs.sort((a, b) => a.step - b.step);
-                const currentIndex = sortedBreadcrumbs.findIndex(bc => bc.step === activeStep);
-                const previousBreadcrumb = currentIndex > 0 ? sortedBreadcrumbs[currentIndex - 1] : null;
-                return previousBreadcrumb ? `← ${previousBreadcrumb.label}` : "← Back";
+                const sortedBreadcrumbs = breadcrumbs.sort(
+                  (a, b) => a.step - b.step
+                );
+                const currentIndex = sortedBreadcrumbs.findIndex(
+                  (bc) => bc.step === activeStep
+                );
+                const previousBreadcrumb =
+                  currentIndex > 0 ? sortedBreadcrumbs[currentIndex - 1] : null;
+                return previousBreadcrumb
+                  ? `← ${previousBreadcrumb.label}`
+                  : "← Back";
               })()}
             </button>
           )}
@@ -875,89 +891,90 @@ function MonthlySub() {
                 {/* Silver package - only show for "Exterior and Interior" */}
                 {selectedService === "Exterior and Interior" && (
                   <div className="package silver">
-                  <h2 className="package-title">SILVER</h2>
-                  <p className="package-price">
-                    {selectedCar
-                      ? (() => {
-                          const priceRange = getPriceRange(
-                            "interiors",
-                            "silverInterior"
-                          );
-                          return priceRange.min === priceRange.max
-                            ? `$${priceRange.min}`
-                            : `$${priceRange.min} - $${priceRange.max}`;
-                        })()
-                      : "Starting at $55"}
-                  </p>
-                  <div className="package-list">
-                    <ul className="package-details">
-                      <li>
-                        <img
-                          src={CheckIcon}
-                          alt="check"
-                          className="check-icon"
-                        />
-                        Agitate/wipe down doors, jambs, dash, console, and trims
-                      </li>
-                      <li>
-                        {" "}
-                        <img
-                          src={CheckIcon}
-                          alt="check"
-                          className="check-icon"
-                        />
-                        Vacuum seats, mats, floor, and trunk
-                      </li>
-                      <li>
-                        {" "}
-                        <img
-                          src={CheckIcon}
-                          alt="check"
-                          className="check-icon"
-                        />
-                        Clean all windows
-                      </li>
-                      <li>
-                        <img
-                          src={CheckIcon}
-                          alt="check"
-                          className="check-icon"
-                        />
-                        Deep clean/shampoo floor mats
-                      </li>
-                    </ul>
-
-                    <div className="locked-options">
-                      <h3 className="locked-header">Not Included</h3>
-                      <ul className="package-details locked">
-                        <li>🔒 Deep cleaning - shampoo & condition seats</li>
-                        <li>🔒 UV Protection & Interior Shine</li>
-                        <li>🔒 Agitate and clean seat belts</li>
-                        <li>🔒 Deep clean & remove stains from the floor</li>
+                    <h2 className="package-title">SILVER</h2>
+                    <p className="package-price">
+                      {selectedCar
+                        ? (() => {
+                            const priceRange = getPriceRange(
+                              "interiors",
+                              "silverInterior"
+                            );
+                            return priceRange.min === priceRange.max
+                              ? `$${priceRange.min}`
+                              : `$${priceRange.min} - $${priceRange.max}`;
+                          })()
+                        : "Starting at $55"}
+                    </p>
+                    <div className="package-list">
+                      <ul className="package-details">
                         <li>
-                          🔒 Deep clean & remove stains from the headliner
+                          <img
+                            src={CheckIcon}
+                            alt="check"
+                            className="check-icon"
+                          />
+                          Agitate/wipe down doors, jambs, dash, console, and
+                          trims
                         </li>
-                        <li>🔒 Aids in reducing car odor</li>
+                        <li>
+                          {" "}
+                          <img
+                            src={CheckIcon}
+                            alt="check"
+                            className="check-icon"
+                          />
+                          Vacuum seats, mats, floor, and trunk
+                        </li>
+                        <li>
+                          {" "}
+                          <img
+                            src={CheckIcon}
+                            alt="check"
+                            className="check-icon"
+                          />
+                          Clean all windows
+                        </li>
+                        <li>
+                          <img
+                            src={CheckIcon}
+                            alt="check"
+                            className="check-icon"
+                          />
+                          Deep clean/shampoo floor mats
+                        </li>
                       </ul>
+
+                      <div className="locked-options">
+                        <h3 className="locked-header">Not Included</h3>
+                        <ul className="package-details locked">
+                          <li>🔒 Deep cleaning - shampoo & condition seats</li>
+                          <li>🔒 UV Protection & Interior Shine</li>
+                          <li>🔒 Agitate and clean seat belts</li>
+                          <li>🔒 Deep clean & remove stains from the floor</li>
+                          <li>
+                            🔒 Deep clean & remove stains from the headliner
+                          </li>
+                          <li>🔒 Aids in reducing car odor</li>
+                        </ul>
+                      </div>
                     </div>
+                    <button
+                      className="package-button"
+                      onClick={() => {
+                        const priceRange = getPriceRange(
+                          "interiors",
+                          "silverInterior"
+                        );
+                        handlePackageClick({
+                          name: "SILVER",
+                          price: priceRange.min,
+                          maxPrice: priceRange.max,
+                        });
+                      }}
+                    >
+                      Book
+                    </button>
                   </div>
-                  <button
-                    className="package-button"
-                    onClick={() => {
-                      const priceRange = getPriceRange(
-                        "interiors",
-                        "silverInterior"
-                      );
-                      handlePackageClick({
-                        name: "SILVER",
-                        price: priceRange.min,
-                        maxPrice: priceRange.max,
-                      });
-                    }}
-                  >
-                    Book
-                  </button>
-                </div>
                 )}
 
                 <div
@@ -984,10 +1001,7 @@ function MonthlySub() {
                       : "Starting at $100"}
                   </p>
                   <div className="package-list">
-                    <ul
-                      className="package-details"
-                      style={{ marginInline: "20px" }}
-                    >
+                    <ul className="package-details">
                       <li>
                         <img
                           src={CheckIcon}
@@ -1103,8 +1117,7 @@ function MonthlySub() {
                           alt="check"
                           className="check-icon"
                         />
-                        Agitate/ wipe down doors, jambs, dash, console & plastic
-                        trims.
+                        Agitate/wipe down doors, jambs, dash, console, and trims
                       </li>
                       <li>
                         <img
@@ -1112,7 +1125,7 @@ function MonthlySub() {
                           alt="check"
                           className="check-icon"
                         />
-                        Vacuum seats, mats, floor & trunk.
+                        Vacuum seats, mats, floor, and trunk
                       </li>
                       <li>
                         <img
@@ -1120,7 +1133,7 @@ function MonthlySub() {
                           alt="check"
                           className="check-icon"
                         />
-                        Clean all windows.
+                        Clean all windows
                       </li>
                       <li>
                         <img
@@ -1136,7 +1149,7 @@ function MonthlySub() {
                           alt="check"
                           className="check-icon"
                         />
-                        Pressure wash floor mats
+                        Deep cleaning - shampoo & condition seats
                       </li>
                       <li>
                         <img
@@ -1144,7 +1157,7 @@ function MonthlySub() {
                           alt="check"
                           className="check-icon"
                         />
-                        Pressure wash trunk
+                        UV Protection & Interior Shine
                       </li>
                       <li>
                         <img
@@ -1152,7 +1165,31 @@ function MonthlySub() {
                           alt="check"
                           className="check-icon"
                         />
-                        Pressure wash door jambs
+                        Agitate and clean seat belts
+                      </li>
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Deep clean & remove stains from the floor
+                      </li>
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Deep clean & remove stains from the headliner
+                      </li>
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Aids in reducing car odor
                       </li>
                     </ul>
                   </div>
@@ -1187,94 +1224,88 @@ function MonthlySub() {
                 {/* Standard Exterior package - only show for "Exterior and Interior" */}
                 {selectedService === "Exterior and Interior" && (
                   <div className="package standard">
-                  <h2 className="package-title">Standard Exterior</h2>
-                  <p className="package-price">
-                    {selectedCar
-                      ? (() => {
-                          const priceRange = getPriceRange(
-                            "exteriors",
-                            "standardExterior"
-                          );
-                          return priceRange.min === priceRange.max
-                            ? `$${priceRange.min}`
-                            : `$${priceRange.min} - $${priceRange.max}`;
-                        })()
-                      : "Starting at $60"}
-                  </p>
-                  <div className="package-list">
-                    <ul className="package-details">
-                      <li>
-                        <img
-                          src={CheckIcon}
-                          alt="check"
-                          className="check-icon"
-                        />
-                        Foam pre-rinse & contact wash
-                      </li>
+                    <h2 className="package-title">Standard Exterior</h2>
+                    <p className="package-price">
+                      {selectedCar
+                        ? (() => {
+                            const priceRange = getPriceRange(
+                              "exteriors",
+                              "standardExterior"
+                            );
+                            return priceRange.min === priceRange.max
+                              ? `$${priceRange.min}`
+                              : `$${priceRange.min} - $${priceRange.max}`;
+                          })()
+                        : "Starting at $60"}
+                    </p>
+                    <div className="package-list">
+                      <ul className="package-details">
+                        <li>
+                          <img
+                            src={CheckIcon}
+                            alt="check"
+                            className="check-icon"
+                          />
+                          Foam pre-rinse & contact wash
+                        </li>
 
-                      <li>
-                        <img
-                          src={CheckIcon}
-                          alt="check"
-                          className="check-icon"
-                        />
-                        Deep clean wheels and shine tires
-                      </li>
-                      <li>
-                        <img
-                          src={CheckIcon}
-                          alt="check"
-                          className="check-icon"
-                        />
-                        Power wash all door jambs
-                      </li>
-                      <li>
-                        <img
-                          src={CheckIcon}
-                          alt="check"
-                          className="check-icon"
-                        />
-                        Shine all exterior trims
-                      </li>
-                      <li>
-                        <img
-                          src={CheckIcon}
-                          alt="check"
-                          className="check-icon"
-                        />
-                        Apply 3-month spray-wax protection
-                      </li>
-                    </ul>
-
-                    <div className="locked-options">
-                      <h3 className="locked-header">Not Included</h3>
-                      <ul className="package-details locked">
-                        <li>🔒 Full decontamination (clay/iron treatment)</li>
-                        <li>🔒 Bug and tar removal</li>
-                        <li>🔒 6-8 month sealant upgrade</li>
-                        <li>🔒 Swirl-mark reduction / paint correction</li>
-                        <li>🔒 Water-spot / oxidation removal</li>
-                        <li>🔒 Depth-&-gloss enhancement</li>
+                        <li>
+                          <img
+                            src={CheckIcon}
+                            alt="check"
+                            className="check-icon"
+                          />
+                          Deep clean wheels and shine tires
+                        </li>
+                        <li>
+                          <img
+                            src={CheckIcon}
+                            alt="check"
+                            className="check-icon"
+                          />
+                          Pressure rinse all door jambs
+                        </li>
+                        <li>
+                          <img
+                            src={CheckIcon}
+                            alt="check"
+                            className="check-icon"
+                          />
+                          Apply spray-wax protection
+                        </li>
                       </ul>
+
+                      <div className="locked-options">
+                        <h3 className="locked-header">Not Included</h3>
+                        <ul className="package-details locked">
+                          <li>🔒 Shine all exterior trims</li>
+                          <li>🔒 Agitate and declog door jambs</li>
+                          <li>🔒 Full decontamination (clay/iron treatment)</li>
+                          <li>🔒 Bug and tar removal</li>
+                          <li>🔒 6-8 month sealant upgrade</li>
+                          <li>🔒 Swirl-mark reduction / paint correction</li>
+                          <li>🔒 Water-spot / oxidation removal</li>
+                          <li>🔒 Depth-&-gloss enhancement</li>
+                        </ul>
+                      </div>
                     </div>
+                    <button
+                      className="package-button"
+                      onClick={() => {
+                        const priceRange = getPriceRange(
+                          "exteriors",
+                          "standardExterior"
+                        );
+                        handlePackageClick({
+                          name: "Standard Exterior",
+                          price: priceRange.min,
+                          maxPrice: priceRange.max,
+                        });
+                      }}
+                    >
+                      Book
+                    </button>
                   </div>
-                  <button
-                    className="package-button"
-                    onClick={() => {
-                      const priceRange = getPriceRange(
-                        "exteriors",
-                        "standardExterior"
-                      );
-                      handlePackageClick({
-                        name: "Standard Exterior",
-                        price: priceRange.min,
-                        maxPrice: priceRange.max,
-                      });
-                    }}
-                  >
-                    Book
-                  </button>
-                </div>
                 )}
 
                 <div className="package gold">
@@ -1294,12 +1325,62 @@ function MonthlySub() {
                   </p>
                   <div className="package-list">
                     <ul className="package-details">
-                      <li>Foam pre-rinse and bath</li>
-                      <li>Full decontamination (clay/iron treatment)</li>
-                      <li>Bug and tar removal</li>
-                      <li>Deep clean wheels and shine tires</li>
-                      <li>Shine all exterior trims</li>
-                      <li>Apply 6 to 8 months protection</li>
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Foam pre-rinse and bath
+                      </li>
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Deep clean wheels and shine tires
+                      </li>
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Agitate and declog door jambs
+                      </li>
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Bug and tar removal
+                      </li>
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Full decontamination (clay/iron treatment)
+                      </li>
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Shine all exterior trims
+                      </li>
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Apply 6 to 8 months protection
+                      </li>
                     </ul>
                     <div className="locked-options">
                       <h3 className="locked-header">Not Included</h3>
@@ -1357,7 +1438,15 @@ function MonthlySub() {
                           alt="check"
                           className="check-icon"
                         />
-                        Full decontamination (clay/iron treatment)
+                        Deep clean wheels and shine tires
+                      </li>
+                      <li>
+                        <img
+                          src={CheckIcon}
+                          alt="check"
+                          className="check-icon"
+                        />
+                        Agitate and declog door jambs
                       </li>
                       <li>
                         <img
@@ -1373,7 +1462,7 @@ function MonthlySub() {
                           alt="check"
                           className="check-icon"
                         />
-                        Deep clean wheels and shine tires
+                        Full decontamination (clay/iron treatment)
                       </li>
                       <li>
                         <img
@@ -1447,7 +1536,7 @@ function MonthlySub() {
               <div className="package silver">
                 <h2 className="package-title">ONE STEP</h2>
                 <p className="package-subtitle">
-                  40-60% Swirl & Scratch Removal
+                  50-70% Swirl & Scratch Removal
                 </p>
                 <p className="package-price">
                   {selectedCar
@@ -1486,7 +1575,11 @@ function MonthlySub() {
                     </li>
                     <li>
                       <img src={CheckIcon} alt="check" className="check-icon" />
-                      Remove 40-60% of swirls & scratches
+                      Remove 50-70% of swirls & scratches
+                    </li>
+                    <li>
+                      <img src={CheckIcon} alt="check" className="check-icon" />
+                      Water spot and oxidation removal
                     </li>
                   </ul>
                 </div>
@@ -1509,7 +1602,7 @@ function MonthlySub() {
               <div className="package gold">
                 <h2 className="package-title">TWO STEP</h2>
                 <p className="package-subtitle">
-                  60-80% Swirl & Scratch Removal
+                  80-90% Swirl & Scratch Removal
                 </p>
                 <p className="package-price">
                   {selectedCar
@@ -1548,11 +1641,15 @@ function MonthlySub() {
                     </li>
                     <li>
                       <img src={CheckIcon} alt="check" className="check-icon" />
-                      Remove 60-80% of swirls & scratches
+                      Remove 80-90% of swirls & scratches
                     </li>
                     <li>
                       <img src={CheckIcon} alt="check" className="check-icon" />
                       Enhanced paint depth & clarity
+                    </li>
+                    <li>
+                      <img src={CheckIcon} alt="check" className="check-icon" />
+                      Water spot and oxidation removal
                     </li>
                   </ul>
                 </div>
@@ -1798,6 +1895,34 @@ function MonthlySub() {
                     required
                   />
                 </div>
+
+                <div className="form-group">
+                  <label htmlFor="message">Message (Optional)</label>
+                  <textarea
+                    id="message"
+                    className="message-textarea"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Any special requests or notes..."
+                    style={{
+                      width: "100%",
+                      padding: "12px",
+                      border: "1px solid #ddd",
+                      borderRadius: "4px",
+                      fontSize: "16px",
+                      fontFamily: "inherit",
+                      backgroundColor: "rgba(0, 0, 0, 0.2)",
+                      color: "white",
+                      outline: "none",
+                      transition: "border-color 0.3s ease",
+                      resize: "none",
+                      minHeight: "80px",
+                      lineHeight: "1.4",
+                    }}
+                    onFocus={(e) => (e.target.style.borderColor = "#007bff")}
+                    onBlur={(e) => (e.target.style.borderColor = "#ddd")}
+                  />
+                </div>
               </form>
 
               <p>Select a date and an available time slot to finish booking.</p>
@@ -1894,7 +2019,7 @@ function MonthlySub() {
                       Processing...
                     </>
                   ) : (
-                    "Book Monthly Subscription"
+                    "Schedule Appointment"
                   )}
                 </button>
               </div>

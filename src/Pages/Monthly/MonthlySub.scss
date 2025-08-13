@@ -7,9 +7,32 @@
   padding: 0;
 }
 
+// Message textarea styling
+.message-textarea {
+  &::placeholder {
+    color: white !important;
+    opacity: 0.7;
+  }
+
+  &::-webkit-input-placeholder {
+    color: white !important;
+    opacity: 0.7;
+  }
+
+  &::-moz-placeholder {
+    color: white !important;
+    opacity: 0.7;
+  }
+
+  &:-ms-input-placeholder {
+    color: white !important;
+    opacity: 0.7;
+  }
+}
+
 // Main content wrapper
 .main-content {
-  padding-top: 6rem; // Add space for fixed header (5.5rem + 0.5rem buffer)
+  padding-top: 6rem; // Reduced from 6rem to prevent unnecessary scroll with breadcrumb
 
   &.blurred {
     filter: blur(1px);
@@ -19,7 +42,7 @@
 
   // Mobile adjustment for header spacing
   @media (max-width: 800px) {
-    padding-top: 5rem; // Slightly less padding on mobile
+    padding-top: 5.5rem; // Reduced proportionally for mobile
   }
 }
 
@@ -38,7 +61,7 @@
 
 // Booking Button Container
 .booking-button-container {
-  margin-top: 20px;
+  margin: 20px 0 0 0; // Removed any potential bottom margin
   padding: 0 20px;
 
   .submit-booking-btn {
@@ -132,7 +155,7 @@
   display: flex;
   flex-direction: column; // Mobile-first: stack vertically
   max-width: 100%;
-  margin: 10px;
+  margin: 10px 10px 20px 10px; // Added bottom margin for mobile spacing
   padding: 0;
   border-radius: 15px;
   background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
@@ -146,9 +169,9 @@
   @media (min-width: 768px) {
     flex-direction: row;
     max-width: 1200px;
-    margin: 40px auto;
+    margin: 20px auto 40px auto; // Reduced top margin, added bottom margin
     border-radius: 20px;
-    min-height: 600px;
+    min-height: auto; // Changed from 600px to auto to prevent unnecessary white space
   }
 }
 
@@ -457,6 +480,7 @@
       }
 
       .service-item {
+        text-align: left;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -506,14 +530,14 @@
 
 .right-panel {
   flex: none; // Mobile-first: don't flex
-  padding: 20px 15px;
+  padding: 20px 15px 15px 15px; // Reduced bottom padding to minimize white space
   background: #ffffff;
   position: relative;
 
   // Desktop override
   @media (min-width: 768px) {
     flex: 1 1 500px;
-    padding: 40px;
+    padding: 40px 40px 30px 40px; // Reduced bottom padding to minimize white space
   }
 }
 
@@ -556,7 +580,7 @@
 }
 
 .calendar-container {
-  margin-bottom: 20px;
+  margin-bottom: 15px; // Reduced from 20px to minimize white space
   padding: 15px;
   background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
   border-radius: 15px;
@@ -565,7 +589,7 @@
 
   // Desktop override
   @media (min-width: 768px) {
-    margin-bottom: 30px;
+    margin-bottom: 20px; // Reduced from 30px to minimize white space
     padding: 25px;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 174, 239, 0.1);
@@ -583,7 +607,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr); // Mobile-first: 2 columns
   gap: 12px;
-  margin-top: 20px;
+  margin: 20px 0 0 0; // Removed any potential bottom margin
   padding: 15px;
   background: #ffffff;
   border-radius: 15px;
@@ -600,7 +624,7 @@
   @media (min-width: 768px) {
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 15px;
-    margin-top: 25px;
+    margin: 25px 0 0 0; // Removed any potential bottom margin
     padding: 25px;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 174, 239, 0.1);
@@ -915,7 +939,7 @@ $card-max-height: 400px;
   align-items: center;
   justify-content: center;
   text-align: center;
-  min-height: 100vh;
+  min-height: 80vh;
   position: relative;
 
   &::before {
@@ -1194,7 +1218,7 @@ $card-max-height: 400px;
   list-style: none;
   overflow: hidden;
   font: 18px Helvetica, Arial, Sans-Serif;
-  margin: 40px;
+  margin: 20px 40px 10px 40px; /* Reduced top/bottom margins to prevent scroll */
   padding: 0;
 }
 
@@ -1378,7 +1402,7 @@ $card-max-height: 400px;
   margin: 0;
   padding: 20px 15px;
   background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
-  min-height: 100vh;
+  min-height: 85vh;
   position: relative;
 
   &::before {
