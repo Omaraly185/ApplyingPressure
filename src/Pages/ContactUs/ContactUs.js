@@ -8,6 +8,7 @@ import FaceBook from "./Facebook.svg";
 import Tiktok from "./Tiktok.svg";
 import Twitter from "./Twitter.svg";
 import Phone from "./phone.png";
+import { SEOComponent, contactPageSEO } from "../../Component/SEO";
 
 function ContactUs() {
   const imgStyle = {
@@ -18,6 +19,7 @@ function ContactUs() {
   };
   return (
     <>
+      <SEOComponent {...contactPageSEO} />
       <div className="customHeight backGround-Img">
         <Header />
         <div className="Section2">

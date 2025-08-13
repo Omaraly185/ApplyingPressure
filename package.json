@@ -16,6 +16,7 @@
     "react-datepicker": "^7.5.0",
     "react-dom": "^18.2.0",
     "react-google-login": "^5.2.2",
+    "react-helmet-async": "^2.0.5",
     "react-icons": "^4.10.1",
     "react-multi-select-component": "^4.3.4",
     "react-multi-select-dropdown": "^0.1.2",

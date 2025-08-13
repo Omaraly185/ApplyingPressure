@@ -1,9 +1,12 @@
 import React from "react";
 import "./PrivacyPolicy.css";
+import { SEOComponent, privacyPolicySEO } from "../../Component/SEO";
 
 const PrivacyPolicy = () => {
   return (
-    <div className="privacy-policy-container">
+    <>
+      <SEOComponent {...privacyPolicySEO} />
+      <div className="privacy-policy-container">
       <h1 className="privacy-title">Privacy Policy</h1>
 
       <p className="effective-date">
@@ -214,7 +217,8 @@ const PrivacyPolicy = () => {
         </li>
         <li>Phone: +19295285191</li>
       </ul>
-    </div>
+      </div>
+    </>
   );
 };
 

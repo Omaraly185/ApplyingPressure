@@ -1,9 +1,12 @@
 import React from "react";
 import "./TermsAndConditions.css";
+import { SEOComponent, termsConditionsSEO } from "../../Component/SEO";
 
 const TermsAndConditions = () => {
   return (
-    <div className="terms-container">
+    <>
+      <SEOComponent {...termsConditionsSEO} />
+      <div className="terms-container">
       <h1 className="terms-title">Terms and Conditions</h1>
 
       <p className="last-updated">
@@ -151,7 +154,8 @@ const TermsAndConditions = () => {
         behalf of its Affiliates and its and their respective licensors and
         service providers, expressly disclaims all warranties.
       </p>
-    </div>
+      </div>
+    </>
   );
 };
 

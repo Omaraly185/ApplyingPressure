@@ -5,25 +5,29 @@ import HomeForm from "./HomeForm";
 import AboutUs from "./AboutUs/AboutUs";
 import TestimonialSlider from "./testimonials/testimonial";
 import Footer from "../../Component/Footer"; // Correct way to import default export
+import { SEOComponent, homePageSEO } from "../../Component/SEO";
 
 function Home() {
   return (
-    <div
-      style={{ backgroundColor: "black" }}
-      className="fluid myCustomHeight fullPage"
-    >
-      <Header />
-      <HomeForm />
-      <div></div>
-      <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />{" "}
-      <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />{" "}
-      <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />{" "}
-      <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
-      <br /> <br />
-      <AboutUs />
-      <TestimonialSlider />
-      <Footer />
-    </div>
+    <>
+      <SEOComponent {...homePageSEO} />
+      <div
+        style={{ backgroundColor: "black" }}
+        className="fluid myCustomHeight fullPage"
+      >
+        <Header />
+        <HomeForm />
+        <div></div>
+        <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />{" "}
+        <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />{" "}
+        <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />{" "}
+        <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+        <br /> <br />
+        <AboutUs />
+        <TestimonialSlider />
+        <Footer />
+      </div>
+    </>
   );
 }
 

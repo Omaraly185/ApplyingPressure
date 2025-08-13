@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
+import { HelmetProvider } from 'react-helmet-async';
 import Home from "./Pages/Home/Home";
 import BookNow from "./Pages/Book-Now/bookNow";
 import FacebookPixel from "./Component/FacebookPixel";
@@ -40,25 +41,27 @@ function App() {
   useTrackPageExit();
 
   return (
-    <div className="App">
-      <FacebookPixel />
-      <ScrollToTop />
+    <HelmetProvider>
+      <div className="App">
+        <FacebookPixel />
+        <ScrollToTop />
 
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/Book_Now" element={<MonthlySub />} />
-        <Route exact path="/Ceramic-Coating" element={<CeramicCoating />} />
-        <Route exact path="/ContactUs" element={<ContactUs />} />
-        <Route exact path="/success" element={<SuccessPage />} />
-        <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route
-          exact
-          path="/terms-conditions"
-          element={<TermsAndConditions />}
-        />
-        <Route exact path="/review" element={<RedirectToGoogle />} />
-      </Routes>
-    </div>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/Book_Now" element={<MonthlySub />} />
+          <Route exact path="/Ceramic-Coating" element={<CeramicCoating />} />
+          <Route exact path="/ContactUs" element={<ContactUs />} />
+          <Route exact path="/success" element={<SuccessPage />} />
+          <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route
+            exact
+            path="/terms-conditions"
+            element={<TermsAndConditions />}
+          />
+          <Route exact path="/review" element={<RedirectToGoogle />} />
+        </Routes>
+      </div>
+    </HelmetProvider>
   );
 }
 

@@ -4,6 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "../../Component/Header";
 import "./MonthlySub.scss";
+import { SEOComponent, bookingPageSEO } from "../../Component/SEO";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Sedan from "./aha.png";
@@ -769,8 +770,10 @@ function MonthlySub() {
   };
 
   return (
-    <div className="monthly-sub-container">
-      <Header />
+    <>
+      <SEOComponent {...bookingPageSEO} />
+      <div className="monthly-sub-container">
+        <Header />
       <ToastContainer style={{ marginTop: "80px" }} />
 
       <div className={`main-content ${showPlusServices ? "blurred" : ""}`}>
@@ -2174,8 +2177,9 @@ function MonthlySub() {
             </div>
           </>
         )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

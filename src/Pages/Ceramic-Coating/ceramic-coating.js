@@ -3,6 +3,7 @@ import Header from "../../Component/Header";
 import "./ceramic-coating.scss";
 import video1 from "./cc.mp4";
 import Footer from "../../Component/Footer";
+import { SEOComponent, ceramicCoatingPageSEO } from "../../Component/SEO";
 
 function CeramicCoating() {
   const [ceramicForm, setCeramicForm] = useState({
@@ -61,8 +62,10 @@ function CeramicCoating() {
   };
 
   return (
-    <div className="fluid myCustomHeight2 black-background">
-      <Header />
+    <>
+      <SEOComponent {...ceramicCoatingPageSEO} />
+      <div className="fluid myCustomHeight2 black-background">
+        <Header />
       <div className="video-container">
         <video
           autoPlay
@@ -203,8 +206,9 @@ function CeramicCoating() {
           </div>
         </div>
       </div>
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 }
 
