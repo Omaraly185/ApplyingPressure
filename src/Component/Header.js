@@ -75,7 +75,7 @@ function Header() {
               <Link
                 className="header-routing"
                 to="/Book_Now"
-                title="Book Now"
+                title="Monthly Services"
                 role="menuitem"
               >
                 Book
@@ -92,24 +92,14 @@ function Header() {
               </Link>
             </li>
             <li className="dommanip" role="none">
-              <a
+              <Link
                 className="header-routing"
-                href="/Monthly"
-                title="Monthly Services"
-                role="menuitem"
-              >
-                Monthly
-              </a>
-            </li>
-            <li className="dommanip" role="none">
-              <a
-                className="header-routing"
-                href="/ContactUS"
+                to="/ContactUS"
                 title="Contact Us"
                 role="menuitem"
               >
                 Contact Us
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

@@ -9,10 +9,17 @@
 
 // Main content wrapper
 .main-content {
+  padding-top: 6rem; // Add space for fixed header (5.5rem + 0.5rem buffer)
+
   &.blurred {
     filter: blur(1px);
     pointer-events: none;
     transition: filter 0.3s ease;
+  }
+
+  // Mobile adjustment for header spacing
+  @media (max-width: 800px) {
+    padding-top: 5rem; // Slightly less padding on mobile
   }
 }
 
@@ -27,6 +34,66 @@
   backdrop-filter: blur(1.5px);
   z-index: 999;
   cursor: pointer;
+}
+
+// Booking Button Container
+.booking-button-container {
+  margin-top: 20px;
+  padding: 0 20px;
+
+  .submit-booking-btn {
+    width: 100%;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, #00aeef 0%, #0088cc 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 174, 239, 0.3);
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, #0088cc 0%, #006699 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 174, 239, 0.4);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    &:disabled {
+      background: linear-gradient(135deg, #cccccc 0%, #999999 100%);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        background: linear-gradient(135deg, #cccccc 0%, #999999 100%);
+        transform: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 8px;
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 // .main-content {
@@ -120,7 +187,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
+  text-align: left;
   margin-bottom: 15px;
   padding: 10px 0;
 
@@ -175,6 +242,7 @@
 }
 
 .total-price-display {
+  text-align: center;
   margin-top: 15px;
   padding: 15px;
   background: rgba(0, 0, 0, 0.4);
@@ -327,7 +395,6 @@
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   padding-top: 15px;
   width: 100%;
-  max-width: 400px; // Fixed maximum width
   box-sizing: border-box;
 
   .price-breakdown-toggle {
@@ -401,7 +468,6 @@
         }
 
         &.plus-service {
-          padding-left: 15px;
           font-size: 13px;
           color: rgba(255, 255, 255, 0.8);
         }
@@ -423,6 +489,7 @@
         .service-price {
           color: white;
           font-weight: 600;
+          font-size: 0.9rem;
         }
       }
 
@@ -541,7 +608,7 @@
 }
 
 .time-slot {
-  padding: 20px 12px; // Larger touch target for mobile
+  padding: 20px 12px;
   border: 2px solid #e9ecef;
   border-radius: 12px;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -587,7 +654,7 @@
     }
   }
 
-  &.active {
+  &.selected {
     border-color: #00aeef;
     background: linear-gradient(135deg, #00aeef 0%, #0088cc 100%);
     color: white;
@@ -780,13 +847,39 @@
   }
 
   .time-slots {
-    gap: 8px;
+    gap: 12px; // Increased gap to prevent shadow overlap
     padding: 12px;
 
     .time-slot {
       padding: 16px 8px;
       font-size: 13px;
       min-height: 50px;
+      height: 50px; // Fixed height to prevent size changes
+      width: 100%; // Ensure consistent width
+      box-sizing: border-box; // Include padding and border in height
+      position: relative; // Contain any absolute positioning
+      flex-shrink: 0; // Prevent shrinking
+
+      // Remove ALL effects on mobile that could cause layout shifts
+      &:hover {
+        transform: none;
+        box-shadow: none; // Remove shadow completely on mobile
+        border-color: #00aeef; // Only change border color
+      }
+
+      &.selected {
+        transform: none;
+        box-shadow: none; // Remove shadow completely on mobile
+        border-color: #00aeef;
+
+        // Ensure checkmark doesn't affect layout
+        &::after {
+          position: absolute;
+          top: 5px;
+          right: 8px;
+          z-index: 1;
+        }
+      }
     }
   }
 
@@ -1239,7 +1332,7 @@ $card-max-height: 400px;
   display: none; /* Hidden by default */
 }
 
-@media (max-width: 500px) {
+@media (max-width: 1000px) {
   .large-screen-only {
     display: none; /* Hide breadcrumbs on smaller screens */
   }
@@ -1295,11 +1388,6 @@ $card-max-height: 400px;
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(
-      45deg,
-      rgba(0, 174, 239, 0.05) 0%,
-      rgba(0, 0, 0, 0.8) 100%
-    );
     z-index: 1;
   }
 
@@ -1836,5 +1924,30 @@ $card-max-height: 400px;
 
   .package-details li {
     font-size: 0.9rem;
+  }
+}
+
+// Paint Correction specific styling
+.package-subtitle {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 5px 0 15px 0;
+  text-align: center;
+}
+
+.recommendation-section {
+  text-align: center;
+  margin-top: 30px;
+  padding: 20px;
+  background: rgba(0, 174, 239, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 174, 239, 0.3);
+
+  .recommendation-text {
+    color: #00aeef;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    margin: 0;
   }
 }

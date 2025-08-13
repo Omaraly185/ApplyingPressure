@@ -7,6 +7,10 @@
       "headlight": { "minPrice": 40, "maxPrice": 40 },
       "ceramicCoating": { "minPrice": 350, "maxPrice": 350 }
     },
+    "paintCorrection": {
+      "oneStep": { "minPrice": 400, "maxPrice": 400 },
+      "twoStep": { "minPrice": 600, "maxPrice": 600 }
+    },
     "exteriors": {
       "NA": { "minPrice": 0, "maxPrice": 0 },
       "standardExterior": { "minPrice": 60, "maxPrice": 60 },
