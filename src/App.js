@@ -46,10 +46,9 @@ function App() {
 
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route exact path="/Book_Now" element={<BookNow />} />
+        <Route exact path="/Book_Now" element={<MonthlySub />} />
         <Route exact path="/Ceramic-Coating" element={<CeramicCoating />} />
         <Route exact path="/ContactUs" element={<ContactUs />} />
-        <Route exact path="/Monthly" element={<MonthlySub />} />
         <Route exact path="/success" element={<SuccessPage />} />
         <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route

@@ -1,0 +1,253 @@
+.paint-correction-container {
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  min-height: 100vh;
+  padding: 20px;
+  color: white;
+}
+
+.hero-section {
+  text-align: center;
+  margin-bottom: 40px;
+  
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #00aeef;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+  }
+  
+  p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+.car-selection-section {
+  margin-bottom: 40px;
+  
+  h2 {
+    text-align: center;
+    color: #00aeef;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+  }
+}
+
+.car-types-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.car-type-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    border-color: #00aeef;
+    background: rgba(0, 174, 239, 0.1);
+  }
+  
+  &.selected {
+    border-color: #00aeef;
+    background: rgba(0, 174, 239, 0.2);
+  }
+  
+  .car-image {
+    width: 80px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 10px;
+  }
+  
+  h3 {
+    font-size: 1rem;
+    margin: 0;
+    color: white;
+  }
+}
+
+.services-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  
+  h2 {
+    text-align: center;
+    color: #00aeef;
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+  }
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.service-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 3px solid #00aeef;
+  border-radius: 15px;
+  padding: 25px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 174, 239, 0.3);
+  }
+  
+  &.one-step {
+    border-color: #00aeef;
+  }
+  
+  &.two-step {
+    border-color: #00aeef;
+  }
+}
+
+.service-header {
+  text-align: center;
+  margin-bottom: 20px;
+  
+  h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #00aeef;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+  }
+  
+  .swirl-removal {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+  }
+}
+
+.service-features {
+  margin-bottom: 25px;
+  
+  .feature-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    
+    .check-icon {
+      width: 16px;
+      height: 16px;
+      margin-right: 10px;
+    }
+    
+    span {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.95rem;
+    }
+  }
+}
+
+.pricing-section {
+  margin-bottom: 25px;
+  
+  h4 {
+    color: #00aeef;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+}
+
+.price-list {
+  .price-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    span:first-child {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.9rem;
+    }
+    
+    span:last-child {
+      color: #00aeef;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+  }
+}
+
+.book-button {
+  width: 100%;
+  padding: 15px 20px;
+  background: linear-gradient(135deg, #00aeef 0%, #0088cc 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: linear-gradient(135deg, #0088cc 0%, #006699 100%);
+    transform: translateY(-2px);
+  }
+}
+
+.recommendation-section {
+  text-align: center;
+  margin-top: 30px;
+  
+  .recommendation-text {
+    color: #00aeef;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+  }
+}
+
+// Mobile responsiveness
+@media (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .car-types-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .hero-section h1 {
+    font-size: 2rem;
+  }
+  
+  .service-card {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .car-types-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .paint-correction-container {
+    padding: 15px;
+  }
+}

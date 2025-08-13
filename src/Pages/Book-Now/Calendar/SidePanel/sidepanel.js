@@ -1,13 +1,21 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./sidepanel.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { useSelector } from "react-redux";
 
 function Sidepanel(props) {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { showPanel, selectedDate, events, setShowPanel, handleTimeSelect } =
-    props;
+  const {
+    showPanel,
+    selectedDate,
+    setSelectedDate,
+    events,
+    setShowPanel,
+    handleTimeSelect,
+  } = props;
   const name = useSelector((state) => state.bookingForm.name);
   const dogHair = useSelector((state) => state.bookingForm.yes_no);
   const message = useSelector((state) => state.bookingForm.message) || "";
@@ -45,6 +53,11 @@ function Sidepanel(props) {
     setSelectedTime(time);
     setShowCreditCardForm(true);
   };
+  const disabledDates = [
+    new Date(2024, 11, 11),
+    new Date(2024, 11, 12),
+    new Date(2024, 11, 15),
+  ];
 
   const handleFormSubmit = async (e) => {
     let appointmentLength = 0;
@@ -188,6 +201,14 @@ function Sidepanel(props) {
       return isConflicting;
     });
   };
+  const isDateDisabled = (date) => {
+    return disabledDates.some(
+      (disabledDate) =>
+        date.getDate() === disabledDate.getDate() &&
+        date.getMonth() === disabledDate.getMonth() &&
+        date.getFullYear() === disabledDate.getFullYear()
+    );
+  };
 
   return (
     <>
@@ -202,6 +223,15 @@ function Sidepanel(props) {
             <>
               <div className="panel-title">
                 Available times for {selectedDate}
+                <DatePicker
+                  selected={selectedDate}
+                  onChange={(date) => setSelectedDate(date)}
+                  filterDate={(date) => !isDateDisabled(date)}
+                  dayClassName={(date) =>
+                    isDateDisabled(date) ? "disabled-date" : undefined
+                  }
+                  inline
+                />
               </div>
               <div
                 className={` ${
