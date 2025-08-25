@@ -59,6 +59,8 @@ function App() {
             element={<TermsAndConditions />}
           />
           <Route exact path="/review" element={<RedirectToGoogle />} />
+          {/* Catch-all route - redirects any unmatched routes to home */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
     </HelmetProvider>
