@@ -11,8 +11,8 @@
   flex-wrap: nowrap;
   overflow-x: auto;
   scroll-behavior: smooth;
-  gap: 20px;
   cursor: grab;
+  padding: 0; /* Remove padding to avoid scroll calculation issues */
 }
 
 .testimonial-slide:active {
@@ -34,7 +34,17 @@
   border-right: 2px solid #fff;
   position: relative;
   background: #000;
-  margin: 10px;
+  margin: 0 20px 0 0; /* Only right margin, no top/bottom margins */
+}
+
+/* First card should have left margin to center it properly */
+.testimonial:first-child {
+  margin-left: 20px;
+}
+
+/* Last card should have right margin for proper spacing */
+.testimonial:last-child {
+  margin-right: 20px;
 }
 
 .star-rating {
@@ -143,12 +153,21 @@
 
 @media only screen and (max-width: 1200px) {
   .testimonial {
-    max-width: 45%;
+    max-width: calc(50% - 30px); /* Two cards per view with proper spacing */
   }
 }
 
-@media only screen and (max-width: 580px) {
+@media only screen and (max-width: 768px) {
   .testimonial {
-    max-width: 100%;
+    max-width: calc(100% - 40px); /* One card per view with proper spacing */
+    margin-right: 15px; /* Slightly less margin on mobile */
+  }
+
+  .testimonial:first-child {
+    margin-left: 15px;
+  }
+
+  .testimonial:last-child {
+    margin-right: 15px;
   }
 }

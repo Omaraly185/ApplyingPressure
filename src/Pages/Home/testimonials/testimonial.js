@@ -109,18 +109,67 @@ const TestimonialSlider = () => {
     sliderRef.current.scrollLeft = scrollLeft - walk;
   };
 
-  const scrollLeftHandler = () => {
-    sliderRef.current.scrollBy({
-      left: -sliderRef.current.clientWidth,
+  const getCurrentCardIndex = () => {
+    if (!sliderRef.current) return 0;
+
+    const container = sliderRef.current;
+    const cards = container.querySelectorAll('.testimonial');
+    const containerScrollLeft = container.scrollLeft;
+    const containerWidth = container.clientWidth;
+
+    // Find the card that's most visible in the current view
+    let mostVisibleIndex = 0;
+    let maxVisibleWidth = 0;
+
+    cards.forEach((card, index) => {
+      const cardLeft = card.offsetLeft;
+      const cardRight = cardLeft + card.offsetWidth;
+      const viewLeft = containerScrollLeft;
+      const viewRight = containerScrollLeft + containerWidth;
+
+      // Calculate how much of this card is visible
+      const visibleLeft = Math.max(cardLeft, viewLeft);
+      const visibleRight = Math.min(cardRight, viewRight);
+      const visibleWidth = Math.max(0, visibleRight - visibleLeft);
+
+      if (visibleWidth > maxVisibleWidth) {
+        maxVisibleWidth = visibleWidth;
+        mostVisibleIndex = index;
+      }
+    });
+
+    return mostVisibleIndex;
+  };
+
+  const scrollToCard = (cardIndex) => {
+    if (!sliderRef.current) return;
+
+    const container = sliderRef.current;
+    const cards = container.querySelectorAll('.testimonial');
+
+    if (cardIndex < 0 || cardIndex >= cards.length) return;
+
+    const targetCard = cards[cardIndex];
+    const cardLeft = targetCard.offsetLeft;
+
+    // Scroll to the exact start of the card
+    container.scrollTo({
+      left: cardLeft,
       behavior: "smooth",
     });
   };
 
+  const scrollLeftHandler = () => {
+    const currentIndex = getCurrentCardIndex();
+    const prevIndex = Math.max(0, currentIndex - 1);
+    scrollToCard(prevIndex);
+  };
+
   const scrollRightHandler = () => {
-    sliderRef.current.scrollBy({
-      left: sliderRef.current.clientWidth,
-      behavior: "smooth",
-    });
+    const currentIndex = getCurrentCardIndex();
+    const totalCards = testimonials.length;
+    const nextIndex = Math.min(totalCards - 1, currentIndex + 1);
+    scrollToCard(nextIndex);
   };
 
   return (

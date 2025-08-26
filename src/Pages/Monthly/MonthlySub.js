@@ -63,6 +63,8 @@ function MonthlySub() {
     useState([]);
   const [showPriceBreakdown, setShowPriceBreakdown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showPriceInfo, setShowPriceInfo] = useState(false);
+  const [priceInfoPackage, setPriceInfoPackage] = useState(null);
 
   const plusServicesByPackage = {
     GOLD: [
@@ -895,19 +897,35 @@ function MonthlySub() {
                 {selectedService === "Exterior and Interior" && (
                   <div className="package silver">
                     <h2 className="package-title">SILVER</h2>
-                    <p className="package-price">
-                      {selectedCar
-                        ? (() => {
-                            const priceRange = getPriceRange(
-                              "interiors",
-                              "silverInterior"
-                            );
-                            return priceRange.min === priceRange.max
-                              ? `$${priceRange.min}`
-                              : `$${priceRange.min} - $${priceRange.max}`;
-                          })()
-                        : "Starting at $55"}
-                    </p>
+                    <div className="package-price-container">
+                      <p className="package-price">
+                        {selectedCar
+                          ? (() => {
+                              const priceRange = getPriceRange(
+                                "interiors",
+                                "silverInterior"
+                              );
+                              return priceRange.min === priceRange.max
+                                ? `$${priceRange.min}`
+                                : `$${priceRange.min} - $${priceRange.max}`;
+                            })()
+                          : "Starting at $55"}
+                      </p>
+                      {selectedCar && (() => {
+                        const priceRange = getPriceRange("interiors", "silverInterior");
+                        return priceRange.min !== priceRange.max;
+                      })() && (
+                        <button
+                          className="price-info-icon"
+                          onClick={() => {
+                            setShowPriceInfo(true);
+                            setPriceInfoPackage('SILVER');
+                          }}
+                        >
+                          ℹ️
+                        </button>
+                      )}
+                    </div>
                     <div className="package-list">
                       <ul className="package-details">
                         <li>
@@ -990,19 +1008,35 @@ function MonthlySub() {
                   // }}
                 >
                   <h2 className="package-title">GOLD</h2>
-                  <p className="package-price">
-                    {selectedCar
-                      ? (() => {
-                          const priceRange = getPriceRange(
-                            "interiors",
-                            "goldInterior"
-                          );
-                          return priceRange.min === priceRange.max
-                            ? `$${priceRange.min}`
-                            : `$${priceRange.min} - $${priceRange.max}`;
-                        })()
-                      : "Starting at $100"}
-                  </p>
+                  <div className="package-price-container">
+                    <p className="package-price">
+                      {selectedCar
+                        ? (() => {
+                            const priceRange = getPriceRange(
+                              "interiors",
+                              "goldInterior"
+                            );
+                            return priceRange.min === priceRange.max
+                              ? `$${priceRange.min}`
+                              : `$${priceRange.min} - $${priceRange.max}`;
+                          })()
+                        : "Starting at $100"}
+                    </p>
+                    {selectedCar && (() => {
+                      const priceRange = getPriceRange("interiors", "goldInterior");
+                      return priceRange.min !== priceRange.max;
+                    })() && (
+                      <button
+                        className="price-info-icon"
+                        onClick={() => {
+                          setShowPriceInfo(true);
+                          setPriceInfoPackage('GOLD');
+                        }}
+                      >
+                        ℹ️
+                      </button>
+                    )}
+                  </div>
                   <div className="package-list">
                     <ul className="package-details">
                       <li>
@@ -1099,19 +1133,35 @@ function MonthlySub() {
 
                 <div className="package pressure">
                   <h2 className="package-title">PRESSURE</h2>
-                  <p className="package-price">
-                    {selectedCar
-                      ? (() => {
-                          const priceRange = getPriceRange(
-                            "interiors",
-                            "pressureSpecial"
-                          );
-                          return priceRange.min === priceRange.max
-                            ? `$${priceRange.min}`
-                            : `$${priceRange.min} - $${priceRange.max}`;
-                        })()
-                      : "Starting at $200"}
-                  </p>
+                  <div className="package-price-container">
+                    <p className="package-price">
+                      {selectedCar
+                        ? (() => {
+                            const priceRange = getPriceRange(
+                              "interiors",
+                              "pressureSpecial"
+                            );
+                            return priceRange.min === priceRange.max
+                              ? `$${priceRange.min}`
+                              : `$${priceRange.min} - $${priceRange.max}`;
+                          })()
+                        : "Starting at $200"}
+                    </p>
+                    {selectedCar && (() => {
+                      const priceRange = getPriceRange("interiors", "pressureSpecial");
+                      return priceRange.min !== priceRange.max;
+                    })() && (
+                      <button
+                        className="price-info-icon"
+                        onClick={() => {
+                          setShowPriceInfo(true);
+                          setPriceInfoPackage('PRESSURE');
+                        }}
+                      >
+                        ℹ️
+                      </button>
+                    )}
+                  </div>
                   <div className="package-list">
                     <ul className="package-details">
                       <li>
@@ -1216,6 +1266,37 @@ function MonthlySub() {
               </div>
             </div>
           )}
+
+        {/* Price Info Tooltip */}
+        {showPriceInfo && (
+          <div
+            className="price-info-tooltip"
+            onClick={() => setShowPriceInfo(false)}
+          >
+            <div
+              className="price-info-content"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h4>Why is there a price range?</h4>
+              <p>
+                Interior pricing varies based on the current condition of your vehicle's interior.
+                Factors like stains, wear, pet hair, and overall cleanliness affect the time and
+                effort required for the service.
+              </p>
+              <ul>
+                <li><strong>Lower range:</strong> Well-maintained interiors</li>
+                <li><strong>Higher range:</strong> Heavily soiled or stained interiors</li>
+              </ul>
+              <button
+                className="close-info-btn"
+                onClick={() => setShowPriceInfo(false)}
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* STEP 4: Exterior Packages */}
         {activeStep === 4 &&
           (selectedService === "Exterior Only" ||
