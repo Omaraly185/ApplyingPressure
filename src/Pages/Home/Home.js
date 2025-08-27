@@ -4,7 +4,8 @@ import "./home.css";
 import HomeForm from "./HomeForm";
 import AboutUs from "./AboutUs/AboutUs";
 import TestimonialSlider from "./testimonials/testimonial";
-import Footer from "../../Component/Footer"; // Correct way to import default export
+import CallToAction from "./CallToAction/CallToAction";
+import Footer from "../../Component/Footer";
 import { SEOComponent, homePageSEO } from "../../Component/SEO";
 
 function Home() {
@@ -25,6 +26,7 @@ function Home() {
         <br /> <br />
         <AboutUs />
         <TestimonialSlider />
+        <CallToAction />
         <Footer />
       </div>
     </>

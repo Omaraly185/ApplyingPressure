@@ -1,0 +1,134 @@
+.cta-container {
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+  padding: 80px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(0, 174, 239, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: "Roboto", sans-serif;
+}
+
+.cta-description {
+  font-size: 1.2rem;
+  color: #e0e0e0;
+  margin-bottom: 40px;
+  line-height: 1.6;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-button {
+  background: linear-gradient(135deg, #00aeef 0%, #0088cc 100%);
+  color: white;
+  border: none;
+  padding: 18px 40px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(0, 174, 239, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+  display: inline-block;
+}
+
+.cta-button:hover {
+  background: linear-gradient(135deg, #0088cc 0%, #006699 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(0, 174, 239, 0.6);
+}
+
+.cta-button:active {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 174, 239, 0.4);
+}
+
+.cta-subtitle {
+  font-size: 1rem;
+  color: #00aeef;
+  margin: 0;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .cta-container {
+    padding: 60px 15px;
+  }
+
+  .cta-title {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+  }
+
+  .cta-description {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+  }
+
+  .cta-button {
+    padding: 16px 35px;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+
+  .cta-subtitle {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-container {
+    padding: 50px 10px;
+  }
+
+  .cta-title {
+    font-size: 1.8rem;
+  }
+
+  .cta-description {
+    font-size: 1rem;
+  }
+
+  .cta-button {
+    padding: 14px 30px;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .cta-subtitle {
+    font-size: 0.8rem;
+  }
+}
