@@ -81,9 +81,7 @@ const testimonials = [
   },
 ];
 
-const getLetterAvatar = (name) => {
-  return name.charAt(0).toUpperCase();
-};
+
 
 const TestimonialSlider = () => {
   const sliderRef = useRef(null);

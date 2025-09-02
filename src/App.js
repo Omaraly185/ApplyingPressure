@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
-import { HelmetProvider } from 'react-helmet-async';
+import { HelmetProvider } from "react-helmet-async";
 import Home from "./Pages/Home/Home";
-import BookNow from "./Pages/Book-Now/bookNow";
-import FacebookPixel from "./Component/FacebookPixel";
 import { v4 as uuidv4 } from "uuid";
 import ScrollToTop from "./Component/ScrollTotop";
 import "./App.css";
-import useTrackPageView from "./Component/useTrackPageView";
 import ContactUs from "./Pages/ContactUs/ContactUs";
 import SuccessPage from "./Success/SuccessPage";
 import MonthlySub from "./Pages/Monthly/MonthlySub";
-import useTrackPageExit from "./Component/useTrackPageExit";
 import CeramicCoating from "./Pages/Ceramic-Coating/ceramic-coating";
 import PrivacyPolicy from "./Pages/Privacy-Policy/privacy-policy";
 import TermsAndConditions from "./Pages/Privacy-Policy/terms-condtions";
@@ -37,15 +33,10 @@ function App() {
     }
   }, [sessionId]);
 
-  useTrackPageView(sessionId);
-  useTrackPageExit();
-
   return (
     <HelmetProvider>
       <div className="App">
-        <FacebookPixel />
         <ScrollToTop />
-
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/Book_Now" element={<MonthlySub />} />

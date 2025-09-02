@@ -1,5 +1,4 @@
 import {
-  localBusinessSchema,
   enhancedLocalBusinessSchema,
   ceramicCoatingSchema,
   mobileDetailingSchema,

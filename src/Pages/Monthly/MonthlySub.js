@@ -31,7 +31,7 @@ import {
   formatZipCode,
 } from "./monthlyValidation";
 
-import { format, startOfMonth, addMonths, addDays } from "date-fns";
+import { startOfMonth, addMonths, addDays } from "date-fns";
 
 function MonthlySub() {
   const navigate = useNavigate();
@@ -64,7 +64,7 @@ function MonthlySub() {
   const [showPriceBreakdown, setShowPriceBreakdown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showPriceInfo, setShowPriceInfo] = useState(false);
-  const [priceInfoPackage, setPriceInfoPackage] = useState(null);
+  const [setPriceInfoPackage] = useState(null);
 
   const plusServicesByPackage = {
     GOLD: [
@@ -191,28 +191,14 @@ function MonthlySub() {
     return carTypeMap[carName] || "sedan";
   };
 
-  // Function to get ceramic coating price based on selected car
   const getCeramicCoatingPrice = () => {
-    if (!selectedCar) return 350; // Default to sedan price
+    if (!selectedCar) return 350;
     const carTypeKey = getCarTypeKey(selectedCar.name);
     return carPricing[carTypeKey]?.services?.ceramicCoating?.minPrice || 350;
   };
 
   const currentPlusServices =
     plusServicesByPackage[selectedPackage?.name] || [];
-  const totalPrice =
-    selectedPackage?.price +
-    selectedPlusServices.reduce((sum, name) => {
-      const svc = currentPlusServices.find((s) => s.name === name);
-      const price =
-        svc?.price === "ceramic-coating-dynamic"
-          ? getCeramicCoatingPrice()
-          : typeof svc?.price === "number"
-          ? svc.price
-          : parseFloat(svc?.price) || 0;
-      return sum + price;
-    }, 0);
-
   const timeSlots = [
     "9:00 AM",
     "10:00 AM",
@@ -302,11 +288,6 @@ function MonthlySub() {
           "https://applyingpressure-api-production.up.railway.app/events"
         );
         const data = await res.json();
-        console.log(
-          "Fetched events for availability check:",
-          data.length,
-          "events"
-        );
         setEvents(data);
         findNextAvailableDate();
       } catch (err) {
@@ -321,10 +302,6 @@ function MonthlySub() {
   const checkAvailableDates = (month) => {
     const newExcluded = [];
     const start = startOfMonth(month);
-    console.log(
-      "Checking available dates for month:",
-      format(month, "yyyy-MM")
-    );
 
     for (let i = 0; i < 31; i++) {
       const date = addDays(start, i);
@@ -336,14 +313,6 @@ function MonthlySub() {
         newExcluded.push(date);
       }
     }
-
-    console.log(
-      "Excluded dates for",
-      format(month, "yyyy-MM"),
-      ":",
-      newExcluded.length,
-      "dates"
-    );
 
     setExcludedDynamicDates((prev) => [
       ...prev,
@@ -387,16 +356,12 @@ function MonthlySub() {
   };
 
   const handleStepChange = (step) => {
-    // Only allow backward navigation (step must be less than current activeStep)
     if (step >= activeStep) {
       return; // Prevent forward navigation
     }
 
-    // Clear data from steps after the target step
     if (step < activeStep) {
-      // Clear data based on which step we're going back to
       if (step <= 1) {
-        // Going back to car selection - clear everything
         setSelectedCar(null);
         setSelectedService("");
         setConfirmedInteriorPackage(null);
@@ -878,7 +843,7 @@ function MonthlySub() {
                     }
                     style={{ cursor: isClickable ? "pointer" : "default" }}
                   >
-                    <a>{bc.label}</a>
+                    <span>{bc.label}</span>
                   </li>
                 );
               })}
@@ -2233,12 +2198,6 @@ function MonthlySub() {
                     (() => {
                       const availableSlots = timeSlots.filter((t) =>
                         isTimeAvailable(selectedDate, t)
-                      );
-                      console.log(
-                        "Available slots for",
-                        format(selectedDate, "yyyy-MM-dd"),
-                        ":",
-                        availableSlots
                       );
 
                       return availableSlots.length > 0 ? (
