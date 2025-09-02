@@ -6,7 +6,7 @@ const CallToAction = () => {
   const navigate = useNavigate();
 
   const handleBookNowClick = () => {
-    navigate("/monthly");
+    navigate("/Book_Now");
   };
 
   return (

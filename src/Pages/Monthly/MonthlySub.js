@@ -546,7 +546,6 @@ function MonthlySub() {
     }
   };
 
-  // Function to get price range for a service
   const getPriceRange = (serviceType, serviceKey) => {
     if (!selectedCar) return { min: 0, max: 0 };
 
