@@ -7,6 +7,231 @@
   padding: 0;
 }
 
+// Zipcode validation step styling
+.zipcode-validation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 2rem;
+  text-align: center;
+
+  .zipcode-header {
+    color: #00aeef;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 174, 239, 0.3);
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+  }
+
+  .zipcode-description {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+
+    @media (max-width: 768px) {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .zipcode-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+
+    @media (min-width: 768px) {
+      flex-wrap: wrap;
+      flex-direction: row;
+      gap: 0; // Remove gap between input and button
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .zipcode-input-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 350px;
+
+      @media (min-width: 768px) {
+        max-width: 280px;
+      }
+    }
+
+    .zipcode-input {
+      padding: 1.5rem 2rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+      border: 3px solid #333;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      text-align: center;
+      width: 100%;
+      transition: all 0.3s ease;
+      letter-spacing: 0.1em;
+      height: 70px; // Fixed height for consistency
+      box-sizing: border-box;
+
+      @media (min-width: 768px) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-right: none;
+      }
+
+      &:focus {
+        outline: none;
+        border-color: #00aeef;
+        box-shadow: 0 0 0 4px rgba(0, 174, 239, 0.2);
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      &.error {
+        border-color: #ff4444;
+        box-shadow: 0 0 0 4px rgba(255, 68, 68, 0.2);
+      }
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+        font-weight: 400;
+        letter-spacing: normal;
+      }
+
+      @media (max-width: 768px) {
+        padding: 1.25rem 1.75rem;
+        font-size: 1.3rem;
+        height: 60px; // Slightly smaller on mobile
+      }
+    }
+
+    .zipcode-error {
+      color: #ff6b6b;
+      font-size: 0.9rem;
+      text-align: center;
+      background: rgba(255, 107, 107, 0.1);
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 107, 107, 0.3);
+      width: 100%;
+      flex-basis: 100%; // Forces it to take full width and go to new line
+      order: 3; // Ensures it appears after both input and button
+      margin-top: 0.5rem;
+
+      @media (max-width: 768px) {
+        font-size: 0.85rem;
+        margin-top: 0.75rem;
+      }
+    }
+
+    .zipcode-submit-btn {
+      padding: 0 2.5rem; // Remove vertical padding, use height instead
+      background: linear-gradient(135deg, #00aeef 0%, #0088cc 100%);
+      color: white;
+      border: 3px solid #00aeef;
+      border-radius: 16px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 174, 239, 0.3);
+      min-width: 150px;
+      height: 70px; // Match input height
+      box-sizing: border-box;
+
+      @media (min-width: 768px) {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-left: none;
+        border-color: #333;
+      }
+
+      &:hover:not(:disabled) {
+        background: linear-gradient(135deg, #0088cc 0%, #006699 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 174, 239, 0.4);
+      }
+
+      &:active:not(:disabled) {
+        transform: translateY(0);
+      }
+
+      &:disabled {
+        background: linear-gradient(135deg, #666 0%, #444 100%);
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        opacity: 0.6;
+
+        @media (min-width: 768px) {
+          border-color: #666;
+        }
+      }
+
+      @media (max-width: 768px) {
+        width: 100%;
+        max-width: 350px;
+        padding: 0 2rem; // Remove vertical padding on mobile too
+        font-size: 1.1rem;
+        border: none;
+        height: 60px; // Match mobile input height
+      }
+    }
+  }
+
+  .service-area-info {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+    max-width: 400px;
+    text-align: center; // Keep container centered
+
+    p {
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      text-align: center; // Keep "We currently serve:" centered
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left; // Left align the list
+      display: inline-block; // Allow left alignment within centered container
+
+      li {
+        padding: 0.25rem 0;
+        position: relative;
+        padding-left: 1.5rem;
+        text-align: left; // Left align list items
+
+        &:before {
+          content: "✓";
+          position: absolute;
+          left: 0;
+          color: #00aeef;
+          font-weight: bold;
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+    }
+  }
+}
+
 // Message textarea styling
 .message-textarea {
   &::placeholder {

@@ -29,6 +29,7 @@ import {
   validateMonthlyFields,
   formatPhoneNumber,
   formatZipCode,
+  validateZipcode,
 } from "./monthlyValidation";
 
 import { startOfMonth, addMonths, addDays } from "date-fns";
@@ -40,8 +41,10 @@ function MonthlySub() {
   const [events, setEvents] = useState([]);
   const [excludedDynamicDates, setExcludedDynamicDates] = useState([]);
   const [currentMonth, setCurrentMonth] = useState(startOfMonth(new Date()));
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep, setActiveStep] = useState(0); // Start with zipcode validation
   const [selectedService, setSelectedService] = useState("");
+  const [serviceZipcode, setServiceZipcode] = useState("");
+  const [zipcodeError, setZipcodeError] = useState("");
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [zip, setZip] = useState("");
@@ -239,6 +242,7 @@ function MonthlySub() {
   // Dynamic breadcrumbs based on selected service
   const getBreadcrumbs = () => {
     const baseBreadcrumbs = [
+      { label: "Service Area", step: 0 },
       { label: "Car Type", step: 1 },
       { label: "Service", step: 2 },
     ];
@@ -361,7 +365,25 @@ function MonthlySub() {
     }
 
     if (step < activeStep) {
-      if (step <= 1) {
+      if (step <= 0) {
+        // Going back to zipcode - reset everything
+        setServiceZipcode("");
+        setZipcodeError("");
+        setSelectedCar(null);
+        setSelectedService("");
+        setConfirmedInteriorPackage(null);
+        setConfirmedExteriorPackage(null);
+        setConfirmedInteriorPlusServices([]);
+        setConfirmedExteriorPlusServices([]);
+        setSelectedDate(null);
+        setSelectedTime("");
+        setName("");
+        setAddress("");
+        setZip("");
+        setPhone("");
+        setEmail("");
+        setMessage("");
+      } else if (step <= 1) {
         setSelectedCar(null);
         setSelectedService("");
         setConfirmedInteriorPackage(null);
@@ -433,6 +455,25 @@ function MonthlySub() {
   const handleZipChange = (e) => {
     const formattedZip = formatZipCode(e.target.value);
     setZip(formattedZip);
+  };
+
+  const handleServiceZipcodeChange = (e) => {
+    const value = e.target.value.replace(/\D/g, "").slice(0, 5);
+    setServiceZipcode(value);
+    // Clear error when user starts typing
+    if (zipcodeError) {
+      setZipcodeError("");
+    }
+  };
+
+  const handleZipcodeSubmit = () => {
+    const validation = validateZipcode(serviceZipcode);
+    if (validation.isValid) {
+      setZipcodeError("");
+      setActiveStep(1); // Move to car type selection
+    } else {
+      setZipcodeError(validation.error);
+    }
   };
 
   const submitMonthlyBooking = async () => {
@@ -855,7 +896,7 @@ function MonthlySub() {
           </nav>
           {/* Mobile back button */}
           <div className="navigation-buttons small-screen-only">
-            {activeStep > 1 && (
+            {activeStep > 0 && (
               <button
                 className="back-button"
                 onClick={() => {
@@ -892,6 +933,52 @@ function MonthlySub() {
               </button>
             )}
           </div>
+          {/* STEP 0: Zipcode Validation */}
+          {activeStep === 0 && (
+            <div className="zipcode-validation-container">
+              <h1 className="zipcode-header">Check Service Area</h1>
+              <p className="zipcode-description">
+                Enter your zip code to confirm we service your area
+              </p>
+              <div className="zipcode-input-container">
+                <div className="zipcode-input-wrapper">
+                  <input
+                    type="text"
+                    placeholder="Enter your zip code"
+                    value={serviceZipcode}
+                    onChange={handleServiceZipcodeChange}
+                    className={`zipcode-input ${zipcodeError ? 'error' : ''}`}
+                    maxLength="5"
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter' && serviceZipcode.length === 5) {
+                        handleZipcodeSubmit();
+                      }
+                    }}
+                  />
+                </div>
+                <button
+                  className="zipcode-submit-btn"
+                  onClick={handleZipcodeSubmit}
+                  disabled={serviceZipcode.length !== 5}
+                >
+                  Continue
+                </button>
+                {zipcodeError && (
+                  <div className="zipcode-error">{zipcodeError}</div>
+                )}
+              </div>
+              <div className="service-area-info">
+                <p>We currently serve:</p>
+                <ul>
+                  <li>New York City (All 5 Boroughs)</li>
+                  <li>Majority of Long Island</li>
+                  <li>Parts of New Jersey</li>
+                  <li>Parts of Connecticut</li>
+                </ul>
+              </div>
+            </div>
+          )}
+          {/* STEP 1: Car Type */}
           {activeStep === 1 && (
             <div className="service-options-container">
               <h1 className="service-header">Select Your Car Type</h1>

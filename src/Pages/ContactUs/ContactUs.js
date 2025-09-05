@@ -20,9 +20,13 @@ function ContactUs() {
       <SEOComponent {...contactPageSEO} />
       <div className="customHeight backGround-Img">
         <Header />
-        <div className="Section2">
+        <div className="Section2" style={{ marginTop: "80px" }}>
           <div className="controller-img">
-            <img src={AP} className="ContactImg" alt="Applying Pressure Mobile Detailing Logo" />
+            <img
+              src={AP}
+              className="ContactImg"
+              alt="Applying Pressure Mobile Detailing Logo"
+            />
           </div>
           <div className="Bro">Find Us On Social Media</div>
         </div>
