@@ -837,12 +837,17 @@ function MonthlySub() {
                     } ${isNext ? "next" : ""} ${
                       !isClickable && !isCurrent ? "disabled" : ""
                     }`}
-                    onClick={() =>
-                      isClickable ? handleStepChange(bc.step) : null
-                    }
-                    style={{ cursor: isClickable ? "pointer" : "default" }}
                   >
-                    <span>{bc.label}</span>
+                    <a
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (isClickable) handleStepChange(bc.step);
+                      }}
+                      style={{ cursor: isClickable ? "pointer" : "default" }}
+                    >
+                      {bc.label}
+                    </a>
                   </li>
                 );
               })}
