@@ -1,12 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import AP from "../Pages/ContactUs/AP.png";
-import $ from "jquery";
 
 function Header() {
   const navbarRef = useRef(null);
   const menuButtonRef = useRef(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -14,40 +14,32 @@ function Header() {
         navbarRef.current &&
         !navbarRef.current.contains(e.target) &&
         !menuButtonRef.current.contains(e.target) &&
-        $(window).width() < 800
+        window.innerWidth < 800
       ) {
-        $(".domanip").hide();
+        setIsMenuOpen(false);
+      }
+    };
+
+    const handleResize = () => {
+      if (window.innerWidth > 800) {
+        setIsMenuOpen(false);
       }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
-  $(document).ready(function () {
-    if ($(window).width() < 800) {
-      $(".dommanip").hide();
-    } else {
-      $(".dommanip").slideDown();
+  const toggleMenu = () => {
+    if (window.innerWidth < 800) {
+      setIsMenuOpen(!isMenuOpen);
     }
-    $(".menu")
-      .off("click")
-      .on("click", function () {
-        if ($(window).width() < 800) {
-          $(".dommanip").slideToggle("50");
-        }
-      });
-  });
-
-  $(window)
-    .off("resize")
-    .on("resize", function () {
-      if ($(window).width() > 800) {
-        $(document).ready(function () {
-          $(".dommanip").slideDown();
-        });
-      }
-    });
+  };
 
   return (
     <>
@@ -59,44 +51,40 @@ function Header() {
             alt="Applying Pressure Logo"
           />
         </Link>
-        <div className="active">
-          <ul className="defaultFont" role="menu">
-            <li className="dommanip" role="none">
+        <div className={`active ${isMenuOpen ? 'menu-open' : ''}`}>
+          <ul className="defaultFont">
+            <li className="dommanip">
               <Link
                 className="header-routing"
                 to="/"
                 title="Home"
-                role="menuitem"
               >
                 Home
               </Link>
             </li>
-            <li className="dommanip" role="none">
+            <li className="dommanip">
               <Link
                 className="header-routing"
                 to="/Book_Now"
                 title="Monthly Services"
-                role="menuitem"
               >
                 Book
               </Link>
             </li>
-            <li className="dommanip" role="none">
+            <li className="dommanip">
               <Link
                 className="header-routing"
                 to="/Ceramic-Coating"
                 title="Ceramic Coating"
-                role="menuitem"
               >
                 Ceramic Coating
               </Link>
             </li>
-            <li className="dommanip" role="none">
+            <li className="dommanip">
               <Link
                 className="header-routing"
                 to="/ContactUS"
                 title="Contact Us"
-                role="menuitem"
               >
                 Contact Us
               </Link>
@@ -109,6 +97,7 @@ function Header() {
         id="toggleButton"
         ref={menuButtonRef}
         aria-label="Toggle Menu"
+        onClick={toggleMenu}
       >
         <div className="menu-line"></div>
         <div className="menu-line"></div>

@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from "uuid";
 import ScrollToTop from "./Component/ScrollTotop";
 import "./App.css";
 import ContactUs from "./Pages/ContactUs/ContactUs";
-import SuccessPage from "./Success/SuccessPage";
 import MonthlySub from "./Pages/Monthly/MonthlySub";
 import CeramicCoating from "./Pages/Ceramic-Coating/ceramic-coating";
 import PrivacyPolicy from "./Pages/Privacy-Policy/privacy-policy";
@@ -42,7 +41,6 @@ function App() {
           <Route exact path="/Book_Now" element={<MonthlySub />} />
           <Route exact path="/Ceramic-Coating" element={<CeramicCoating />} />
           <Route exact path="/ContactUs" element={<ContactUs />} />
-          <Route exact path="/success" element={<SuccessPage />} />
           <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route
             exact
