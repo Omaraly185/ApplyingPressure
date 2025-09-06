@@ -1,6 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+
+  // Explicitly configure JSX runtime
+  compiler: {
+    emotion: false,
+  },
+
+  // Ensure proper JSX transform
+  experimental: {
+    esmExternals: false,
+  },
   
   // Enable SASS support
   sassOptions: {
