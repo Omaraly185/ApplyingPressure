@@ -1,11 +1,11 @@
 @font-face {
   font-family: "MyFont";
-  src: url(./Anurati-Regular.otf);
+  src: url(/Anurati-Regular.otf);
 }
 
 @font-face {
   font-family: "TitleFont";
-  src: url(./American_Captain.otf);
+  src: url(/American_Captain.otf);
 }
 
 * {
@@ -166,26 +166,11 @@
     z-index: 95;
   }
   .active {
-    display: block;
+    display: none;
     margin-top: 88px;
-    max-height: 0;
-    transition: max-height 0.5s ease-in-out;
   }
 
   .active.menu-open {
-    max-height: 300px;
-  }
-
-  .active ul {
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out 0.2s;
-  }
-
-  .active.menu-open ul {
-    opacity: 1;
-  }
-
-  .active .dommanip {
     display: block;
   }
 

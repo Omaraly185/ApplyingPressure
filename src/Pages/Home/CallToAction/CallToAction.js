@@ -1,12 +1,12 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import "./CallToAction.css";
+import { useRouter } from "next/router";
+
 
 const CallToAction = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleBookNowClick = () => {
-    navigate("/Book_Now");
+    router.push("/Book_Now");
   };
 
   return (

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import "./testimonal.css";
+
 
 const testimonials = [
   {

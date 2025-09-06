@@ -16,6 +16,9 @@ export const LazyImage = ({ src, alt, className, ...props }) => {
 
 // Preload critical resources
 export const preloadCriticalResources = () => {
+  // Only run on client side
+  if (typeof window === 'undefined') return;
+
   // Preload critical fonts
   const fontPreloads = [
     "/fonts/American_Captain.otf",
@@ -162,6 +165,9 @@ export const localSEOOptimization = {
 export const analyticsOptimization = {
   // Google Analytics 4 setup
   setupGA4: (measurementId) => {
+    // Only run on client side
+    if (typeof window === 'undefined') return;
+
     // Add GA4 script
     const script1 = document.createElement("script");
     script1.async = true;

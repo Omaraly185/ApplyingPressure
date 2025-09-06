@@ -1,29 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/router";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 import Header from "../../Component/Header";
-import "./MonthlySub.scss";
 import { SEOComponent, bookingPageSEO } from "../../Component/SEO";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import Sedan from "./aha.png";
-import SUV from "./2row-ap.png";
-import Mini from "./mini-van-ap.png";
-import Van from "./van-ap.png";
-import exterior from "./Exterior-only.png";
-import interior from "./Interior-only.png";
-import exteriorInterior from "./Exterior-and-interior.png";
-import ceramic from "./ceramic-coating.png";
-import polish from "./polish.png";
-import CheckIcon from "./check.png";
-import engineBayClean from "./engine-bay-clean.png";
-import trimRestoration from "./trim-restoration.png";
-import headlightRestoration from "./headlight-restoration.png";
-import headliner from "./headliner.png";
-import flooring from "./flooring.png";
-import dogHair from "./dog-hair.png";
-import odor from "./odor.png";
+
+
 import carPricing from "../Book-Now/BookingForm/carPricing.json";
 import {
   validateMonthlyFields,
@@ -35,7 +18,7 @@ import {
 import { startOfMonth, addMonths, addDays } from "date-fns";
 
 function MonthlySub() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState("");
   const [events, setEvents] = useState([]);
@@ -71,103 +54,103 @@ function MonthlySub() {
 
   const plusServicesByPackage = {
     GOLD: [
-      { name: "Flooring", price: 50, image: flooring },
-      { name: "Headliner", price: 50, image: headliner },
-      { name: "Dog Hair Removal", price: "50-150", image: dogHair },
+      { name: "Flooring", price: 50, image: "/images/flooring.png" },
+      { name: "Headliner", price: 50, image: "/images/headliner.png" },
+      { name: "Dog Hair Removal", price: "50-150", image: "/images/dog-hair.png" },
       {
         name: "Heavy Spills/Odor Removal",
         price: "50-150",
-        image: odor,
+        image: "/images/odor.png",
       },
     ],
     SILVER: [
-      { name: "Flooring", price: 50, image: flooring },
-      { name: "Headliner", price: 50, image: headliner },
-      { name: "Dog Hair Removal", price: "50-150", image: dogHair },
+      { name: "Flooring", price: 50, image: "/images/flooring.png" },
+      { name: "Headliner", price: 50, image: "/images/headliner.png" },
+      { name: "Dog Hair Removal", price: "50-150", image: "/images/dog-hair.png" },
       {
         name: "Heavy Spills/Odor Removal",
         price: "50-150",
-        image: odor,
+        image: "/images/odor.png",
       },
     ],
     PRESSURE: [
-      { name: "Dog Hair Removal", price: "50-150", image: dogHair },
+      { name: "Dog Hair Removal", price: "50-150", image: "/images/dog-hair.png" },
       {
         name: "Heavy Spills/Odor Removal",
         price: "50-150",
-        image: odor,
+        image: "/images/odor.png",
       },
     ],
     Standard: [
-      { name: "Ceramic Sealant", price: 40, image: Sedan },
-      { name: "Trim Restoration", price: "75-150", image: trimRestoration },
-      { name: "Engine Bay Cleaning", price: 50, image: Sedan },
+      { name: "Ceramic Sealant", price: 40, image: "/images/aha.png" },
+      { name: "Trim Restoration", price: "75-150", image: "/images/trim-restoration.png" },
+      { name: "Engine Bay Cleaning", price: 50, image: "/images/aha.png" },
       {
         name: "Headlight Restoration",
         price: "40-80",
-        image: headlightRestoration,
+        image: "/images/headlight-restoration.png",
       },
     ],
     "Wash & Wax": [
       {
         name: "Headlight Restoration",
         price: "40-80",
-        image: headlightRestoration,
+        image: "/images/headlight-restoration.png",
       },
-      { name: "Engine Bay Cleaning", price: 50, image: engineBayClean },
-      { name: "Trim Restoration", price: "75-150", image: trimRestoration },
+      { name: "Engine Bay Cleaning", price: 50, image: "/images/engine-bay-clean.png" },
+      { name: "Trim Restoration", price: "75-150", image: "/images/trim-restoration.png" },
     ],
     "Paint Enhancement": [
       {
         name: "Headlight Restoration",
         price: "40-80",
-        image: headlightRestoration,
+        image: "/images/headlight-restoration.png",
       },
-      { name: "Engine Bay Cleaning", price: 50, image: engineBayClean },
-      { name: "Trim Restoration", price: "75-150", image: trimRestoration },
+      { name: "Engine Bay Cleaning", price: 50, image: "/images/engine-bay-clean.png" },
+      { name: "Trim Restoration", price: "75-150", image: "/images/trim-restoration.png" },
       {
         name: "Ceramic Coating",
         price: "ceramic-coating-dynamic",
-        image: ceramic,
+        image: "/images/ceramic-coating.png",
       },
     ],
     "One Step Paint Correction": [
       {
         name: "Headlight Restoration",
         price: "40-80",
-        image: headlightRestoration,
+        image: "/images/headlight-restoration.png",
       },
-      { name: "Engine Bay Cleaning", price: 50, image: engineBayClean },
-      { name: "Trim Restoration", price: "75-150", image: trimRestoration },
+      { name: "Engine Bay Cleaning", price: 50, image: "/images/engine-bay-clean.png" },
+      { name: "Trim Restoration", price: "75-150", image: "/images/trim-restoration.png" },
       {
         name: "Ceramic Coating",
         price: "ceramic-coating-dynamic",
-        image: ceramic,
+        image: "/images/ceramic-coating.png",
       },
     ],
     "Two Step Paint Correction": [
       {
         name: "Headlight Restoration",
         price: "40-80",
-        image: headlightRestoration,
+        image: "/images/headlight-restoration.png",
       },
-      { name: "Engine Bay Cleaning", price: 50, image: engineBayClean },
-      { name: "Trim Restoration", price: "75-150", image: trimRestoration },
+      { name: "Engine Bay Cleaning", price: 50, image: "/images/engine-bay-clean.png" },
+      { name: "Trim Restoration", price: "75-150", image: "/images/trim-restoration.png" },
       {
         name: "Ceramic Coating",
         price: "ceramic-coating-dynamic",
-        image: ceramic,
+        image: "/images/ceramic-coating.png",
       },
     ],
     "Standard Exterior": [
-      { name: "6-8 Month Sealant", price: 25, image: Sedan },
+      { name: "6-8 Month Sealant", price: 25, image: "/images/aha.png" },
       {
         name: "Headlight Restoration",
         price: "40-80",
-        image: headlightRestoration,
+        image: "/images/headlight-restoration.png",
       },
-      { name: "Engine Bay Cleaning", price: 50, image: engineBayClean },
-      { name: "Trim Restoration", price: "75-150", image: trimRestoration },
+      { name: "Engine Bay Cleaning", price: 50, image: "/images/engine-bay-clean.png" },
+      { name: "Trim Restoration", price: "75-150", image: "/images/trim-restoration.png" },
     ],
   };
 
@@ -224,18 +207,18 @@ function MonthlySub() {
     }
   };
   const carType = [
-    { name: "Sedan/Coupe", image: Sedan },
-    { name: "2 Row SUV", image: SUV },
-    { name: "3 Row/ Pickup truck", image: Mini },
-    { name: "Van", image: Van },
+    { name: "Sedan/Coupe", image: "/images/aha.png" },
+    { name: "2 Row SUV", image: "/images/2row-ap.png" },
+    { name: "3 Row/ Pickup truck", image: "/images/mini-van-ap.png" },
+    { name: "Van", image: "/images/van-ap.png" },
   ];
 
   const services = [
-    { name: "Exterior Only", image: exterior },
-    { name: "Interior Only", image: interior },
-    { name: "Exterior and Interior", image: exteriorInterior },
-    { name: "Paint Correction", image: polish },
-    { name: "Ceramic Coating", image: ceramic },
+    { name: "Exterior Only", image: "/images/Exterior-only.png" },
+    { name: "Interior Only", image: "/images/Interior-only.png" },
+    { name: "Exterior and Interior", image: "/images/Exterior-and-interior.png" },
+    { name: "Paint Correction", image: "/images/polish.png" },
+    { name: "Ceramic Coating", image: "/images/ceramic-coating.png" },
   ];
   const staticExcludedDates = [];
 
@@ -288,9 +271,7 @@ function MonthlySub() {
   useEffect(() => {
     async function fetchEvents() {
       try {
-        const res = await fetch(
-          "https://applyingpressure-api-production.up.railway.app/events"
-        );
+        const res = await fetch("/api/events");
         const data = await res.json();
         setEvents(data);
         findNextAvailableDate();
@@ -345,7 +326,7 @@ function MonthlySub() {
   const handleServiceClick = (serviceName) => {
     if (serviceName === "Ceramic Coating") {
       // Route to ceramic coating page
-      navigate("/ceramic-coating");
+      router.push("/ceramic-coating");
       return;
     }
 
@@ -538,21 +519,18 @@ function MonthlySub() {
         location: `${address}, ${zip}`,
       };
 
-      const response = await fetch(
-        "https://applyingpressure-api-production.up.railway.app/events",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newEvent),
-        }
-      );
+      const response = await fetch("/api/events", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newEvent),
+      });
 
       if (response.ok) {
         toast.success("Appointment booked successfully!");
         setTimeout(() => {
-          navigate("/");
+          router.push("/");
         }, 2000);
       } else {
         toast.error("Failed to book monthly subscription. Please try again.");
@@ -1073,7 +1051,7 @@ function MonthlySub() {
                         <ul className="package-details">
                           <li>
                             <img
-                              src={CheckIcon}
+                              src="/images/check.png"
                               alt="check"
                               className="check-icon"
                             />
@@ -1083,7 +1061,7 @@ function MonthlySub() {
                           <li>
                             {" "}
                             <img
-                              src={CheckIcon}
+                              src="/images/check.png"
                               alt="check"
                               className="check-icon"
                             />
@@ -1092,7 +1070,7 @@ function MonthlySub() {
                           <li>
                             {" "}
                             <img
-                              src={CheckIcon}
+                              src="/images/check.png"
                               alt="check"
                               className="check-icon"
                             />
@@ -1100,7 +1078,7 @@ function MonthlySub() {
                           </li>
                           <li>
                             <img
-                              src={CheckIcon}
+                              src="/images/check.png"
                               alt="check"
                               className="check-icon"
                             />
@@ -1192,7 +1170,7 @@ function MonthlySub() {
                       <ul className="package-details">
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1202,7 +1180,7 @@ function MonthlySub() {
                         <li>
                           {" "}
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1211,7 +1189,7 @@ function MonthlySub() {
                         <li>
                           {" "}
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1220,7 +1198,7 @@ function MonthlySub() {
                         <li>
                           {" "}
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1229,7 +1207,7 @@ function MonthlySub() {
                         <li>
                           {" "}
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1238,7 +1216,7 @@ function MonthlySub() {
                         <li>
                           {" "}
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1247,7 +1225,7 @@ function MonthlySub() {
                         <li>
                           {" "}
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1322,7 +1300,7 @@ function MonthlySub() {
                       <ul className="package-details">
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1331,7 +1309,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1339,7 +1317,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1347,7 +1325,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1355,7 +1333,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1363,7 +1341,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1371,7 +1349,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1379,7 +1357,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1387,7 +1365,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1395,7 +1373,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1489,7 +1467,7 @@ function MonthlySub() {
                         <ul className="package-details">
                           <li>
                             <img
-                              src={CheckIcon}
+                              src="/images/check.png"
                               alt="check"
                               className="check-icon"
                             />
@@ -1498,7 +1476,7 @@ function MonthlySub() {
 
                           <li>
                             <img
-                              src={CheckIcon}
+                              src="/images/check.png"
                               alt="check"
                               className="check-icon"
                             />
@@ -1506,7 +1484,7 @@ function MonthlySub() {
                           </li>
                           <li>
                             <img
-                              src={CheckIcon}
+                              src="/images/check.png"
                               alt="check"
                               className="check-icon"
                             />
@@ -1514,7 +1492,7 @@ function MonthlySub() {
                           </li>
                           <li>
                             <img
-                              src={CheckIcon}
+                              src="/images/check.png"
                               alt="check"
                               className="check-icon"
                             />
@@ -1576,7 +1554,7 @@ function MonthlySub() {
                       <ul className="package-details">
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1584,7 +1562,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1592,7 +1570,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1600,7 +1578,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1608,7 +1586,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1616,7 +1594,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1624,7 +1602,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1679,7 +1657,7 @@ function MonthlySub() {
                       <ul className="package-details">
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1687,7 +1665,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1695,7 +1673,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1703,7 +1681,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1711,7 +1689,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1719,7 +1697,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1727,7 +1705,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1735,7 +1713,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1743,7 +1721,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1751,7 +1729,7 @@ function MonthlySub() {
                         </li>
                         <li>
                           <img
-                            src={CheckIcon}
+                            src="/images/check.png"
                             alt="check"
                             className="check-icon"
                           />
@@ -1808,7 +1786,7 @@ function MonthlySub() {
                     <ul className="package-details">
                       <li>
                         <img
-                          src={CheckIcon}
+                          src="/images/check.png"
                           alt="check"
                           className="check-icon"
                         />
@@ -1816,7 +1794,7 @@ function MonthlySub() {
                       </li>
                       <li>
                         <img
-                          src={CheckIcon}
+                          src="/images/check.png"
                           alt="check"
                           className="check-icon"
                         />
@@ -1824,7 +1802,7 @@ function MonthlySub() {
                       </li>
                       <li>
                         <img
-                          src={CheckIcon}
+                          src="/images/check.png"
                           alt="check"
                           className="check-icon"
                         />
@@ -1832,7 +1810,7 @@ function MonthlySub() {
                       </li>
                       <li>
                         <img
-                          src={CheckIcon}
+                          src="/images/check.png"
                           alt="check"
                           className="check-icon"
                         />
@@ -1840,7 +1818,7 @@ function MonthlySub() {
                       </li>
                       <li>
                         <img
-                          src={CheckIcon}
+                          src="/images/check.png"
                           alt="check"
                           className="check-icon"
                         />
@@ -1848,7 +1826,7 @@ function MonthlySub() {
                       </li>
                       <li>
                         <img
-                          src={CheckIcon}
+                          src="/images/check.png"
                           alt="check"
                           className="check-icon"
                         />
@@ -1856,7 +1834,7 @@ function MonthlySub() {
                       </li>
                       <li>
                         <img
-                          src={CheckIcon}
+                          src="/images/check.png"
                           alt="check"
                           className="check-icon"
                         />
@@ -1902,7 +1880,7 @@ function MonthlySub() {
                     <ul className="package-details">
                       <li>
                         <img
-                          src={CheckIcon}
+                          src="/images/check.png"
                           alt="check"
                           className="check-icon"
                         />
@@ -1910,7 +1888,7 @@ function MonthlySub() {
                       </li>
                       <li>
                         <img
-                          src={CheckIcon}
+                          src="/images/check.png"
                           alt="check"
                           className="check-icon"
                         />
@@ -1918,7 +1896,7 @@ function MonthlySub() {
                       </li>
                       <li>
                         <img
-                          src={CheckIcon}
+                          src="/images/check.png"
                           alt="check"
                           className="check-icon"
                         />
@@ -1926,7 +1904,7 @@ function MonthlySub() {
                       </li>
                       <li>
                         <img
-                          src={CheckIcon}
+                          src="/images/check.png"
                           alt="check"
                           className="check-icon"
                         />
@@ -1934,7 +1912,7 @@ function MonthlySub() {
                       </li>
                       <li>
                         <img
-                          src={CheckIcon}
+                          src="/images/check.png"
                           alt="check"
                           className="check-icon"
                         />
@@ -1942,7 +1920,7 @@ function MonthlySub() {
                       </li>
                       <li>
                         <img
-                          src={CheckIcon}
+                          src="/images/check.png"
                           alt="check"
                           className="check-icon"
                         />
@@ -1950,7 +1928,7 @@ function MonthlySub() {
                       </li>
                       <li>
                         <img
-                          src={CheckIcon}
+                          src="/images/check.png"
                           alt="check"
                           className="check-icon"
                         />
@@ -1958,7 +1936,7 @@ function MonthlySub() {
                       </li>
                       <li>
                         <img
-                          src={CheckIcon}
+                          src="/images/check.png"
                           alt="check"
                           className="check-icon"
                         />

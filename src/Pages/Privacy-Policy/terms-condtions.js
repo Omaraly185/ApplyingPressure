@@ -1,11 +1,11 @@
 import React from "react";
-import "./TermsAndConditions.css";
-import { SEOComponent, termsConditionsSEO } from "../../Component/SEO";
+
+import { SEOComponent, termsConditionsPageSEO } from "../../Component/SEO";
 
 const TermsAndConditions = () => {
   return (
     <>
-      <SEOComponent {...termsConditionsSEO} />
+      <SEOComponent {...termsConditionsPageSEO} />
       <div className="terms-container">
       <h1 className="terms-title">Terms and Conditions</h1>
 

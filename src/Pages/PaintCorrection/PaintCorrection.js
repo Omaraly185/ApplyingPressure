@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./PaintCorrection.scss";
-import CheckIcon from "./check.png";
+import { useRouter } from "next/router";
+
 import carPricing from "../Book-Now/BookingForm/carPricing.json";
 
 function PaintCorrection() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [selectedCar, setSelectedCar] = useState(null);
 
   const carTypes = [
@@ -30,8 +29,9 @@ function PaintCorrection() {
       return;
     }
 
-    navigate("/book-now", {
-      state: {
+    router.push({
+      pathname: "/Book_Now",
+      query: {
         selectedService: "Paint Correction",
         serviceType: serviceType,
         carType: selectedCar,
@@ -81,7 +81,7 @@ function PaintCorrection() {
 
             <div className="service-features">
               <div className="feature-item">
-                <img src={CheckIcon} alt="check" className="check-icon" />
+                <img src="/images/check.png" alt="check" className="check-icon" />
                 <span>Standard and Wash & wax included</span>
               </div>
             </div>
@@ -145,7 +145,7 @@ function PaintCorrection() {
 
             <div className="service-features">
               <div className="feature-item">
-                <img src={CheckIcon} alt="check" className="check-icon" />
+                <img src="/images/check.png" alt="check" className="check-icon" />
                 <span>Standard and Wash & wax included.</span>
               </div>
             </div>

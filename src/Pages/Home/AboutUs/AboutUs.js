@@ -1,7 +1,6 @@
 import React from "react";
-import "./AboutUs.scss";
-import About5 from "./AboutUsPics/About5.jpg";
-import About9 from "./AboutUsPics/About9.jpg";
+
+
 
 function AboutUs() {
   return (
@@ -11,7 +10,7 @@ function AboutUs() {
           <section id="about-us-section">
             <div className="about-us-image">
               <img
-                src={About5}
+                src="/images/About5.jpg"
                 width="808"
                 height="458"
                 alt="Interior Cleaning Applying Pressure Mobile Detailing"
@@ -45,7 +44,7 @@ function AboutUs() {
           <section id="history-section">
             <div className="history-image">
               <img
-                src={About9}
+                src="/images/About9.jpg"
                 width="951"
                 height="471"
                 alt="Ceramic Coating job Applying Pressure Mobile Detailing"

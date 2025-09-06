@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Header from "../../Component/Header";
-import "./ceramic-coating.scss";
-import video1 from "./cc.mp4";
+
+
 import Footer from "../../Component/Footer";
 import { SEOComponent, ceramicCoatingPageSEO } from "../../Component/SEO";
 
@@ -15,9 +15,11 @@ function CeramicCoating() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const scrollToForm = () => {
-    const formElement = document.querySelector(".form-container");
-    if (formElement) {
-      formElement.scrollIntoView({ behavior: "smooth" });
+    if (typeof window !== 'undefined') {
+      const formElement = document.querySelector(".form-container");
+      if (formElement) {
+        formElement.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
@@ -74,7 +76,7 @@ function CeramicCoating() {
           playsInline
           aria-label="Promotional video showing ceramic coating process"
         >
-          <source src={video1} type="video/mp4" />
+          <source src="/cc.mp4" type="video/mp4" />
         </video>
         <div className="overlay">
           <div className="ceramic-coating-container">

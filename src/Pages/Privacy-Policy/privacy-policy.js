@@ -1,11 +1,11 @@
 import React from "react";
-import "./PrivacyPolicy.css";
-import { SEOComponent, privacyPolicySEO } from "../../Component/SEO";
+
+import { SEOComponent, privacyPolicyPageSEO } from "../../Component/SEO";
 
 const PrivacyPolicy = () => {
   return (
     <>
-      <SEOComponent {...privacyPolicySEO} />
+      <SEOComponent {...privacyPolicyPageSEO} />
       <div className="privacy-policy-container">
       <h1 className="privacy-title">Privacy Policy</h1>
 

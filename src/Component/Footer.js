@@ -1,16 +1,15 @@
 import React from "react";
-import "./footer.css";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <Link to="/privacy-policy" className="footer-link">
+        <Link href="/privacy-policy" className="footer-link">
           Privacy Policy
         </Link>
         <span className="divider">-</span>
-        <Link to="/terms-conditions" className="footer-link">
+        <Link href="/terms-conditions" className="footer-link">
           Terms & Conditions
         </Link>
       </div>

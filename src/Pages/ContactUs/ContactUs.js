@@ -1,11 +1,7 @@
 import React from "react";
 import Header from "../../Component/Header";
-import "./ContactUs.css";
-import AP from "./AP.png";
-import Instgram from "./Instagram.svg";
-import FaceBook from "./Facebook.svg";
-import Tiktok from "./Tiktok.svg";
-import Phone from "./phone.png";
+
+
 import { SEOComponent, contactPageSEO } from "../../Component/SEO";
 
 function ContactUs() {
@@ -23,7 +19,7 @@ function ContactUs() {
         <div className="Section2" style={{ marginTop: "80px" }}>
           <div className="controller-img">
             <img
-              src={AP}
+              src="/images/AP.png"
               className="ContactImg"
               alt="Applying Pressure Mobile Detailing Logo"
             />
@@ -37,7 +33,7 @@ function ContactUs() {
               className="game-link instagram"
             >
               <div className="svgLogo">
-                <img style={imgeStyle} src={Instgram} alt="Instagram icon" />
+                <img style={imgeStyle} src="/images/Instagram.svg" alt="Instagram icon" />
               </div>
               <div style={imgStyle}>Instagram</div>
             </a>
@@ -46,7 +42,7 @@ function ContactUs() {
               className="game-link facebook"
             >
               <div className="svgLogo">
-                <img max-width="25px" src={FaceBook} alt="Facebook icon" />
+                <img max-width="25px" src="/images/Facebook.svg" alt="Facebook icon" />
               </div>
               <div style={imgStyle}>Facebook</div>
             </a>
@@ -55,7 +51,7 @@ function ContactUs() {
               className="game-link tiktok"
             >
               <div className="svgLogo noboxing">
-                <img max-width="25px" src={Tiktok} alt="TikTok icon" />
+                <img max-width="25px" src="/images/Tiktok.svg" alt="TikTok icon" />
               </div>
               <div className="boxing" style={imgStyle}>
                 TikTok
@@ -64,7 +60,7 @@ function ContactUs() {
             {/* #81fb6b */}
             <a href="tel:+19295285191" className="game-link phoneNumber">
               <div className="svgLogo">
-                <img width="25px" src={Phone} alt="Phone icon" />
+                <img width="25px" src="/images/phone.png" alt="Phone icon" />
               </div>
               <div style={imgStyle}>Call Us</div>
             </a>

@@ -1,6 +1,5 @@
 import React from "react";
-import video1 from "./Homevideo.mp4";
-import "./home.css";
+
 import Button from "../../Component/Button";
 
 function HomeForm() {
@@ -14,7 +13,7 @@ function HomeForm() {
           playsInline
           aria-label="Background video showing detailing service"
         >
-          <source src={video1} type="video/mp4" />
+          <source src="/Homevideo.mp4" type="video/mp4" />
         </video>
         <div className="parent">
           <header className="title">
