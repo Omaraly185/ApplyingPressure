@@ -4,34 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="06bcbe42-6cde-44c5-8254-70e23a7119f4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/AugmentWebviewStateStore.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AugmentWebviewStateStore.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/Book_Now.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/Book_Now.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/ceramic-coating.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/ceramic-coating.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/contactus.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/contactus.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/privacy-policy.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/privacy-policy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/terms-conditions.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/terms-conditions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/robots.txt" beforeDir="false" afterPath="$PROJECT_DIR$/public/robots.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sitemap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/public/sitemap.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Footer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/footer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Ceramic-Coating/cc.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Ceramic-Coating/ceramic-coating.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Ceramic-Coating/ceramic-coating.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/ContactUs/AP.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/ContactUs/ContactUs.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/ContactUs/ContactUs.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/ContactUs/Facebook.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/ContactUs/Instagram.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/ContactUs/Reddit.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/ContactUs/Tiktok.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/ContactUs/Twitter.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/ContactUs/ny.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/ContactUs/phone.png" beforeDir="false" />
-    </list>
+    <list default="true" id="06bcbe42-6cde-44c5-8254-70e23a7119f4" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -105,7 +78,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1757642085343</updated>
-      <workItem from="1757642086482" duration="2884000" />
+      <workItem from="1757642086482" duration="3492000" />
     </task>
     <servers />
   </component>
