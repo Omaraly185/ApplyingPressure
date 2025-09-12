@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import PrivacyPolicy from "../src/Pages/Privacy-Policy/privacy-policy";
+import Footer from "../src/Component/Footer";
 import { privacyPolicyPageSEO } from "../src/Component/SEO";
 
 export default function PrivacyPolicyPage() {
@@ -29,6 +30,7 @@ export default function PrivacyPolicyPage() {
         />
       </Head>
       <PrivacyPolicy />
+      <Footer />
     </>
   );
 }

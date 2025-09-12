@@ -3,9 +3,9 @@ Allow: /
 
 # Important pages for SEO
 Allow: /
-Allow: /Ceramic-Coating
+Allow: /ceramic-coating
 Allow: /Book_Now
-Allow: /ContactUs
+Allow: /contactUs
 Allow: /privacy-policy
 Allow: /terms-conditions
 

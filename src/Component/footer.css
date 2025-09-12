@@ -10,7 +10,9 @@
 .footer-content {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 15px;
+  flex-wrap: wrap;
 }
 
 .footer-link {
@@ -23,6 +25,32 @@
   text-decoration: underline;
 }
 
+.phone-link {
+  font-weight: bold;
+  color: #00afef;
+}
+
+.phone-link:hover {
+  color: #ffffff;
+}
+
 .divider {
   color: #00afef;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-link {
+    font-size: 16px;
+  }
+
+  .phone-link {
+    font-size: 18px;
+    order: -1; /* Show phone number first on mobile */
+  }
 }

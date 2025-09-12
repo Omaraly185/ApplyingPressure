@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import TermsAndConditions from "../src/Pages/Privacy-Policy/terms-condtions";
+import Footer from "../src/Component/Footer";
 import { termsConditionsPageSEO } from "../src/Component/SEO";
 
 export default function TermsConditionsPage() {
@@ -29,6 +30,7 @@ export default function TermsConditionsPage() {
         />
       </Head>
       <TermsAndConditions />
+      <Footer />
     </>
   );
 }

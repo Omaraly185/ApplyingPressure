@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import MonthlySub from "../src/Pages/Monthly/MonthlySub";
+import Footer from "../src/Component/Footer";
 import { bookingPageSEO } from "../src/Component/SEO";
 
 export default function BookNow() {
@@ -29,6 +30,7 @@ export default function BookNow() {
         />
       </Head>
       <MonthlySub />
+      <Footer />
     </>
   );
 }

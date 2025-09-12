@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import Header from "../../Component/Header";
-
-
 import Footer from "../../Component/Footer";
 import { SEOComponent, ceramicCoatingPageSEO } from "../../Component/SEO";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import CeramicCoating from "../src/Pages/Ceramic-Coating/ceramic-coating";
+import CeramicCoating from "../src/Pages/CeramicCoating/ceramic-coating";
 import { ceramicCoatingPageSEO } from "../src/Component/SEO";
 
 export default function CeramicCoatingPage() {

@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
-import ContactUs from "../src/Pages/ContactUs/ContactUs";
+import ContactUs from "../src/Pages/Contact/ContactUs";
+import Footer from "../src/Component/Footer";
 import { contactPageSEO } from "../src/Component/SEO";
 
 export default function ContactUsPage() {
@@ -29,6 +30,7 @@ export default function ContactUsPage() {
         />
       </Head>
       <ContactUs />
+      <Footer />
     </>
   );
 }

@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  trailingSlash: false,
+  skipTrailingSlashRedirect: true,
 
 
-  
   // Enable SASS support
   sassOptions: {
     includePaths: ['./src'],
@@ -15,41 +16,10 @@ const nextConfig = {
     formats: ['image/webp', 'image/avif'],
   },
 
-  // Redirects for SEO
-  async redirects() {
-    return [
-      {
-        source: '/book-now',
-        destination: '/Book_Now',
-        permanent: true,
-      },
-      {
-        source: '/Ceramic-Coating',
-        destination: '/ceramic-coating',
-        permanent: true,
-      },
-      {
-        source: '/ContactUs',
-        destination: '/contactus',
-        permanent: true,
-      },
-      {
-        source: '/contact-us',
-        destination: '/contactus',
-        permanent: true,
-      },
-      {
-        source: '/privacy-policy',
-        destination: '/privacy-policy',
-        permanent: false,
-      },
-      {
-        source: '/terms-conditions',
-        destination: '/terms-conditions',
-        permanent: false,
-      },
-    ];
-  },
+  // Redirects for SEO - removed to prevent redirect loops
+  // async redirects() {
+  //   return [];
+  // },
 
   // Headers for security and performance
   async headers() {
