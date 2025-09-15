@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 
 
@@ -9,11 +10,16 @@ function AboutUs() {
         <div className="we-are-block">
           <section id="about-us-section">
             <div className="about-us-image">
-              <img
+              <Image
                 src="/images/About5.jpg"
-                width="808"
-                height="458"
                 alt="Interior Cleaning Applying Pressure Mobile Detailing"
+                fill
+                sizes="(max-width: 644px) 100vw, (max-width: 860px) 100vw, (max-width: 1200px) 50vw, 808px"
+                style={{
+                  objectFit: 'cover',
+                  objectPosition: 'center center'
+                }}
+                priority
               />
             </div>
 
@@ -43,11 +49,15 @@ function AboutUs() {
 
           <section id="history-section">
             <div className="history-image">
-              <img
+              <Image
                 src="/images/About9.jpg"
-                width="951"
-                height="471"
                 alt="Ceramic Coating job Applying Pressure Mobile Detailing"
+                fill
+                sizes="(max-width: 644px) 100vw, (max-width: 860px) 100vw, (max-width: 1200px) 50vw, 820px"
+                style={{
+                  objectFit: 'cover',
+                  objectPosition: 'center center'
+                }}
               />
             </div>
 
