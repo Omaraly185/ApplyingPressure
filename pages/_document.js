@@ -5,6 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <meta name="google-site-verification" content="26a2dbd97c5957bf" />
+        <meta name="apple-domain-verification" content="CPOVj8d9FxlBcN6d_ePxf786NwApV1fG72LR0Ijya2Y" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link rel="preconnect" href="https://applyingpressure-api-production.up.railway.app" />
