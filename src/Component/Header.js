@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import $ from "jquery";
 
 function Header() {
   const navbarRef = useRef(null);
@@ -11,7 +10,7 @@ function Header() {
 
   const handleMenuToggle = () => {
     if (typeof window !== 'undefined') {
-      const windowWidth = $(window).width();
+      const windowWidth = window.innerWidth;
       if (windowWidth < 800) {
         setIsMenuOpen(!isMenuOpen);
         // Toggle the menu-open class on the active element
@@ -31,7 +30,7 @@ function Header() {
         navbarRef.current &&
         !navbarRef.current.contains(e.target) &&
         !menuButtonRef.current.contains(e.target) &&
-        $(window).width() < 800 &&
+        window.innerWidth < 800 &&
         isMenuOpen
       ) {
         setIsMenuOpen(false);
@@ -50,7 +49,7 @@ function Header() {
     if (typeof window === 'undefined') return;
 
     const initializeMenu = () => {
-      const windowWidth = $(window).width();
+      const windowWidth = window.innerWidth;
       setIsMobile(windowWidth < 800);
 
       if (windowWidth >= 800) {
@@ -63,7 +62,7 @@ function Header() {
     };
 
     const handleResize = () => {
-      const windowWidth = $(window).width();
+      const windowWidth = window.innerWidth;
       setIsMobile(windowWidth < 800);
 
       if (windowWidth >= 800) {
@@ -80,11 +79,11 @@ function Header() {
       initializeMenu();
     }, 100);
 
-    $(window).on("resize", handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
       clearTimeout(timeoutId);
-      $(window).off("resize", handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
