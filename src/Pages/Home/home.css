@@ -6,6 +6,12 @@
 * {
   box-sizing: border-box;
 }
+
+/* Optimized spacing section - replaces 42 <br> tags for better LCP performance */
+.home-spacing-section {
+  height: 800px; /* Equivalent to 42 <br> tags at ~16px line-height */
+  width: 100%;
+}
 .content {
   position: absolute;
   right: 0;

@@ -8,7 +8,6 @@ import CallToAction from "../src/Pages/Home/CallToAction/CallToAction";
 import Footer from "../src/Component/Footer";
 import { homePageSEO } from "../src/Component/SEO";
 
-
 export default function Home() {
   return (
     <>
@@ -17,14 +16,23 @@ export default function Home() {
         <meta name="description" content={homePageSEO.description} />
         <meta name="keywords" content={homePageSEO.keywords} />
         <meta property="og:title" content={homePageSEO.openGraph.title} />
-        <meta property="og:description" content={homePageSEO.openGraph.description} />
+        <meta
+          property="og:description"
+          content={homePageSEO.openGraph.description}
+        />
         <meta property="og:type" content={homePageSEO.openGraph.type} />
         <meta property="og:url" content={homePageSEO.openGraph.url} />
         <meta property="og:image" content={homePageSEO.openGraph.image} />
-        <meta property="og:site_name" content={homePageSEO.openGraph.siteName} />
+        <meta
+          property="og:site_name"
+          content={homePageSEO.openGraph.siteName}
+        />
         <meta name="twitter:card" content={homePageSEO.twitter.card} />
         <meta name="twitter:title" content={homePageSEO.twitter.title} />
-        <meta name="twitter:description" content={homePageSEO.twitter.description} />
+        <meta
+          name="twitter:description"
+          content={homePageSEO.twitter.description}
+        />
         <meta name="twitter:image" content={homePageSEO.twitter.image} />
         <link rel="canonical" href={homePageSEO.canonical} />
         <script
@@ -40,12 +48,8 @@ export default function Home() {
       >
         <Header />
         <HomeForm />
-        <div></div>
-        <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />{" "}
-        <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />{" "}
-        <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />{" "}
-        <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
-        <br /> <br />
+        {/* Spacing section - optimized for performance while maintaining visual layout */}
+        <div className="home-spacing-section"></div>
         <AboutUs />
         <TestimonialSlider />
         <CallToAction />
