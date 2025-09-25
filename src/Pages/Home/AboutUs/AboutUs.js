@@ -1,8 +1,6 @@
 import React from "react";
 import Image from "next/image";
 
-
-
 function AboutUs() {
   return (
     <main className="fullAbout">
@@ -16,8 +14,8 @@ function AboutUs() {
                 fill
                 sizes="(max-width: 644px) 100vw, (max-width: 860px) 100vw, (max-width: 1200px) 50vw, 808px"
                 style={{
-                  objectFit: 'cover',
-                  objectPosition: 'center center'
+                  objectFit: "cover",
+                  objectPosition: "center center",
                 }}
                 priority
                 fetchPriority="high"
@@ -32,17 +30,17 @@ function AboutUs() {
               </header>
 
               <p className="letter-spacing">
-                Welcome to Applying Pressure Mobile Detailing - your go-to
-                solution for exceptional car cleaning and detailing services in
-                New York and New Jersey. As a team of experienced professionals,
-                we not only deeply care about cars but also appreciate their
-                importance in your day-to-day life. Using advanced tools,
-                innovative techniques, and eco-friendly products, we offer a
-                wide range of services from quick washes to full detailing
-                packages and ceramic coatings. We understand that your car is a
-                reflection of you, and we are committed to ensuring it always
-                shines brilliantly, capturing the essence of your personality in
-                its gleaming finish. Call us now at{" "}
+                Applying Pressure Mobile Detailing is your go-to solution for
+                professional mobile detailing and car detailing in NYC, Long
+                Island, and New Jersey. Whether you’re searching for mobile car
+                detailing NYC, car detailing in Brooklyn, or even Astoria mobile
+                detailing, our team delivers top-notch auto detailing NYC
+                residents trust. We specialize in complete interior detailing,
+                advanced ceramic coating and ceramic coating detailing, using
+                eco-friendly products and modern techniques to keep your vehicle
+                looking its best. So when you’re typing “mobile detailing near
+                me,” know that we’re ready to bring a showroom shine straight to
+                your driveway. Call us today at{" "}
                 <a href="tel:+19295285191" className="PhonenumberLink">
                   (929) 528-5191
                 </a>
@@ -58,28 +56,28 @@ function AboutUs() {
                 fill
                 sizes="(max-width: 644px) 100vw, (max-width: 860px) 100vw, (max-width: 1200px) 50vw, 820px"
                 style={{
-                  objectFit: 'cover',
-                  objectPosition: 'center center'
+                  objectFit: "cover",
+                  objectPosition: "center center",
                 }}
               />
             </div>
 
             <div className="history-info">
               <header>
-                <h2>Why Choose Us</h2>
+                <h2>Why Choose AP Mobile Detailing</h2>
               </header>
 
               <p className="letter-spacing">
-                What sets us apart from others in the market is our unwavering
-                commitment to customer satisfaction. We take the time to
-                understand your needs, evaluate your car's condition, and
-                recommend the best solutions. Additionally, we offer flexible
-                scheduling and competitive pricing. We don't just aim to meet
-                your expectations but to exceed them. If you're looking for a
-                mobile detailing service that offers unparalleled attention to
-                detail and customer service, Applying Pressure Mobile Detailing
-                is your best choice. Contact us today to schedule your
-                appointment. WE COME TO YOU!
+                At Applying Pressure Mobile Detailing, we bring professional
+                detailing right to your doorstep — whether you’re in Brooklyn,
+                Queens, Manhattan, the Bronx, or Staten Island. Our team
+                carefully evaluates your vehicle’s condition, recommends the
+                best solutions, and customizes services to fit your schedule.
+                With flexible appointments, competitive pricing, and unmatched
+                attention to detail, we consistently exceed expectations. If
+                you’re searching for trusted mobile detailing in New York City,
+                Long Island, or New Jersey, contact us today —{" "}
+                <strong>we come to you</strong>!
               </p>
             </div>
           </section>

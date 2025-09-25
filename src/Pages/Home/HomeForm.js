@@ -17,12 +17,8 @@ function HomeForm() {
         </video>
         <div className="parent">
           <header className="title">
-            <h2>Applying</h2>
-            <h1>Pressure</h1>
+            <h1>Applying<br />Pressure <span className="mobile-detailing">Mobile Detailing</span></h1>
             <div className="tagline">
-              <p className="letter-spacing">
-                We wash and wax while you sit and relax!
-              </p>
             </div>
             <Button />
           </header>

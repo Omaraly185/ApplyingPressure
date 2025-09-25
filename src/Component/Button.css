@@ -106,6 +106,7 @@
 
 @media all and (max-width: 450px) {
   .container {
-    margin-left: 14%;
+    width: 100%;
+    max-width: 300px;
   }
 }

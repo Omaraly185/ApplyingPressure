@@ -58,26 +58,17 @@ body {
   position: absolute;
   margin-top: 270px;
   top: 0;
-  right: 0;
-}
-
-.title h2 {
-  font-size: 55pt;
-  font-family: MyFont;
-  letter-spacing: 3px;
-  color: white;
-  line-height: 1em;
-  text-transform: uppercase;
+  right: 50px;
 }
 
 .title h1 {
   font-size: 55pt;
   font-family: MyFont;
-  margin-left: 1px;
   letter-spacing: 3px;
   color: white;
   line-height: 1em;
   text-transform: uppercase;
+  margin-left: 1px;
 }
 
 .tagline {
@@ -85,12 +76,27 @@ body {
   color: white;
   margin-top: 30px;
 }
+
+.title h1 .mobile-detailing {
+  font-size: 35pt;
+  font-family: Arial, Helvetica, sans-serif;
+  display: block;
+  margin-top: 10px;
+}
+
+.title .container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+}
 @media all and (max-width: 650px) {
   .title h1 {
     font-size: 45pt;
   }
-  .title h2 {
-    font-size: 45pt;
+
+  .title h1 .mobile-detailing {
+    font-size: 28pt;
   }
 }
 
@@ -99,9 +105,14 @@ body {
     font-size: 35pt;
     margin-left: 30%;
   }
-  .title h2 {
-    font-size: 35pt;
-    margin-left: 30%;
+
+  .title {
+    right: 20px;
+    margin-top: 190px;
+  }
+
+  .title h1 .mobile-detailing {
+    font-size: 24pt;
   }
 
   .title p {
@@ -113,16 +124,13 @@ body {
     font-size: 35pt;
     margin-left: 45%;
   }
-  .title h2 {
-    font-size: 35pt;
-    margin-left: 45%;
+
+  .title h1 .mobile-detailing {
+    font-size: 22pt;
   }
 
   .title p {
     margin-left: 45%;
-  }
-  .container .btn a {
-    margin-left: 40px;
   }
 }
 
@@ -139,8 +147,5 @@ body {
   .title p {
     font-size: 18px;
     margin-left: 51%;
-  }
-  .container .btn a {
-    margin-left: 70px;
   }
 }

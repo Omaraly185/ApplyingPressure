@@ -13,7 +13,15 @@ export const localBusinessSchema = {
   image: "https://www.apdetailers.com/APLogo.png",
   telephone: "+1-929-528-5191",
   email: "applyingpressureaq@gmail.com",
-  // Mobile service - no physical storefront address
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "2065 Shore Blvd",
+    addressLocality: "Astoria",
+    addressRegion: "NY",
+    postalCode: "11105",
+    addressCountry: "US",
+  },
+  // Mobile service with business address
   serviceArea: {
     "@type": "GeoCircle",
     geoMidpoint: {
@@ -191,6 +199,14 @@ export const enhancedLocalBusinessSchema = {
   image: "https://www.apdetailers.com/APLogo.png",
   telephone: "+1-929-528-5191",
   email: "applyingpressureaq@gmail.com",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "20-65 Shore Blvd",
+    addressLocality: "Astoria",
+    addressRegion: "NY",
+    postalCode: "11105",
+    addressCountry: "US",
+  },
 
   serviceArea: {
     "@type": "GeoCircle",
@@ -344,6 +360,7 @@ export const enhancedLocalBusinessSchema = {
     "Exterior Detailing",
     "Car Washing",
     "Auto Detailing",
+    "Car Detailing",
   ],
 
   priceRange: "$$",
