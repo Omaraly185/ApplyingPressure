@@ -50,7 +50,7 @@ function MonthlySub() {
   const [showPriceBreakdown, setShowPriceBreakdown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showPriceInfo, setShowPriceInfo] = useState(false);
-  const [setPriceInfoPackage] = useState(null);
+  const [priceInfoPackage, setPriceInfoPackage] = useState(null);
 
   const plusServicesByPackage = {
     GOLD: [

@@ -137,12 +137,17 @@ export const localSEOOptimization = {
   // Local business schema
   generateLocalBusinessSchema: (additionalData = {}) => ({
     "@context": "https://schema.org",
-    "@type": "AutoRepair",
+    "@type": "AutoWash",
     name: "Applying Pressure Mobile Detailing",
     telephone: "+1-929-528-5191",
     email: "applyingpressureaq@gmail.com",
     url: "https://www.apdetailers.com/",
-    serviceType: "Mobile Car Detailing",
+    category: [
+      "Mobile Detailing NYC",
+      "Car Detailing",
+      "Auto Detailing"
+    ],
+    additionalType: "https://schema.org/AutoWash",
     areaServed: [
       {
         "@type": "City",

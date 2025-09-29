@@ -2,7 +2,7 @@
 
 export const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "AutoRepair",
+  "@type": ["AutoWash", "LocalBusiness"],
   "@id": "https://www.apdetailers.com/#organization",
   name: "Applying Pressure Mobile Detailing",
   alternateName: "AP Detailers",
@@ -15,7 +15,7 @@ export const localBusinessSchema = {
   email: "applyingpressureaq@gmail.com",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "2065 Shore Blvd",
+    streetAddress: "20-65 Shore Blvd",
     addressLocality: "Astoria",
     addressRegion: "NY",
     postalCode: "11105",
@@ -48,13 +48,6 @@ export const localBusinessSchema = {
       sameAs: "https://en.wikipedia.org/wiki/New_Jersey",
     },
   ],
-  serviceType: [
-    "Mobile Car Detailing",
-    "Ceramic Coating",
-    "Paint Correction",
-    "Interior Detailing",
-    "Exterior Detailing",
-  ],
   priceRange: "$$",
   openingHours: "Mo-Su 08:00-18:00",
   sameAs: [
@@ -69,8 +62,9 @@ export const serviceSchema = (serviceName, serviceDescription, serviceUrl) => ({
   name: serviceName,
   description: serviceDescription,
   url: serviceUrl,
+  serviceOutput: "Clean and restored vehicle",
   provider: {
-    "@type": "AutoRepair",
+    "@type": "AutoWash",
     name: "Applying Pressure Mobile Detailing",
     url: "https://www.apdetailers.com/",
   },
@@ -88,7 +82,13 @@ export const serviceSchema = (serviceName, serviceDescription, serviceUrl) => ({
       name: "New Jersey",
     },
   ],
-  serviceType: serviceName,
+  category: ["Mobile Detailing", "Car Detailing", "Auto Detailing"],
+  additionalType: "https://schema.org/AutoWash",
+  offers: {
+    "@type": "Offer",
+    availability: "https://schema.org/InStock",
+    priceCurrency: "USD",
+  },
 });
 
 export const ceramicCoatingSchema = {
@@ -98,13 +98,24 @@ export const ceramicCoatingSchema = {
   description:
     "Professional ceramic coating application for cars in NYC, Long Island, and New Jersey. Long-lasting paint protection with hydrophobic properties.",
   url: "https://www.apdetailers.com/Ceramic-Coating",
+  serviceOutput: "Paint protection lasting up to 5 years",
   provider: {
-    "@type": "AutoRepair",
+    "@type": "AutoWash",
     name: "Applying Pressure Mobile Detailing",
     url: "https://www.apdetailers.com/",
   },
-  serviceType: "Ceramic Coating",
-  category: "Automotive Services",
+  category: [
+    "Mobile Detailing",
+    "Car Detailing",
+    "Auto Detailing",
+    "Vehicle Maintenance",
+  ],
+  additionalType: "https://schema.org/AutoWash",
+  offers: {
+    "@type": "Offer",
+    availability: "https://schema.org/InStock",
+    priceCurrency: "USD",
+  },
   areaServed: [
     {
       "@type": "City",
@@ -133,13 +144,19 @@ export const mobileDetailingSchema = {
   description:
     "Professional mobile car detailing services that come to you in NYC, Long Island, and New Jersey. Interior and exterior detailing at your location.",
   url: "https://www.apdetailers.com/",
+  serviceOutput: "Clean and restored vehicle at your location",
   provider: {
-    "@type": "AutoRepair",
+    "@type": "AutoWash",
     name: "Applying Pressure Mobile Detailing",
     url: "https://www.apdetailers.com/",
   },
-  serviceType: "Mobile Car Detailing",
-  category: "Automotive Services",
+  category: ["Mobile Detailing", "Car Detailing", "Auto Detailing"],
+  additionalType: "https://schema.org/AutoWash",
+  offers: {
+    "@type": "Offer",
+    availability: "https://schema.org/InStock",
+    priceCurrency: "USD",
+  },
   areaServed: [
     {
       "@type": "City",
@@ -183,7 +200,7 @@ export const breadcrumbSchema = (breadcrumbs) => ({
 // Enhanced local business schema with more specific location data
 export const enhancedLocalBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": ["AutoRepair", "LocalBusiness"],
+  "@type": ["AutoWash", "LocalBusiness"],
   "@id": "https://www.apdetailers.com/#organization",
   name: "Applying Pressure Mobile Detailing",
   alternateName: ["AP Detailers", "Applying Pressure"],
@@ -206,6 +223,12 @@ export const enhancedLocalBusinessSchema = {
     addressRegion: "NY",
     postalCode: "11105",
     addressCountry: "US",
+  },
+
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: "40.7357",
+    longitude: "-73.9564",
   },
 
   serviceArea: {
@@ -301,67 +324,268 @@ export const enhancedLocalBusinessSchema = {
     },
   ],
 
-  // Services offered
+  additionalType: [
+    "https://schema.org/AutoWash",
+    "https://schema.org/LocalBusiness",
+  ],
+
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Mobile Car Detailing Services",
     itemListElement: [
+      // Interior Packages
       {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "Mobile Car Detailing",
+          name: "SILVER Interior Package",
           description:
-            "Complete interior and exterior car detailing at your location",
+            "Complete interior detailing with vacuum, wipe down, and UV protection",
+          category: [
+            "Mobile Detailing",
+            "Car Detailing",
+            "Auto Detailing",
+            "Interior Detailing",
+          ],
         },
       },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "GOLD Interior Package",
+          description:
+            "Deep interior cleaning with stain removal and odor elimination",
+          category: [
+            "Mobile Detailing",
+            "Car Detailing",
+            "Auto Detailing",
+            "Interior Detailing",
+          ],
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "PRESSURE Interior Package",
+          description:
+            "Premium interior detailing with deep cleaning and restoration",
+          category: [
+            "Mobile Detailing",
+            "Car Detailing",
+            "Auto Detailing",
+            "Interior Detailing",
+          ],
+        },
+      },
+      // Exterior Packages
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Standard Exterior Package",
+          description: "Basic exterior wash with wheel cleaning and tire shine",
+          category: [
+            "Mobile Detailing",
+            "Car Detailing",
+            "Auto Detailing",
+            "Exterior Detailing",
+          ],
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Wash & Wax Package",
+          description:
+            "Exterior wash with wax protection and shine enhancement",
+          category: [
+            "Mobile Detailing",
+            "Car Detailing",
+            "Auto Detailing",
+            "Exterior Detailing",
+          ],
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Paint Enhancement Package",
+          description: "Paint correction with decontamination and protection",
+          category: [
+            "Mobile Detailing",
+            "Car Detailing",
+            "Auto Detailing",
+            "Paint Correction",
+          ],
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "One Step Paint Correction",
+          description:
+            "Single-stage paint correction to remove light swirls and scratches",
+          category: [
+            "Mobile Detailing",
+            "Car Detailing",
+            "Auto Detailing",
+            "Paint Correction",
+          ],
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Two Step Paint Correction",
+          description:
+            "Multi-stage paint correction for maximum gloss and clarity",
+          category: [
+            "Mobile Detailing",
+            "Car Detailing",
+            "Auto Detailing",
+            "Paint Correction",
+          ],
+        },
+      },
+      // Plus Services - Interior
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Flooring Deep Clean",
+          description: "Deep clean and remove stains from vehicle flooring",
+          category: [
+            "Mobile Detailing",
+            "Car Detailing",
+            "Auto Detailing",
+            "Interior Detailing",
+          ],
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Headliner Cleaning",
+          description: "Deep clean and remove stains from vehicle headliner",
+          category: [
+            "Mobile Detailing",
+            "Car Detailing",
+            "Auto Detailing",
+            "Interior Detailing",
+          ],
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Dog Hair Removal",
+          description: "Specialized pet hair removal from vehicle interior",
+          category: [
+            "Mobile Detailing",
+            "Car Detailing",
+            "Auto Detailing",
+            "Interior Detailing",
+          ],
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Heavy Spills/Odor Removal",
+          description: "Professional odor elimination and heavy stain removal",
+          category: [
+            "Mobile Detailing",
+            "Car Detailing",
+            "Auto Detailing",
+            "Interior Detailing",
+          ],
+        },
+      },
+      // Plus Services - Exterior
       {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
           name: "Ceramic Coating",
           description:
-            "Professional ceramic coating application for long-lasting paint protection",
+            "Long-lasting paint protection with hydrophobic properties",
+          category: [
+            "Mobile Detailing",
+            "Car Detailing",
+            "Auto Detailing",
+            "Ceramic Coating",
+          ],
         },
       },
       {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "Paint Correction",
+          name: "Engine Bay Cleaning",
           description:
-            "Professional paint correction to remove swirls and scratches",
+            "Professional engine compartment cleaning and degreasing",
+          category: [
+            "Mobile Detailing",
+            "Car Detailing",
+            "Auto Detailing",
+            "Engine Detailing",
+          ],
         },
       },
       {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "Interior Detailing",
-          description: "Deep cleaning and protection of vehicle interior",
+          name: "Headlight Restoration",
+          description: "Restore clarity and brightness to oxidized headlights",
+          category: [
+            "Mobile Detailing",
+            "Car Detailing",
+            "Auto Detailing",
+            "Vehicle Maintenance",
+          ],
         },
       },
       {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "Exterior Detailing",
-          description: "Complete exterior washing, polishing, and protection",
+          name: "Trim Restoration",
+          description:
+            "Restore faded plastic and rubber trim to original condition",
+          category: [
+            "Mobile Detailing",
+            "Car Detailing",
+            "Auto Detailing",
+            "Vehicle Maintenance",
+          ],
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Ceramic Sealant",
+          description: "6-8 month paint protection sealant application",
+          category: [
+            "Mobile Detailing",
+            "Car Detailing",
+            "Auto Detailing",
+            "Vehicle Maintenance",
+          ],
         },
       },
     ],
   },
-
-  serviceType: [
-    "Mobile Car Detailing",
-    "Ceramic Coating",
-    "Paint Correction",
-    "Interior Detailing",
-    "Exterior Detailing",
-    "Car Washing",
-    "Auto Detailing",
-    "Car Detailing",
-  ],
 
   priceRange: "$$",
   openingHours: "Mo-Su 08:00-18:00",
