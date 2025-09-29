@@ -67,6 +67,14 @@ export const serviceSchema = (serviceName, serviceDescription, serviceUrl) => ({
     "@type": "AutoWash",
     name: "Applying Pressure Mobile Detailing",
     url: "https://www.apdetailers.com/",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "20-65 Shore Blvd",
+      addressLocality: "Astoria",
+      addressRegion: "NY",
+      postalCode: "11105",
+      addressCountry: "US",
+    },
   },
   areaServed: [
     {
@@ -103,6 +111,14 @@ export const ceramicCoatingSchema = {
     "@type": "AutoWash",
     name: "Applying Pressure Mobile Detailing",
     url: "https://www.apdetailers.com/",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "20-65 Shore Blvd",
+      addressLocality: "Astoria",
+      addressRegion: "NY",
+      postalCode: "11105",
+      addressCountry: "US",
+    },
   },
   category: [
     "Mobile Detailing",
@@ -149,6 +165,14 @@ export const mobileDetailingSchema = {
     "@type": "AutoWash",
     name: "Applying Pressure Mobile Detailing",
     url: "https://www.apdetailers.com/",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "20-65 Shore Blvd",
+      addressLocality: "Astoria",
+      addressRegion: "NY",
+      postalCode: "11105",
+      addressCountry: "US",
+    },
   },
   category: ["Mobile Detailing", "Car Detailing", "Auto Detailing"],
   additionalType: "https://schema.org/AutoWash",

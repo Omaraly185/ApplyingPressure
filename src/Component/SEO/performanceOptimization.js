@@ -142,6 +142,14 @@ export const localSEOOptimization = {
     telephone: "+1-929-528-5191",
     email: "applyingpressureaq@gmail.com",
     url: "https://www.apdetailers.com/",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "20-65 Shore Blvd",
+      addressLocality: "Astoria",
+      addressRegion: "NY",
+      postalCode: "11105",
+      addressCountry: "US",
+    },
     category: [
       "Mobile Detailing NYC",
       "Car Detailing",
