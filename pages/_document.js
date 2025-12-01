@@ -4,6 +4,21 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        {/* Google Analytics */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-YEQBRK59B2"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-YEQBRK59B2');
+            `,
+          }}
+        />
         <meta name="google-site-verification" content="26a2dbd97c5957bf" />
         <meta
           name="apple-domain-verification"

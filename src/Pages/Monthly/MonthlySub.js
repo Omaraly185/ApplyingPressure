@@ -5,7 +5,11 @@ import { toast, ToastContainer } from "react-toastify";
 import Header from "../../Component/Header";
 import { SEOComponent, bookingPageSEO } from "../../Component/SEO";
 import DatePicker from "react-datepicker";
-
+import {
+  trackBookingStep,
+  trackServiceSelection,
+  trackFormInteraction,
+} from "../../utils/analytics";
 
 import carPricing from "../Book-Now/BookingForm/carPricing.json";
 import {
@@ -56,7 +60,11 @@ function MonthlySub() {
     GOLD: [
       { name: "Flooring", price: 50, image: "/images/flooring.png" },
       { name: "Headliner", price: 50, image: "/images/headliner.png" },
-      { name: "Dog Hair Removal", price: "50-150", image: "/images/dog-hair.png" },
+      {
+        name: "Dog Hair Removal",
+        price: "50-150",
+        image: "/images/dog-hair.png",
+      },
       {
         name: "Heavy Spills/Odor Removal",
         price: "50-150",
@@ -66,7 +74,11 @@ function MonthlySub() {
     SILVER: [
       { name: "Flooring", price: 50, image: "/images/flooring.png" },
       { name: "Headliner", price: 50, image: "/images/headliner.png" },
-      { name: "Dog Hair Removal", price: "50-150", image: "/images/dog-hair.png" },
+      {
+        name: "Dog Hair Removal",
+        price: "50-150",
+        image: "/images/dog-hair.png",
+      },
       {
         name: "Heavy Spills/Odor Removal",
         price: "50-150",
@@ -74,7 +86,11 @@ function MonthlySub() {
       },
     ],
     PRESSURE: [
-      { name: "Dog Hair Removal", price: "50-150", image: "/images/dog-hair.png" },
+      {
+        name: "Dog Hair Removal",
+        price: "50-150",
+        image: "/images/dog-hair.png",
+      },
       {
         name: "Heavy Spills/Odor Removal",
         price: "50-150",
@@ -83,7 +99,11 @@ function MonthlySub() {
     ],
     Standard: [
       { name: "Ceramic Sealant", price: 40, image: "/images/aha.png" },
-      { name: "Trim Restoration", price: "75-150", image: "/images/trim-restoration.png" },
+      {
+        name: "Trim Restoration",
+        price: "75-150",
+        image: "/images/trim-restoration.png",
+      },
       { name: "Engine Bay Cleaning", price: 50, image: "/images/aha.png" },
       {
         name: "Headlight Restoration",
@@ -97,8 +117,16 @@ function MonthlySub() {
         price: "40-80",
         image: "/images/headlight-restoration.png",
       },
-      { name: "Engine Bay Cleaning", price: 50, image: "/images/engine-bay-clean.png" },
-      { name: "Trim Restoration", price: "75-150", image: "/images/trim-restoration.png" },
+      {
+        name: "Engine Bay Cleaning",
+        price: 50,
+        image: "/images/engine-bay-clean.png",
+      },
+      {
+        name: "Trim Restoration",
+        price: "75-150",
+        image: "/images/trim-restoration.png",
+      },
     ],
     "Paint Enhancement": [
       {
@@ -106,8 +134,16 @@ function MonthlySub() {
         price: "40-80",
         image: "/images/headlight-restoration.png",
       },
-      { name: "Engine Bay Cleaning", price: 50, image: "/images/engine-bay-clean.png" },
-      { name: "Trim Restoration", price: "75-150", image: "/images/trim-restoration.png" },
+      {
+        name: "Engine Bay Cleaning",
+        price: 50,
+        image: "/images/engine-bay-clean.png",
+      },
+      {
+        name: "Trim Restoration",
+        price: "75-150",
+        image: "/images/trim-restoration.png",
+      },
       {
         name: "Ceramic Coating",
         price: "ceramic-coating-dynamic",
@@ -120,8 +156,16 @@ function MonthlySub() {
         price: "40-80",
         image: "/images/headlight-restoration.png",
       },
-      { name: "Engine Bay Cleaning", price: 50, image: "/images/engine-bay-clean.png" },
-      { name: "Trim Restoration", price: "75-150", image: "/images/trim-restoration.png" },
+      {
+        name: "Engine Bay Cleaning",
+        price: 50,
+        image: "/images/engine-bay-clean.png",
+      },
+      {
+        name: "Trim Restoration",
+        price: "75-150",
+        image: "/images/trim-restoration.png",
+      },
       {
         name: "Ceramic Coating",
         price: "ceramic-coating-dynamic",
@@ -134,8 +178,16 @@ function MonthlySub() {
         price: "40-80",
         image: "/images/headlight-restoration.png",
       },
-      { name: "Engine Bay Cleaning", price: 50, image: "/images/engine-bay-clean.png" },
-      { name: "Trim Restoration", price: "75-150", image: "/images/trim-restoration.png" },
+      {
+        name: "Engine Bay Cleaning",
+        price: 50,
+        image: "/images/engine-bay-clean.png",
+      },
+      {
+        name: "Trim Restoration",
+        price: "75-150",
+        image: "/images/trim-restoration.png",
+      },
       {
         name: "Ceramic Coating",
         price: "ceramic-coating-dynamic",
@@ -149,14 +201,23 @@ function MonthlySub() {
         price: "40-80",
         image: "/images/headlight-restoration.png",
       },
-      { name: "Engine Bay Cleaning", price: 50, image: "/images/engine-bay-clean.png" },
-      { name: "Trim Restoration", price: "75-150", image: "/images/trim-restoration.png" },
+      {
+        name: "Engine Bay Cleaning",
+        price: 50,
+        image: "/images/engine-bay-clean.png",
+      },
+      {
+        name: "Trim Restoration",
+        price: "75-150",
+        image: "/images/trim-restoration.png",
+      },
     ],
   };
 
   const handlePackageClick = (pkg) => {
     setSelectedPackage(pkg);
     setShowPlusServices(true);
+    trackServiceSelection(pkg.name, pkg.type || "package");
   };
 
   const handleTogglePlusService = (svc) => {
@@ -216,7 +277,10 @@ function MonthlySub() {
   const services = [
     { name: "Exterior Only", image: "/images/Exterior-only.png" },
     { name: "Interior Only", image: "/images/Interior-only.png" },
-    { name: "Exterior and Interior", image: "/images/Exterior-and-interior.png" },
+    {
+      name: "Exterior and Interior",
+      image: "/images/Exterior-and-interior.png",
+    },
     { name: "Paint Correction", image: "/images/polish.png" },
     { name: "Ceramic Coating", image: "/images/ceramic-coating.png" },
   ];
@@ -452,8 +516,10 @@ function MonthlySub() {
     if (validation.isValid) {
       setZipcodeError("");
       setActiveStep(1); // Move to car type selection
+      trackBookingStep("zipcode_validated", serviceZipcode);
     } else {
       setZipcodeError(validation.error);
+      trackFormInteraction("booking_form", "zipcode_error", serviceZipcode);
     }
   };
 
@@ -529,15 +595,21 @@ function MonthlySub() {
 
       if (response.ok) {
         toast.success("Appointment booked successfully!");
+        trackBookingStep(
+          "booking_completed",
+          `${interiorPackageName} ${exteriorPackageName}`
+        );
         setTimeout(() => {
           router.push("/");
         }, 2000);
       } else {
         toast.error("Failed to book monthly subscription. Please try again.");
+        trackFormInteraction("booking_form", "booking_failed", "api_error");
         console.error("Failed to create monthly subscription");
       }
     } catch (error) {
       toast.error("Error booking monthly subscription. Please try again.");
+      trackFormInteraction("booking_form", "booking_error", error.message);
       console.error("Error creating monthly subscription:", error);
     } finally {
       setIsLoading(false);
@@ -560,8 +632,15 @@ function MonthlySub() {
     );
 
     if (isValid) {
+      trackBookingStep("form_submitted", "booking_form_complete");
       // Create booking request
       await submitMonthlyBooking();
+    } else {
+      trackFormInteraction(
+        "booking_form",
+        "validation_failed",
+        "form_submission"
+      );
     }
   };
 
@@ -925,10 +1004,10 @@ function MonthlySub() {
                     placeholder="Enter your zip code"
                     value={serviceZipcode}
                     onChange={handleServiceZipcodeChange}
-                    className={`zipcode-input ${zipcodeError ? 'error' : ''}`}
+                    className={`zipcode-input ${zipcodeError ? "error" : ""}`}
                     maxLength="5"
                     onKeyPress={(e) => {
-                      if (e.key === 'Enter' && serviceZipcode.length === 5) {
+                      if (e.key === "Enter" && serviceZipcode.length === 5) {
                         handleZipcodeSubmit();
                       }
                     }}

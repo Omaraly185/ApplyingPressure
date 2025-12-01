@@ -1,11 +1,12 @@
 import React from "react";
 import { useRouter } from "next/router";
-
+import { trackButtonClick } from "../../../utils/analytics";
 
 const CallToAction = () => {
   const router = useRouter();
 
   const handleBookNowClick = () => {
+    trackButtonClick("Book Now CTA", "Home Page");
     router.push("/Book_Now");
   };
 
