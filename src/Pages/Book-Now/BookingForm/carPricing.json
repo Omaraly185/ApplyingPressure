@@ -22,7 +22,7 @@
     "interiors": {
       "NA": { "minPrice": 0, "maxPrice": 0 },
       "silverInterior": { "minPrice": 55, "maxPrice": 155 },
-      "goldInterior": { "minPrice": 150, "maxPrice": 250 },
+      "goldInterior": { "minPrice": 175, "maxPrice": 275 },
       "pressureSpecial": { "minPrice": 250, "maxPrice": 350 }
     }
   },
@@ -45,7 +45,7 @@
     "interiors": {
       "NA": { "minPrice": 0, "maxPrice": 0 },
       "silverInterior": { "minPrice": 60, "maxPrice": 160 },
-      "goldInterior": { "minPrice": 170, "maxPrice": 270 },
+      "goldInterior": { "minPrice": 195, "maxPrice": 295 },
       "pressureSpecial": { "minPrice": 290, "maxPrice": 390 }
     }
   },
@@ -68,7 +68,7 @@
     "interiors": {
       "NA": { "minPrice": 0, "maxPrice": 0 },
       "silverInterior": { "minPrice": 70, "maxPrice": 170 },
-      "goldInterior": { "minPrice": 190, "maxPrice": 290 },
+      "goldInterior": { "minPrice": 215, "maxPrice": 315 },
       "pressureSpecial": { "minPrice": 330, "maxPrice": 430 }
     }
   },
@@ -91,7 +91,7 @@
     "interiors": {
       "NA": { "minPrice": 0, "maxPrice": 0 },
       "silverInterior": { "minPrice": 95, "maxPrice": 195 },
-      "goldInterior": { "minPrice": 235, "maxPrice": 335 },
+      "goldInterior": { "minPrice": 260, "maxPrice": 360 },
       "pressureSpecial": { "minPrice": 350, "maxPrice": 450 }
     }
   }
