@@ -1301,15 +1301,6 @@ function MonthlySub() {
                           />
                           UV Protection & Interior Shine
                         </li>
-                        <li>
-                          {" "}
-                          <img
-                            src="/images/check.png"
-                            alt="check"
-                            className="check-icon"
-                          />
-                          Agitate and clean seat belts
-                        </li>
                       </ul>
                       <div className="locked-options">
                         <h3 className="locked-header">Not Included</h3>
