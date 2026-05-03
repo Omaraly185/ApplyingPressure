@@ -13,7 +13,7 @@ function CeramicCoating() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const scrollToForm = () => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const formElement = document.querySelector(".form-container");
       if (formElement) {
         formElement.scrollIntoView({ behavior: "smooth" });
@@ -38,7 +38,7 @@ function CeramicCoating() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(ceramicForm),
-        }
+        },
       );
       if (response.ok) {
         alert("Quote request submitted successfully!");
@@ -50,7 +50,7 @@ function CeramicCoating() {
         });
       } else {
         alert(
-          "Failed to submit quote request. Please try again or give us a call."
+          "Failed to submit quote request. Please try again or give us a call.",
         );
       }
     } catch (error) {
@@ -66,146 +66,185 @@ function CeramicCoating() {
       <SEOComponent {...ceramicCoatingPageSEO} />
       <div className="fluid myCustomHeight2 black-background">
         <Header />
-      <div className="video-container">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          aria-label="Promotional video showing ceramic coating process"
-        >
-          <source src="/cc.mp4" type="video/mp4" />
-        </video>
-        <div className="overlay">
-          <div className="ceramic-coating-container">
-            <h1 className="ceramic-coating">
-              Ceramic Coating Experts: Shine & Protect Your Vehicle Today
-            </h1>
-            <div className="buttons">
-              <button
-                className="custom-button learn-more"
-                onClick={scrollToForm}
-              >
-                Get a Quote
-              </button>
-              <a href="tel:+19295285191" className="custom-button get-quote">
-                Call (929) 528-5191
-              </a>
+        <div className="video-container">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            aria-label="Promotional video showing ceramic coating process"
+          >
+            <source src="/cc.mp4" type="video/mp4" />
+          </video>
+          <div className="overlay">
+            <div className="ceramic-coating-container">
+              <h1 className="ceramic-coating">
+                Ceramic Coating Detailing in NYC: Shine & Protect Your Vehicle
+              </h1>
+              <div className="buttons">
+                <button
+                  className="custom-button learn-more"
+                  onClick={scrollToForm}
+                >
+                  Get a Quote
+                </button>
+                <a href="tel:+19295285191" className="custom-button get-quote">
+                  Call (929) 528-5191
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="content-container">
-        <div className="description-container">
-          <h2 className="CeramicCoatingDescription">Why Choose Us?</h2>
-          <p>
-            We offer the best ceramic coating services to protect your vehicle
-            and give it a high-gloss finish. Our experts use top-of-the-line
-            products to ensure durability and shine.
-          </p>
-          <h2 className="CeramicCoatingDescription2">Why A Ceramic Coating?</h2>
-          <ul>
-            <li className="ceramic-coating-bullets">
-              Durable Protection: Shields paint from dirt, grime, and road salt.
-            </li>
-            <li className="ceramic-coating-bullets">
-              High-Gloss Finish: Enhances shine and vibrancy.
-            </li>
-            <li className="ceramic-coating-bullets">
-              Hydrophobic: Repels water, making cleaning easier.
-            </li>
-            <li className="ceramic-coating-bullets">
-              UV Protection: Prevents paint fading and oxidation.
-            </li>
-            <li className="ceramic-coating-bullets">
-              Scratch Resistance: Guards against minor abrasions.
-            </li>
-            <li className="ceramic-coating-bullets">
-              Chemical Resistant: Defends against stains and etching.
-            </li>
-            <li className="ceramic-coating-bullets">
-              Easy Maintenance: Less frequent and simpler washes.
-            </li>
-            <li className="ceramic-coating-bullets">
-              Cost-Effective: Reduces need for waxing and polishing.
-            </li>
-            <li className="ceramic-coating-bullets">
-              Boosts Resale Value: Keeps your vehicle looking newer, longer.
-            </li>
-          </ul>
-        </div>
-        <div className="form-container">
-          <div className="form">
-            <p className="header">Request A Quote</p>
-            <form style={{ width: "100%" }} onSubmit={handleSubmit}>
-              <div className="fitem namecont">
-                <label htmlFor="name" className="visually-hidden">
-                  Name
-                </label>
-                <input
-                  className="ceramic-input"
-                  id="name"
-                  name="name"
-                  placeholder="Name"
-                  value={ceramicForm.name}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="fitem emailcont">
-                <label htmlFor="email" className="visually-hidden">
-                  Email
-                </label>
-                <input
-                  className="ceramic-input"
-                  id="email"
-                  name="email"
-                  placeholder="Email"
-                  value={ceramicForm.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="fitem phoneNumbercont">
-                <label htmlFor="phoneNumber" className="visually-hidden">
-                  Phone Number
-                </label>
-                <input
-                  className="ceramic-input"
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  placeholder="Phone Number"
-                  value={ceramicForm.phoneNumber}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="fitem carTypecont">
-                <label htmlFor="carType" className="visually-hidden">
-                  Car Type
-                </label>
-                <input
-                  className="ceramic-input"
-                  id="carType"
-                  name="carType"
-                  placeholder="Car Type"
-                  value={ceramicForm.carType}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="buttoncont">
-                <button
-                  className="ReqQuote"
-                  type="submit"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Submitting..." : "Submit"}
-                </button>
-              </div>
-            </form>
+        <div className="content-container">
+          <div className="description-container">
+            <h2 className="CeramicCoatingDescription">Why Choose Us?</h2>
+            <p>
+              Applying Pressure provides professional ceramic coating detailing
+              across NYC, Long Island, and New Jersey. Our certified mobile team
+              serves all five boroughs — Manhattan, Brooklyn, Queens, the Bronx,
+              and Staten Island — using top-of-the-line ceramic products that
+              deliver long-lasting durability and a deep, glossy finish right at
+              your driveway, garage, or office.
+            </p>
+            <h2 className="CeramicCoatingDescription2">
+              Why A Ceramic Coating?
+            </h2>
+            <ul>
+              <li className="ceramic-coating-bullets">
+                Durable Protection: Shields paint from dirt, grime, and road
+                salt.
+              </li>
+              <li className="ceramic-coating-bullets">
+                High-Gloss Finish: Enhances shine and vibrancy.
+              </li>
+              <li className="ceramic-coating-bullets">
+                Hydrophobic: Repels water, making cleaning easier.
+              </li>
+              <li className="ceramic-coating-bullets">
+                UV Protection: Prevents paint fading and oxidation.
+              </li>
+              <li className="ceramic-coating-bullets">
+                Scratch Resistance: Guards against minor abrasions.
+              </li>
+              <li className="ceramic-coating-bullets">
+                Chemical Resistant: Defends against stains and etching.
+              </li>
+              <li className="ceramic-coating-bullets">
+                Easy Maintenance: Less frequent and simpler washes.
+              </li>
+              <li className="ceramic-coating-bullets">
+                Cost-Effective: Reduces need for waxing and polishing.
+              </li>
+              <li className="ceramic-coating-bullets">
+                Boosts Resale Value: Keeps your vehicle looking newer, longer.
+              </li>
+            </ul>
+            <h2 className="CeramicCoatingDescription2">
+              Ceramic Coating Detailing Across NYC &amp; Beyond
+            </h2>
+            <p>
+              Searching for ceramic coating detailing near you in New York City?
+              Our mobile detailers travel throughout the tri-state area so you
+              never have to drop your car off at a shop. Book a same-week
+              appointment in any of the boroughs below.
+            </p>
+            <ul>
+              <li className="ceramic-coating-bullets">
+                Ceramic coating detailing in Manhattan, NY
+              </li>
+              <li className="ceramic-coating-bullets">
+                Ceramic coating detailing in Brooklyn, NY
+              </li>
+              <li className="ceramic-coating-bullets">
+                Ceramic coating detailing in Queens, NY — Astoria, Long Island
+                City, Forest Hills, Flushing
+              </li>
+              <li className="ceramic-coating-bullets">
+                Ceramic coating detailing in the Bronx, NY
+              </li>
+              <li className="ceramic-coating-bullets">
+                Ceramic coating detailing in Staten Island, NY
+              </li>
+              <li className="ceramic-coating-bullets">
+                Long Island — Nassau &amp; Suffolk Counties
+              </li>
+              <li className="ceramic-coating-bullets">
+                Northern New Jersey — Bergen, Hudson &amp; Essex Counties
+              </li>
+            </ul>
+          </div>
+          <div className="form-container">
+            <div className="form">
+              <p className="header">Request A Quote</p>
+              <form style={{ width: "100%" }} onSubmit={handleSubmit}>
+                <div className="fitem namecont">
+                  <label htmlFor="name" className="visually-hidden">
+                    Name
+                  </label>
+                  <input
+                    className="ceramic-input"
+                    id="name"
+                    name="name"
+                    placeholder="Name"
+                    value={ceramicForm.name}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="fitem emailcont">
+                  <label htmlFor="email" className="visually-hidden">
+                    Email
+                  </label>
+                  <input
+                    className="ceramic-input"
+                    id="email"
+                    name="email"
+                    placeholder="Email"
+                    value={ceramicForm.email}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="fitem phoneNumbercont">
+                  <label htmlFor="phoneNumber" className="visually-hidden">
+                    Phone Number
+                  </label>
+                  <input
+                    className="ceramic-input"
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    placeholder="Phone Number"
+                    value={ceramicForm.phoneNumber}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="fitem carTypecont">
+                  <label htmlFor="carType" className="visually-hidden">
+                    Car Type
+                  </label>
+                  <input
+                    className="ceramic-input"
+                    id="carType"
+                    name="carType"
+                    placeholder="Car Type"
+                    value={ceramicForm.carType}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="buttoncont">
+                  <button
+                    className="ReqQuote"
+                    type="submit"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Submitting..." : "Submit"}
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
         <Footer />
       </div>
     </>

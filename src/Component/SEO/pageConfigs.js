@@ -17,17 +17,19 @@ export const homePageSEO = {
   canonical: "https://www.apdetailers.com/",
   openGraph: {
     title: "Mobile Car Detailing NYC, Long Island & NJ | Applying Pressure",
-    description: "Professional mobile car detailing serving NYC, Long Island & New Jersey. Interior/exterior detailing, ceramic coating, paint correction. We come to you! Book online today.",
+    description:
+      "Professional mobile car detailing serving NYC, Long Island & New Jersey. Interior/exterior detailing, ceramic coating, paint correction. We come to you! Book online today.",
     type: "website",
     url: "https://www.apdetailers.com/",
     image: "https://www.apdetailers.com/APLogo.png",
-    siteName: "Applying Pressure Mobile Detailing"
+    siteName: "Applying Pressure Mobile Detailing",
   },
   twitter: {
     card: "summary_large_image",
     title: "Mobile Car Detailing NYC, Long Island & NJ | Applying Pressure",
-    description: "Professional mobile car detailing serving NYC, Long Island & New Jersey. Interior/exterior detailing, ceramic coating, paint correction. We come to you! Book online today.",
-    image: "https://www.apdetailers.com/APLogo.png"
+    description:
+      "Professional mobile car detailing serving NYC, Long Island & New Jersey. Interior/exterior detailing, ceramic coating, paint correction. We come to you! Book online today.",
+    image: "https://www.apdetailers.com/APLogo.png",
   },
   structuredData: [
     enhancedLocalBusinessSchema,
@@ -37,26 +39,27 @@ export const homePageSEO = {
 };
 
 export const ceramicCoatingPageSEO = {
-  title:
-    "Ceramic Coating NYC, Long Island & NJ | Professional Paint Protection",
+  title: "Ceramic Coating Detailing NYC | Mobile in All 5 Boroughs & LI",
   description:
-    "Premium ceramic coating services in NYC, Long Island & New Jersey. Long-lasting paint protection, hydrophobic coating, UV protection. Mobile service - we come to you!",
+    "Mobile ceramic coating detailing in Manhattan, Brooklyn, Queens, Bronx & Staten Island. Hydrophobic, UV-protective paint protection at your driveway. Free quote!",
   keywords:
-    "ceramic coating NYC, ceramic coating Long Island, ceramic coating New Jersey, paint protection NYC, ceramic coating Manhattan, ceramic coating Brooklyn, ceramic coating Queens, ceramic coating Nassau County, ceramic coating Suffolk County",
+    "ceramic coating detailing, ceramic coating detailing NYC, ceramic coating detailing Manhattan, ceramic coating detailing Brooklyn, ceramic coating detailing Queens, ceramic coating detailing Bronx, ceramic coating detailing Staten Island, ceramic coating Astoria, ceramic coating Long Island City, ceramic coating Long Island, ceramic coating Nassau County, ceramic coating Suffolk County, ceramic coating New Jersey, mobile ceramic coating NYC, paint protection NYC",
   canonical: "https://www.apdetailers.com/ceramic-coating",
   openGraph: {
-    title: "Ceramic Coating NYC, Long Island & NJ | Professional Paint Protection",
-    description: "Premium ceramic coating services in NYC, Long Island & New Jersey. Long-lasting paint protection, hydrophobic coating, UV protection. Mobile service - we come to you!",
+    title: "Ceramic Coating Detailing NYC | Mobile in All 5 Boroughs & LI",
+    description:
+      "Mobile ceramic coating detailing in Manhattan, Brooklyn, Queens, Bronx & Staten Island. Hydrophobic, UV-protective paint protection at your driveway. Free quote!",
     type: "website",
     url: "https://www.apdetailers.com/ceramic-coating",
     image: "https://www.apdetailers.com/APLogo.png",
-    siteName: "Applying Pressure Mobile Detailing"
+    siteName: "Applying Pressure Mobile Detailing",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ceramic Coating NYC, Long Island & NJ | Professional Paint Protection",
-    description: "Premium ceramic coating services in NYC, Long Island & New Jersey. Long-lasting paint protection, hydrophobic coating, UV protection. Mobile service - we come to you!",
-    image: "https://www.apdetailers.com/APLogo.png"
+    title: "Ceramic Coating Detailing NYC | Mobile in All 5 Boroughs & LI",
+    description:
+      "Mobile ceramic coating detailing in Manhattan, Brooklyn, Queens, Bronx & Staten Island. Hydrophobic, UV-protective paint protection at your driveway. Free quote!",
+    image: "https://www.apdetailers.com/APLogo.png",
   },
   structuredData: [
     ceramicCoatingSchema,
@@ -80,23 +83,25 @@ export const bookingPageSEO = {
   canonical: "https://www.apdetailers.com/Book_Now",
   openGraph: {
     title: "Book Mobile Detailing NYC, Long Island & NJ | Online Booking",
-    description: "Book professional mobile car detailing services in NYC, Long Island & New Jersey. Easy online booking, flexible scheduling. Interior, exterior, ceramic coating available.",
+    description:
+      "Book professional mobile car detailing services in NYC, Long Island & New Jersey. Easy online booking, flexible scheduling. Interior, exterior, ceramic coating available.",
     type: "website",
     url: "https://www.apdetailers.com/Book_Now",
     image: "https://www.apdetailers.com/APLogo.png",
-    siteName: "Applying Pressure Mobile Detailing"
+    siteName: "Applying Pressure Mobile Detailing",
   },
   twitter: {
     card: "summary_large_image",
     title: "Book Mobile Detailing NYC, Long Island & NJ | Online Booking",
-    description: "Book professional mobile car detailing services in NYC, Long Island & New Jersey. Easy online booking, flexible scheduling. Interior, exterior, ceramic coating available.",
-    image: "https://www.apdetailers.com/APLogo.png"
+    description:
+      "Book professional mobile car detailing services in NYC, Long Island & New Jersey. Easy online booking, flexible scheduling. Interior, exterior, ceramic coating available.",
+    image: "https://www.apdetailers.com/APLogo.png",
   },
   structuredData: [
     serviceSchema(
       "Mobile Car Detailing Booking",
       "Online booking for professional mobile car detailing services in NYC, Long Island, and New Jersey",
-      "https://www.apdetailers.com/Book_Now"
+      "https://www.apdetailers.com/Book_Now",
     ),
     breadcrumbSchema([
       { name: "Home", url: "https://www.apdetailers.com/" },
@@ -114,17 +119,19 @@ export const contactPageSEO = {
   canonical: "https://www.apdetailers.com/contactus",
   openGraph: {
     title: "Contact Applying Pressure Mobile Detailing | NYC, Long Island & NJ",
-    description: "Contact Applying Pressure for professional mobile car detailing in NYC, Long Island & New Jersey. Get quotes, schedule services, or ask questions. We come to you!",
+    description:
+      "Contact Applying Pressure for professional mobile car detailing in NYC, Long Island & New Jersey. Get quotes, schedule services, or ask questions. We come to you!",
     type: "website",
     url: "https://www.apdetailers.com/contactus",
     image: "https://www.apdetailers.com/APLogo.png",
-    siteName: "Applying Pressure Mobile Detailing"
+    siteName: "Applying Pressure Mobile Detailing",
   },
   twitter: {
     card: "summary_large_image",
     title: "Contact Applying Pressure Mobile Detailing | NYC, Long Island & NJ",
-    description: "Contact Applying Pressure for professional mobile car detailing in NYC, Long Island & New Jersey. Get quotes, schedule services, or ask questions. We come to you!",
-    image: "https://www.apdetailers.com/APLogo.png"
+    description:
+      "Contact Applying Pressure for professional mobile car detailing in NYC, Long Island & New Jersey. Get quotes, schedule services, or ask questions. We come to you!",
+    image: "https://www.apdetailers.com/APLogo.png",
   },
   structuredData: [
     breadcrumbSchema([
@@ -142,17 +149,19 @@ export const privacyPolicyPageSEO = {
   canonical: "https://www.apdetailers.com/privacy-policy",
   openGraph: {
     title: "Privacy Policy | Applying Pressure Mobile Detailing",
-    description: "Privacy policy for Applying Pressure Mobile Detailing. Learn how we protect your personal information and data.",
+    description:
+      "Privacy policy for Applying Pressure Mobile Detailing. Learn how we protect your personal information and data.",
     type: "website",
     url: "https://www.apdetailers.com/privacy-policy",
     image: "https://www.apdetailers.com/APLogo.png",
-    siteName: "Applying Pressure Mobile Detailing"
+    siteName: "Applying Pressure Mobile Detailing",
   },
   twitter: {
     card: "summary_large_image",
     title: "Privacy Policy | Applying Pressure Mobile Detailing",
-    description: "Privacy policy for Applying Pressure Mobile Detailing. Learn how we protect your personal information and data.",
-    image: "https://www.apdetailers.com/APLogo.png"
+    description:
+      "Privacy policy for Applying Pressure Mobile Detailing. Learn how we protect your personal information and data.",
+    image: "https://www.apdetailers.com/APLogo.png",
   },
   noindex: false,
   structuredData: [
@@ -174,17 +183,19 @@ export const termsConditionsPageSEO = {
   canonical: "https://www.apdetailers.com/terms-conditions",
   openGraph: {
     title: "Terms & Conditions | Applying Pressure Mobile Detailing",
-    description: "Terms and conditions for Applying Pressure Mobile Detailing services in NYC and New Jersey.",
+    description:
+      "Terms and conditions for Applying Pressure Mobile Detailing services in NYC and New Jersey.",
     type: "website",
     url: "https://www.apdetailers.com/terms-conditions",
     image: "https://www.apdetailers.com/APLogo.png",
-    siteName: "Applying Pressure Mobile Detailing"
+    siteName: "Applying Pressure Mobile Detailing",
   },
   twitter: {
     card: "summary_large_image",
     title: "Terms & Conditions | Applying Pressure Mobile Detailing",
-    description: "Terms and conditions for Applying Pressure Mobile Detailing services in NYC and New Jersey.",
-    image: "https://www.apdetailers.com/APLogo.png"
+    description:
+      "Terms and conditions for Applying Pressure Mobile Detailing services in NYC and New Jersey.",
+    image: "https://www.apdetailers.com/APLogo.png",
   },
   noindex: false, // Keep indexed for transparency
   structuredData: [

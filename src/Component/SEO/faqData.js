@@ -46,6 +46,16 @@ export const mobileDetailingFAQs = [
 
 export const ceramicCoatingFAQs = [
   {
+    question: "Where in NYC do you offer ceramic coating detailing?",
+    answer:
+      "We offer mobile ceramic coating detailing in all five boroughs of New York City — Manhattan, Brooklyn, Queens, the Bronx, and Staten Island — plus Long Island (Nassau and Suffolk Counties) and northern New Jersey. We come to your home, apartment building, or office.",
+  },
+  {
+    question: "Do you do ceramic coating in Brooklyn, Queens, and the Bronx?",
+    answer:
+      "Yes. We regularly perform ceramic coating detailing across Brooklyn, Queens (including Astoria, Long Island City, Forest Hills, and Flushing), and the Bronx. Most appointments can be scheduled within a few days.",
+  },
+  {
     question: "How long does ceramic coating last?",
     answer:
       "Professional ceramic coating typically lasts 3-5 years depending on the product used, environmental conditions, and maintenance. We use high-quality ceramic coatings that provide long-lasting protection.",
@@ -61,8 +71,8 @@ export const ceramicCoatingFAQs = [
       "Ceramic coating can be applied to most vehicles, but the paint condition must be properly prepared first. We may recommend paint correction before ceramic coating application for optimal results.",
   },
   {
-    question: "How much does ceramic coating cost?",
+    question: "How much does ceramic coating cost in NYC?",
     answer:
-      "Ceramic coating pricing varies based on vehicle size, paint condition, and coating package selected. Contact us for a personalized quote based on your specific vehicle and needs.",
+      "Ceramic coating pricing in NYC varies based on vehicle size, paint condition, and coating package selected. Contact us for a personalized quote based on your specific vehicle, location, and needs.",
   },
 ];

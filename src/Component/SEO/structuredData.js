@@ -102,15 +102,17 @@ export const serviceSchema = (serviceName, serviceDescription, serviceUrl) => ({
 export const ceramicCoatingSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "Ceramic Coating Services",
+  name: "Ceramic Coating Detailing",
+  serviceType: "Ceramic Coating Detailing",
   description:
-    "Professional ceramic coating application for cars in NYC, Long Island, and New Jersey. Long-lasting paint protection with hydrophobic properties.",
-  url: "https://www.apdetailers.com/Ceramic-Coating",
+    "Mobile ceramic coating detailing across all five boroughs of New York City — Manhattan, Brooklyn, Queens, Bronx, and Staten Island — plus Long Island and northern New Jersey. Long-lasting hydrophobic paint protection with UV and chemical resistance, applied at your home or office.",
+  url: "https://www.apdetailers.com/ceramic-coating",
   serviceOutput: "Paint protection lasting up to 5 years",
   provider: {
     "@type": "AutoWash",
     name: "Applying Pressure Mobile Detailing",
     url: "https://www.apdetailers.com/",
+    telephone: "+1-929-528-5191",
     address: {
       "@type": "PostalAddress",
       streetAddress: "20-65 Shore Blvd",
@@ -119,37 +121,70 @@ export const ceramicCoatingSchema = {
       postalCode: "11105",
       addressCountry: "US",
     },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: "40.7357",
+      longitude: "-73.9564",
+    },
   },
   category: [
     "Mobile Detailing",
     "Car Detailing",
     "Auto Detailing",
-    "Vehicle Maintenance",
+    "Ceramic Coating",
+    "Paint Protection",
   ],
   additionalType: "https://schema.org/AutoWash",
-  offers: {
-    "@type": "Offer",
-    availability: "https://schema.org/InStock",
-    priceCurrency: "USD",
-  },
   areaServed: [
     {
       "@type": "City",
       name: "New York City",
+      sameAs: "https://en.wikipedia.org/wiki/New_York_City",
+    },
+    {
+      "@type": "Place",
+      name: "Manhattan",
+      containedInPlace: { "@type": "City", name: "New York City" },
+    },
+    {
+      "@type": "Place",
+      name: "Brooklyn",
+      containedInPlace: { "@type": "City", name: "New York City" },
+    },
+    {
+      "@type": "Place",
+      name: "Queens",
+      containedInPlace: { "@type": "City", name: "New York City" },
+    },
+    {
+      "@type": "Place",
+      name: "Bronx",
+      containedInPlace: { "@type": "City", name: "New York City" },
+    },
+    {
+      "@type": "Place",
+      name: "Staten Island",
+      containedInPlace: { "@type": "City", name: "New York City" },
     },
     {
       "@type": "Place",
       name: "Long Island",
+      sameAs: "https://en.wikipedia.org/wiki/Long_Island",
     },
+    { "@type": "AdministrativeArea", name: "Nassau County" },
+    { "@type": "AdministrativeArea", name: "Suffolk County" },
     {
       "@type": "State",
       name: "New Jersey",
+      sameAs: "https://en.wikipedia.org/wiki/New_Jersey",
     },
   ],
   offers: {
     "@type": "Offer",
-    description: "Professional ceramic coating services",
+    description:
+      "Professional mobile ceramic coating detailing in NYC, Long Island, and New Jersey",
     availability: "https://schema.org/InStock",
+    priceCurrency: "USD",
   },
 };
 
