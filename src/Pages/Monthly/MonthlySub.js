@@ -224,7 +224,7 @@ function MonthlySub() {
     setSelectedPlusServices((prev) =>
       prev.includes(svc.name)
         ? prev.filter((s) => s !== svc.name)
-        : [...prev, svc.name]
+        : [...prev, svc.name],
     );
   };
 
@@ -355,7 +355,7 @@ function MonthlySub() {
     for (let i = 0; i < 31; i++) {
       const date = addDays(start, i);
       const availableSlots = timeSlots.filter((slot) =>
-        isTimeAvailable(date, slot)
+        isTimeAvailable(date, slot),
       );
 
       if (availableSlots.length === 0) {
@@ -366,7 +366,7 @@ function MonthlySub() {
     setExcludedDynamicDates((prev) => [
       ...prev,
       ...newExcluded.filter(
-        (d) => !prev.some((p) => p.getTime() === d.getTime())
+        (d) => !prev.some((p) => p.getTime() === d.getTime()),
       ),
     ]);
   };
@@ -549,7 +549,7 @@ function MonthlySub() {
       const selectedDateTime = new Date(selectedDateTimeString);
       const endDateTime = new Date(selectedDateTime.getTime());
       const endTime = endDateTime.setHours(
-        selectedDateTime.getHours() + appointmentDurationHours
+        selectedDateTime.getHours() + appointmentDurationHours,
       );
 
       const interiorPackageName = confirmedInteriorPackage
@@ -597,7 +597,7 @@ function MonthlySub() {
         toast.success("Appointment booked successfully!");
         trackBookingStep(
           "booking_completed",
-          `${interiorPackageName} ${exteriorPackageName}`
+          `${interiorPackageName} ${exteriorPackageName}`,
         );
         setTimeout(() => {
           router.push("/");
@@ -628,7 +628,7 @@ function MonthlySub() {
       selectedDate,
       selectedTime,
       confirmedInteriorPackage,
-      confirmedExteriorPackage
+      confirmedExteriorPackage,
     );
 
     if (isValid) {
@@ -639,7 +639,7 @@ function MonthlySub() {
       trackFormInteraction(
         "booking_form",
         "validation_failed",
-        "form_submission"
+        "form_submission",
       );
     }
   };
@@ -663,81 +663,11 @@ function MonthlySub() {
   };
 
   const calculateAppointmentDuration = () => {
-    let totalHours = 0;
+    // Service time: every $100 of the max quoted price = 1 hour, rounded up
+    const { max } = calculateTotalPriceRange();
+    const totalHours = Math.max(Math.ceil((max || 0) / 100), 1);
 
-    if (confirmedInteriorPackage) {
-      switch (confirmedInteriorPackage.name) {
-        case "PRESSURE":
-          totalHours += 3;
-          break;
-        case "GOLD":
-          totalHours += 2;
-          break;
-        default:
-          totalHours += 1.5;
-      }
-
-      confirmedInteriorPlusServices.forEach((serviceName) => {
-        switch (serviceName) {
-          case "Dog Hair Removal":
-          case "Heavy Spills/Odor Removal":
-            totalHours += 0.5;
-            break;
-          case "Flooring":
-          case "Headliner":
-            totalHours += 0.5;
-            break;
-          default:
-            totalHours += 0.25;
-        }
-      });
-    }
-
-    // Base time for exterior packages
-    if (confirmedExteriorPackage) {
-      switch (confirmedExteriorPackage.name) {
-        case "Paint Enhancement":
-          totalHours += 4;
-          break;
-        case "Wash & Wax":
-          totalHours += 2;
-          break;
-        case "Standard Exterior":
-          totalHours += 1.5; // 1.5 hours for standard
-          break;
-        default:
-          totalHours += 2; // default exterior time
-      }
-
-      // Add time for exterior plus services
-      confirmedExteriorPlusServices.forEach((serviceName) => {
-        switch (serviceName) {
-          case "Engine Bay Cleaning":
-            totalHours += 0.5; // 30 minutes
-            break;
-          case "Headlight Restoration":
-            totalHours += 0.5; // 30 minutes
-            break;
-          case "Ceramic Coating":
-            totalHours += 2; // 1 hour
-            break;
-          default:
-            totalHours += 0.25; // 15 minutes for other services
-        }
-      });
-    }
-
-    // Convert to hours and minutes
-    const hours = Math.floor(totalHours);
-    const minutes = Math.round((totalHours - hours) * 60);
-
-    if (hours === 0) {
-      return `${minutes} min`;
-    } else if (minutes === 0) {
-      return `${hours} hr`;
-    } else {
-      return `${hours} hr ${minutes} min`;
-    }
+    return `${totalHours} hr`;
   };
 
   // Function to calculate total confirmed price range
@@ -959,10 +889,10 @@ function MonthlySub() {
                 onClick={() => {
                   // Find the actual previous step that exists in breadcrumbs
                   const sortedBreadcrumbs = breadcrumbs.sort(
-                    (a, b) => a.step - b.step
+                    (a, b) => a.step - b.step,
                   );
                   const currentIndex = sortedBreadcrumbs.findIndex(
-                    (bc) => bc.step === activeStep
+                    (bc) => bc.step === activeStep,
                   );
                   const previousStep =
                     currentIndex > 0
@@ -974,10 +904,10 @@ function MonthlySub() {
                 {(() => {
                   // Find the actual previous step label
                   const sortedBreadcrumbs = breadcrumbs.sort(
-                    (a, b) => a.step - b.step
+                    (a, b) => a.step - b.step,
                   );
                   const currentIndex = sortedBreadcrumbs.findIndex(
-                    (bc) => bc.step === activeStep
+                    (bc) => bc.step === activeStep,
                   );
                   const previousBreadcrumb =
                     currentIndex > 0
@@ -1099,7 +1029,7 @@ function MonthlySub() {
                             ? (() => {
                                 const priceRange = getPriceRange(
                                   "interiors",
-                                  "silverInterior"
+                                  "silverInterior",
                                 );
                                 return priceRange.min === priceRange.max
                                   ? `$${priceRange.min}`
@@ -1111,7 +1041,7 @@ function MonthlySub() {
                           (() => {
                             const priceRange = getPriceRange(
                               "interiors",
-                              "silverInterior"
+                              "silverInterior",
                             );
                             return priceRange.min !== priceRange.max;
                           })() && (
@@ -1188,7 +1118,7 @@ function MonthlySub() {
                         onClick={() => {
                           const priceRange = getPriceRange(
                             "interiors",
-                            "silverInterior"
+                            "silverInterior",
                           );
                           handlePackageClick({
                             name: "SILVER",
@@ -1218,7 +1148,7 @@ function MonthlySub() {
                           ? (() => {
                               const priceRange = getPriceRange(
                                 "interiors",
-                                "goldInterior"
+                                "goldInterior",
                               );
                               return priceRange.min === priceRange.max
                                 ? `$${priceRange.min}`
@@ -1230,7 +1160,7 @@ function MonthlySub() {
                         (() => {
                           const priceRange = getPriceRange(
                             "interiors",
-                            "goldInterior"
+                            "goldInterior",
                           );
                           return priceRange.min !== priceRange.max;
                         })() && (
@@ -1318,7 +1248,7 @@ function MonthlySub() {
                       onClick={() => {
                         const priceRange = getPriceRange(
                           "interiors",
-                          "goldInterior"
+                          "goldInterior",
                         );
                         handlePackageClick({
                           name: "GOLD",
@@ -1339,7 +1269,7 @@ function MonthlySub() {
                           ? (() => {
                               const priceRange = getPriceRange(
                                 "interiors",
-                                "pressureSpecial"
+                                "pressureSpecial",
                               );
                               return priceRange.min === priceRange.max
                                 ? `$${priceRange.min}`
@@ -1351,7 +1281,7 @@ function MonthlySub() {
                         (() => {
                           const priceRange = getPriceRange(
                             "interiors",
-                            "pressureSpecial"
+                            "pressureSpecial",
                           );
                           return priceRange.min !== priceRange.max;
                         })() && (
@@ -1456,7 +1386,7 @@ function MonthlySub() {
                       onClick={() => {
                         const priceRange = getPriceRange(
                           "interiors",
-                          "pressureSpecial"
+                          "pressureSpecial",
                         );
                         handlePackageClick({
                           name: "PRESSURE",
@@ -1525,7 +1455,7 @@ function MonthlySub() {
                           ? (() => {
                               const priceRange = getPriceRange(
                                 "exteriors",
-                                "standardExterior"
+                                "standardExterior",
                               );
                               return priceRange.min === priceRange.max
                                 ? `$${priceRange.min}`
@@ -1591,7 +1521,7 @@ function MonthlySub() {
                         onClick={() => {
                           const priceRange = getPriceRange(
                             "exteriors",
-                            "standardExterior"
+                            "standardExterior",
                           );
                           handlePackageClick({
                             name: "Standard Exterior",
@@ -1612,7 +1542,7 @@ function MonthlySub() {
                         ? (() => {
                             const priceRange = getPriceRange(
                               "exteriors",
-                              "washWax"
+                              "washWax",
                             );
                             return priceRange.min === priceRange.max
                               ? `$${priceRange.min}`
@@ -1696,7 +1626,7 @@ function MonthlySub() {
                       onClick={() => {
                         const priceRange = getPriceRange(
                           "exteriors",
-                          "washWax"
+                          "washWax",
                         );
                         handlePackageClick({
                           name: "Wash & Wax",
@@ -1715,7 +1645,7 @@ function MonthlySub() {
                         ? (() => {
                             const priceRange = getPriceRange(
                               "exteriors",
-                              "paintEnhancement"
+                              "paintEnhancement",
                             );
                             return priceRange.min === priceRange.max
                               ? `$${priceRange.min}`
@@ -1812,7 +1742,7 @@ function MonthlySub() {
                       onClick={() => {
                         const priceRange = getPriceRange(
                           "exteriors",
-                          "paintEnhancement"
+                          "paintEnhancement",
                         );
                         handlePackageClick({
                           name: "Paint Enhancement",
@@ -1844,7 +1774,7 @@ function MonthlySub() {
                       ? (() => {
                           const priceRange = getPriceRange(
                             "exteriors",
-                            "oneStep"
+                            "oneStep",
                           );
                           return priceRange.min === priceRange.max
                             ? `$${priceRange.min}`
@@ -1938,7 +1868,7 @@ function MonthlySub() {
                       ? (() => {
                           const priceRange = getPriceRange(
                             "exteriors",
-                            "twoStep"
+                            "twoStep",
                           );
                           return priceRange.min === priceRange.max
                             ? `$${priceRange.min}`
@@ -2141,7 +2071,7 @@ function MonthlySub() {
                                           </span>
                                         </div>
                                       ) : null;
-                                    }
+                                    },
                                   )}
 
                                   {confirmedExteriorPlusServices.map(
@@ -2163,13 +2093,13 @@ function MonthlySub() {
                                             "ceramic-coating-dynamic"
                                               ? getCeramicCoatingPrice()
                                               : typeof service.price ===
-                                                "number"
-                                              ? service.price
-                                              : service.price}
+                                                  "number"
+                                                ? service.price
+                                                : service.price}
                                           </span>
                                         </div>
                                       ) : null;
-                                    }
+                                    },
                                   )}
                                 </div>
                               )}
@@ -2336,7 +2266,7 @@ function MonthlySub() {
                   {selectedDate ? (
                     (() => {
                       const availableSlots = timeSlots.filter((t) =>
-                        isTimeAvailable(selectedDate, t)
+                        isTimeAvailable(selectedDate, t),
                       );
 
                       return availableSlots.length > 0 ? (
@@ -2437,13 +2367,13 @@ function MonthlySub() {
                           {svc.price === "ceramic-coating-dynamic"
                             ? getCeramicCoatingPrice()
                             : typeof svc.price === "number"
-                            ? svc.price
-                            : svc.price}
+                              ? svc.price
+                              : svc.price}
                         </p>
                         {isSelected && <span className="check-overlay">✓</span>}
                       </div>
                     );
-                  }
+                  },
                 )}
               </div>
               <p className="package-summary">
@@ -2455,7 +2385,7 @@ function MonthlySub() {
 
                   selectedPlusServices.forEach((serviceName) => {
                     const service = currentPlusServices.find(
-                      (s) => s.name === serviceName
+                      (s) => s.name === serviceName,
                     );
                     if (service) {
                       if (service.price === "ceramic-coating-dynamic") {
