@@ -548,9 +548,15 @@ function MonthlySub() {
       const selectedDateTimeString = `${selectedDateString} ${selectedTime}`;
       const selectedDateTime = new Date(selectedDateTimeString);
       const endDateTime = new Date(selectedDateTime.getTime());
-      const endTime = endDateTime.setHours(
+      endDateTime.setHours(
         selectedDateTime.getHours() + appointmentDurationHours,
       );
+      const pad = (n) => String(n).padStart(2, "0");
+      const endTime = `${endDateTime.getFullYear()}-${pad(
+        endDateTime.getMonth() + 1,
+      )}-${pad(endDateTime.getDate())}T${pad(endDateTime.getHours())}:${pad(
+        endDateTime.getMinutes(),
+      )}:00`;
 
       const interiorPackageName = confirmedInteriorPackage
         ? confirmedInteriorPackage.name
