@@ -579,6 +579,7 @@ function MonthlySub() {
         email,
         name,
         phoneNumber: phone,
+        carType: selectedCar?.name || "",
         ExteriorPackage: exteriorPackageName,
         interiorPackage: interiorPackageName,
         plusService: allPlusServices,
