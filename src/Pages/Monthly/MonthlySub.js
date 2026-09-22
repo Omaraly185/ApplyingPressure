@@ -574,6 +574,52 @@ function MonthlySub() {
       // Calculate price range
       const priceRange = calculateTotalPriceRange();
 
+      const formatPackagePrice = (pkg) => {
+        if (!pkg) return "";
+        return pkg.maxPrice && pkg.maxPrice !== pkg.price
+          ? `$${pkg.price} - $${pkg.maxPrice}`
+          : `$${pkg.price}`;
+      };
+      const exteriorPackageLabel = exteriorPackageName
+        ? `${exteriorPackageName} (${formatPackagePrice(confirmedExteriorPackage)})`
+        : "";
+      const interiorPackageLabel = interiorPackageName
+        ? `${interiorPackageName} (${formatPackagePrice(confirmedInteriorPackage)})`
+        : "";
+
+      const formatPlusServicePrice = (price) => {
+        if (price === "ceramic-coating-dynamic") {
+          return `$${getCeramicCoatingPrice()}`;
+        }
+        if (typeof price === "string" && price.includes("-")) {
+          return `$${price}`;
+        }
+        return `$${price}`;
+      };
+      const formatPlusServicesLabel = (serviceNames, packageName) =>
+        serviceNames
+          .map((serviceName) => {
+            const service = plusServicesByPackage[packageName]?.find(
+              (s) => s.name === serviceName,
+            );
+            return service
+              ? `${serviceName} (${formatPlusServicePrice(service.price)})`
+              : serviceName;
+          })
+          .join(", ");
+      const allPlusServicesLabel = [
+        formatPlusServicesLabel(
+          confirmedInteriorPlusServices,
+          confirmedInteriorPackage?.name,
+        ),
+        formatPlusServicesLabel(
+          confirmedExteriorPlusServices,
+          confirmedExteriorPackage?.name,
+        ),
+      ]
+        .filter(Boolean)
+        .join(", ");
+
       // Create the booking object similar to sidepanel.js
       const newEvent = {
         email,
@@ -588,7 +634,7 @@ function MonthlySub() {
         endTime,
         dogHair: "",
         message: message || "",
-        description: `APL: Detail \n\n ${name} ${phone},\n\n ${selectedCar?.name},\n ${exteriorPackageName} ${interiorPackageName} $ ${allPlusServices}\n\n Service: ${selectedService}\n\n ${priceRange.min}-${priceRange.max},\n\nAddress: ${address}, ${zip}\n\nMonthly Subscription Booking`,
+        description: `Sales Rep: Omar Aly \n\nC.O.M.M:  \n\n APD:  \n\n ${name} ${phone},\n\n ${selectedCar?.name},\n\n ${exteriorPackageLabel} \n\n ${interiorPackageLabel} \n\n ${allPlusServicesLabel}\n\n Service: ${selectedService}\n\n ${priceRange.min}-${priceRange.max},\n\nAddress: ${address}, ${zip}\n\n`,
         location: `${address}, ${zip}`,
       };
 
